@@ -10,7 +10,7 @@ Actualmente cuenta con 5 sucursales distribuidas a lo largo del país, las cuale
 
 Pampa Nutrición es una empresa que si bien tiene sus fortalezas, está teniendo muchos problemas en cuanto a la comunicación con sus clientes y, por ende, vamos a dedicarnos a crear un sitio web para que esta empresa pueda comercializar sus productos de una manera más óptima y sencilla para el cliente. Nos dedicaremos principalmente a que se lleve un mejor control de pedidos, productos, stock, proveedores, sucursales, entre otros.
 
-## 2 - ABMC:
+## 2 - ABMC
 
 ### 2.1 - ABMC Simples
 
@@ -96,7 +96,7 @@ Listado que mostrara todos los productos disponibles a la venta
 
 Listado que mostrará todos los clientes con su respectivo histórico de pedidos.
 
-#### Tipos de Mascota con Productos.
+#### Tipos de Mascota con Productos
 
 Listado que mostrará todos los tipos de mascotas con sus respectivos productos.
 
@@ -119,4 +119,4 @@ Se muestran todos los pedidos y al solicitar más información se muestra el cli
 
 ## Modelo de datos
 
-
+![md-PampaNutricion](https://user-images.githubusercontent.com/80716821/161185409-ac2e50d7-292e-482f-a617-c3d0d663b62e.jpg)
