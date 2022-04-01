@@ -119,4 +119,4 @@ Se muestran todos los pedidos y al solicitar más información se muestra el cli
 
 ## Modelo de datos
 
-![md-PampaNutricion](https://user-images.githubusercontent.com/80716821/161185409-ac2e50d7-292e-482f-a617-c3d0d663b62e.jpg)
+![md-PampaNutricion](https://user-images.githubusercontent.com/80716821/161186016-1a02b8fb-7cfb-4dea-89b5-93a858cbdc48.jpg)
