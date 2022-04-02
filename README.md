@@ -2,13 +2,13 @@
 
 ## 1 - Enunciado general
 
-Pampa Nutrición es una empresa de la ciudad Villa Ramallo que se dedica al comercio y distribución de alimentos para mascotas en condición de mayorista a los pueblos cercanos a la localidad, como La Violeta, San Pedro, Ramallo, San Nicolás, entre otros.
+Pampa Nutrición es una empresa de la ciudad Villa Ramallo que se dedica al comercio y distribución de alimentos para mascotas de forma mayorista a los pueblos cercanos a la localidad, como La Violeta, San Pedro, Ramallo, San Nicolás, entre otros.
 
-Hoy en día, es de las cadenas mayoristas más importantes del país, con más de 10 años en el mercado, especializada en la comercialización de productos y servicios para mascotas. Brinda una experiencia diferente de compra, ofreciendo productos y servicios de alta calidad que cumplen con las necesidades de las mascotas y la satisfacción de sus dueños.
+Hoy en día es de las cadenas mayoristas más importantes del país, con más de 10 años en el mercado, especializada en la comercialización de productos y servicios para mascotas. Brinda una experiencia diferente de compra, ofreciendo productos y servicios de alta calidad que cumplen con las necesidades de las mascotas y la satisfacción de sus dueños.
 
-Actualmente cuenta con 5 sucursales distribuidas a lo largo del país, las cuales cuentan con modernas y cómodas instalaciones a las cuales se puede asistir para realizar cualquier tipo de compra. También podes comprar cualquier tipo de producto desde la comodidad de tu casa.
+Actualmente, podés visitar cualquiera de sus 5 sucursales distribuidas a lo largo del país, las cuales cuentan con modernas y cómodas instalaciones o realizar cualquier tipo de compra desde la comodidad de tu casa.
 
-Pampa Nutrición es una empresa que si bien tiene sus fortalezas, está teniendo muchos problemas en cuanto a la comunicación con sus clientes y, por ende, vamos a dedicarnos a crear un sitio web para que esta empresa pueda comercializar sus productos de una manera más óptima y sencilla para el cliente. Nos dedicaremos principalmente a que se lleve un mejor control de pedidos, productos, stock, proveedores, sucursales, entre otros.
+Pampa Nutrición es una empresa que si bien tiene sus fortalezas, está teniendo muchos problemas en cuanto a la comunicación con sus clientes y, por ende, vamos a dedicarnos a crear un sitio web para que esta empresa pueda comercializar sus productos de una manera más óptima y sencilla para el cliente.
 
 ## 2 - ABMC
 
