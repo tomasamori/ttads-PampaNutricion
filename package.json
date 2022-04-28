@@ -2,9 +2,9 @@
   "name": "ttads-PampaNutricion",
   "version": "1.0.0",
   "description": "## 1 - Enunciado general",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/tomasamori/ttads-PampaNutricion/issues"
   },
-  "homepage": "https://github.com/tomasamori/ttads-PampaNutricion#readme"
+  "homepage": "https://github.com/tomasamori/ttads-PampaNutricion#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.1"
+  }
 }
