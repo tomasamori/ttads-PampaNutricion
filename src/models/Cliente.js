@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const ClienteSchema = new mongoose.Schema({
     idUsuario: String,
     usuario: String,
@@ -12,5 +11,4 @@ const ClienteSchema = new mongoose.Schema({
     telefono: String,
     razonSocial: String
 });
-
 module.exports = mongoose.model('Cliente', ClienteSchema);

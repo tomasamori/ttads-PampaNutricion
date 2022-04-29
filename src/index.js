@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Cliente = require('./models/Cliente');
 
-mongoose.connect('mongodb://localhost/pampadb');
+mongoose.connect('mongodb://localhost:27017');
 
 async function guardarCliente(c) {
     const cliente = c;
