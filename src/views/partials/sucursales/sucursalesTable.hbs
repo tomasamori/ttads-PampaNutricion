@@ -1,0 +1,38 @@
+{{#if sucursales}}
+
+    <table class="table table-bordered table-hover table-dark">
+        <thead>
+        <tr>
+            <th>N.</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each sucursales }}
+            <tr>
+                <td>{{@index}}</td>
+                <td>{{nombre}}</td>
+                <td>{{direccion}}</td>
+                <td>
+                    <a href="/sucursales/{{_id}}/delete" class="btn btn-danger">Eliminar</a>
+                    <a href="/sucursales/{{_id}}/edit" class="btn btn-info">Editar</a>
+                </td>
+            </tr>
+
+        {{/each}}
+        </tbody>
+    </table>
+
+{{else}}
+
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="text-center text-white">
+            <h1>No hay sucursales</h1>
+            <img src="/icons/empty.svg" class="w-75">
+        </div>
+    </div>
+
+{{/if}}

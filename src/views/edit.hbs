@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <div class="card card-body bg-dark p-4 text-white rounded-0">
+
+                <h1>Editar una sucursal</h1>
+                <form action="/sucursales/{{sucursal._id}}/edit" method="POST">
+
+                    <div class="mb-3">
+                        <input type="text" name="nombre" placeholder="Nombre" value="{{sucursal.nombre}}" class="form-control rounded-0 bg-dark text-white"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea
+                                name="direccion"
+                                rows="3"
+                                placeholder="Dirección"
+                                class="form-control rounded-0 bg-dark text-white"
+                        >{{sucursal.direccion}}
+                        </textarea>
+                    </div>
+
+                    <button class="btn btn-primary">Editar</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="card card-body p-4 rounded-0 bg-dark text-white">
+
+    <h3>Agregar una sucursal</h3>
+
+    <form action="/sucursales/add" method="POST">
+
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" class="form-control rounded-0 bg-dark text-white"/>
+        </div>
+
+        <div>
+            <label for="direccion">Dirección:</label>
+            <textarea
+                    name="direccion"
+                    id="direccion"
+                    class="form-control rounded-0 bg-dark text-white"
+            ></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-sm mt-2">Add</button>
+
+    </form>
+</div>
