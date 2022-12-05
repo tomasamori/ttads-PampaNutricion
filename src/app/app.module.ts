@@ -5,7 +5,7 @@ import { HttpClientModule} from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-import { ListadoComponent } from './components/listado/listado.component';
+import { ListComponent } from './components/list/list.component';
 import {RouterLinkActive, RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -15,7 +15,7 @@ import { HomeComponent } from './components/home/home.component';
     AppComponent,
     NavbarComponent,
     ProductCardComponent,
-    ListadoComponent,
+    ListComponent,
     HomeComponent
   ],
   imports: [

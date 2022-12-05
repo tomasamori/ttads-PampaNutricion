@@ -3,11 +3,11 @@ import {ProductoService} from "../../services/producto/producto.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-listado',
-  templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.css']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class ListadoComponent implements OnInit {
+export class ListComponent implements OnInit {
 
   constructor(public productoService: ProductoService, private router:Router) { }
 
