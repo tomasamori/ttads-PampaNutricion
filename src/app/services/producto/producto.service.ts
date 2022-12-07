@@ -11,7 +11,7 @@ export class ProductoService {
   URL_API = environment.URL_PRODUCTO;
 
   constructor(private http: HttpClient) { }
-  producto: Producto[];
+  productos: Producto[];
 
   getAllProducto() {
     return this.http.get<Producto[]>(this.URL_API);

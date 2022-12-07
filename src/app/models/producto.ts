@@ -2,8 +2,9 @@ export interface Producto {
   marca: string,
   nombre: string,
   descripcion: string,
-  peso: string,
+  peso: number,
   imgUrl: string,
-  tipoMascota: {tipoMascota: string},
-  precio: {precio: number}
+  tipoMascota: {nombre: string, tamanoRaza: string, edad: string},
+  precio: number,
+  promo: number
 }

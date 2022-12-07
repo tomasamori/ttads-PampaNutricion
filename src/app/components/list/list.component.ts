@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
   getProductos() {
     this.productoService.getAllProducto().subscribe(
       data => {
-        this.productoService.producto = data;
+        this.productoService.productos = data;
       },
       err => console.log(err)
     )

@@ -1,0 +1,7 @@
+@media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
+
+#disc {
+  padding: 4px;
+  font-weight: bold;
+  border-radius: 50%;
+}

@@ -1,1 +1,13 @@
-<p>list works!</p>
+<div class="container mt-2 m" *ngFor="let p of productoService.productos">
+  <app-product-card
+    brand="{{p.marca}}"
+    name="{{p.nombre}}"
+    discount="{{p.promo}}"
+    description="{{p.descripcion}}"
+    petName="{{p.tipoMascota.nombre}}"
+    petAge="{{p.tipoMascota.edad}}"
+    petSize="{{p.tipoMascota.tamanoRaza}}"
+    price="{{p.precio}}"
+    imgUrl="{{p.imgUrl}}">
+  </app-product-card>
+</div>

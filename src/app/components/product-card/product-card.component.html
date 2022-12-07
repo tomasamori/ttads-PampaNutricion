@@ -1,8 +1,58 @@
-<div class="card" style="width: 18rem;">
-  <img src="assets/logo.png" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-12 col-xl-10">
+        <div class="card shadow-0 border rounded-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                  <img src={{imgUrl}}
+                       class="w-100" />
+                  <a href="#!">
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-xl-6">
+                <h4>{{brand}}</h4>
+                <h5>{{name}}</h5>
+                <div class="mt-1 mb-0 text-muted small">
+                  <span>{{petName}}</span>
+                  <span class="text-primary"> • </span>
+                  <span>{{petAge}}</span>
+                  <span class="text-primary"> • </span>
+                  <span>{{petSize}}<br /></span>
+                </div>
+                <p class="mb-4 mb-md-0">
+                  {{description}}
+                </p>
+              </div>
+              <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount === '0'">
+                  <h4 class="mb-2 me-1">${{price}}</h4>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount !== '0'">
+                  <h4 class="mb-1 me-3">${{calculatePrice(+price, +discount)}}</h4>
+                  <span class="text-danger ms-1"><s>${{price}}</s></span>
+                  <label class="bg bg-danger text-white ms-2" id="disc">-{{discount}}%</label>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount !== '0'">
+
+                </div>
+                <div class="d-flex flex-column mt-auto">
+                  <button class="btn btn-outline-secondary btn-sm" type="button">Detalles</button>
+                  <button class="btn btn-warning bg-gradient mt-2" type="button">
+                    Agregar al carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
