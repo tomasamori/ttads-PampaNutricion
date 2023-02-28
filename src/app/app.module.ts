@@ -9,6 +9,8 @@ import { ListComponent } from './components/list/list.component';
 import {RouterLinkActive, RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
+import { CrudPageComponent } from './components/crud-page/crud-page.component';
+import { CrudProductsComponent } from './components/crud-products/crud-products.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HomeComponent } from './components/home/home.component';
     NavbarComponent,
     ProductCardComponent,
     ListComponent,
-    HomeComponent
+    HomeComponent,
+    CrudPageComponent,
+    CrudProductsComponent
   ],
   imports: [
     BrowserModule,
