@@ -5,4 +5,31 @@
     src: url('assets/fonts/russooneregular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+/* ===== Scrollbar CSS ===== */
+  html, body {
+    max-width: 100%;
+    overflow: overlay;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #212529 transparent;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #212529;
+    border-radius: 10px;
+    border: 3px none transparent;
   }
