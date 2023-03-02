@@ -1,13 +1,39 @@
-<div class="container mt-2 m" *ngFor="let p of productoService.productos">
-  <app-product-card
-    brand="{{p.marca}}"
-    name="{{p.nombre}}"
-    discount="{{p.promo}}"
-    description="{{p.descripcion}}"
-    petName="{{p.tipoMascota.nombre}}"
-    petAge="{{p.tipoMascota.edad}}"
-    petSize="{{p.tipoMascota.tamanoRaza}}"
-    price="{{p.precio}}"
-    imgUrl="{{p.imgUrl}}">
-  </app-product-card>
+<div class="container-fluid p-0">
+  <div class="listfs align-items-center">
+    <br/>
+    <div class="container-fluid p-4">
+      <h1 class="text-center text-white display-3 tbg">ALIMENTA A TU MEJOR AMIGO CON LO MEJOR</h1>
+    </div>
+    <img src="./assets/images/pets.png" class="image-fluid"/>
+  </div>
+</div>
+
+
+<div class="listss">
+  <br/>
+  <div class="container">
+    <div class="search">
+      <form class="d-flex">
+        <input class="form-control m-2" type="search" placeholder="Ingresa una palabra para buscar artículos y productos relacionados" aria-label="Search">
+        <button class="btn btn-dark m-2" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+    <div *ngFor="let p of productoService.productos">
+      <app-product-card
+        brand="{{p.marca}}"
+        name="{{p.nombre}}"
+        discount="{{p.promo}}"
+        description="{{p.descripcion}}"
+        petName="{{p.tipoMascota.nombre}}"
+        petAge="{{p.tipoMascota.edad}}"
+        petSize="{{p.tipoMascota.tamanoRaza}}"
+        price="{{p.precio}}"
+        imgUrl="{{p.imgUrl}}">
+      </app-product-card>
+    </div>
+  </div>  
 </div>
