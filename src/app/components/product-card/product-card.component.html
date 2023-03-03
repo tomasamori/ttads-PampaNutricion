@@ -19,16 +19,17 @@
               <div class="col-md-6 col-lg-6 col-xl-6">
                 <h4>{{brand}}</h4>
                 <h5>{{name}}</h5>
-                <div class="mt-1 mb-0 text-muted small">
+                <div class="mt-1 mb-2 text-muted small">
                   <span>{{petName}}</span>
                   <span class="text-primary"> • </span>
                   <span>{{petAge}}</span>
                   <span class="text-primary"> • </span>
                   <span>{{petSize}}<br /></span>
                 </div>
-                <p class="mb-4 mb-md-0 mt-1">
-                  {{description}}
-                </p>
+                <h6 class="mb-4">Peso: {{weight}}kg</h6>
+                <div class="d-flex align-items-end">
+                  <button class="btn btn-outline-secondary btn-sm" type="button">Detalles</button>
+                </div>
               </div>
               <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                 <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount === '0'">
@@ -39,11 +40,13 @@
                   <span class="text-danger ms-1"><s>${{price}}</s></span>
                   <label class="bg bg-danger text-white ms-2" id="disc">-{{discount}}%</label>
                 </div>
-                <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount !== '0'">
-
+                <div *ngIf="discount === '0'">
+                  <app-product-counter price="{{price}}"></app-product-counter>
                 </div>
-                <div class="d-flex flex-column mt-auto">
-                  <button class="btn btn-outline-secondary btn-sm" type="button">Detalles</button>
+                <div *ngIf="discount !== '0'">
+                  <app-product-counter price="{{calculatePrice(+price, +discount)}}"></app-product-counter>
+                </div>
+                <div class="d-flex flex-column">
                   <button class="btn btn-warning bg-gradient mt-2" type="button">
                     Agregar al carrito
                   </button>

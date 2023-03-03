@@ -12,7 +12,7 @@
 <div class="listss">
   <br/>
   <div class="container">
-    <div class="search">
+    <div class="bg-secondary">
       <form class="d-flex">
         <input class="form-control m-2" type="search" placeholder="Ingresa una palabra para buscar artículos y productos relacionados" aria-label="Search">
         <button class="btn btn-dark m-2" type="submit">
@@ -28,6 +28,7 @@
         name="{{p.nombre}}"
         discount="{{p.promo}}"
         description="{{p.descripcion}}"
+        weight="{{p.peso}}"
         petName="{{p.tipoMascota.nombre}}"
         petAge="{{p.tipoMascota.edad}}"
         petSize="{{p.tipoMascota.tamanoRaza}}"

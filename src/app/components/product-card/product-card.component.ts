@@ -15,6 +15,7 @@ export class ProductCardComponent implements OnInit {
   @Input() brand: string;
   @Input() name: string;
   @Input() description: string;
+  @Input() weight: string;
   @Input() petName: string;
   @Input() petAge: string;
   @Input() petSize: string;
