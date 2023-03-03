@@ -1,0 +1,9 @@
+<div>
+    <span>Cantidad: </span>
+    <button class="btn btn-dark btn-circle minus" (click)="subtract()">-</button>
+    <span class="ms-1 me-1">{{amount}}</span>
+    <button class="btn btn-dark btn-circle plus" (click)="add()">+</button>
+</div>
+<div>
+    <span>Precio final: {{calculatePrice(amount, price)}}</span>
+</div>
