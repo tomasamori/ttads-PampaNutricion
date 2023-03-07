@@ -23,7 +23,14 @@ export class ProductCardComponent implements OnInit {
   @Input() imgUrl: string;
   @Input() discount: string;
 
+  finalPrice = 0;
+
   calculatePrice(price:number, discount:number) {
     return (price - (price * discount / 100));
+  }
+
+  updatePrice(newPrice: number) {
+    this.finalPrice = newPrice;
+    console.log(this.finalPrice);
   }
 }

@@ -41,10 +41,16 @@
                   <label class="bg bg-danger text-white ms-2" id="disc">-{{discount}}%</label>
                 </div>
                 <div *ngIf="discount === '0'">
-                  <app-product-counter price="{{price}}"></app-product-counter>
+                  <app-product-counter 
+                    price="{{price}}"
+                    (updatePriceEvent)="updatePrice($event)">
+                  </app-product-counter>
                 </div>
                 <div *ngIf="discount !== '0'">
-                  <app-product-counter price="{{calculatePrice(+price, +discount)}}"></app-product-counter>
+                  <app-product-counter 
+                    price="{{calculatePrice(+price, +discount)}}"
+                    (updatePriceEvent)="updatePrice($event)">
+                  </app-product-counter>
                 </div>
                 <div class="d-flex flex-column">
                   <button class="btn btn-warning bg-gradient mt-2" type="button">

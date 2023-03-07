@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-counter',
@@ -13,22 +13,28 @@ export class ProductCounterComponent implements OnInit {
   }
 
   @Input() price: string;
+  @Output() updatePriceEvent = new EventEmitter<number>();
 
   amount = 1;
 
   add() {
-    this.amount = this.amount + 1
+    this.amount = this.amount + 1;
+    this.updatePrice(this.calculatePrice(this.amount, this.price));
   }
 
   subtract() {
     if (this.amount > 1)
     {
-      this.amount = this.amount - 1
+      this.amount = this.amount - 1;
+      this.updatePrice(this.calculatePrice(this.amount, this.price));
     }
   }
 
-  calculatePrice(amount: any, price: any)
-  {
+  calculatePrice(amount: any, price: any) {
     return (Number(amount)*Number(price));
+  }
+  
+  updatePrice(value: number) {
+    this.updatePriceEvent.emit(value);
   }
 }
