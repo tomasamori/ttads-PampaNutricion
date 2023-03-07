@@ -31,6 +31,5 @@ export class ProductCardComponent implements OnInit {
 
   updatePrice(newPrice: number) {
     this.finalPrice = newPrice;
-    console.log(this.finalPrice);
   }
 }
