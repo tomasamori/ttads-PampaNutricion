@@ -1,9 +1,12 @@
-<div>
-    <span>Cantidad: </span>
-    <button class="btn btn-dark btn-circle minus" (click)="subtract()">-</button>
-    <span class="ms-1 me-1">{{amount}}</span>
-    <button class="btn btn-dark btn-circle plus" (click)="add()">+</button>
-</div>
-<div>
-    <span>Precio final: {{calculatePrice(amount, price)}}</span>
+<div class="border-sm-start-none border-top border-bottom pt-3 ps-2 pb-3">
+    <div>
+        <span class="me-2">Cantidad: </span>
+        <button class="btn btn-dark btn-circle minus" (click)="subtract()">-</button>
+        <!--<span class="ms-1 me-1">{{amount}}</span>-->
+        <input type="number" min="1" class="col-2 ms-1 me-1 text-center" value="{{amount}}" (keyup)="updateAmountByInput($event)" pattern="^[0-9]+"/>
+        <button class="btn btn-dark btn-circle plus p-1" (click)="add()">+</button>
+    </div>
+    <div class="mt-2">
+        <span>Precio final: </span><span class="fw-bolder">${{calculatePrice(amount, price)}}</span>
+    </div>
 </div>
