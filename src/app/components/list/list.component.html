@@ -24,6 +24,7 @@
     </div>
     <div *ngFor="let p of productoService.productos | listFilter: filterProduct.toLowerCase()">
       <app-product-card
+        _id="{{p._id}}"
         brand="{{p.marca}}"
         name="{{p.nombre}}"
         discount="{{p.promo}}"

@@ -27,7 +27,33 @@
                 </div>
                 <h6 class="mb-4">Peso: {{weight}}kg</h6>
                 <div class="d-flex align-items-end mb-4">
-                  <button class="btn btn-outline-secondary btn-sm" type="button">Detalles</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" [attr.data-bs-target]="'#detailsModal'+_id">
+                    Detalles
+                  </button>
+                </div>
+
+                <div class="modal fade" id="detailsModal{{_id}}" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="detailsModalLabel{{_id}}">{{brand.toUpperCase()}} - {{name}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body row">
+                        <div class="col-6">
+                          <img src="{{imgUrl}}" class="img-thumbnail"/>
+                        </div>
+                        <div class="col-6">
+                          <p>{{description}}</p>
+                          <p>Peso: {{weight}}kg</p>
+                          <p>Para {{petName.toLowerCase()}}s {{petAge.toLowerCase()}}s {{petSize.toLowerCase()}}s</p>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
