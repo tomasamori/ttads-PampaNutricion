@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { CrudPageComponent } from './components/crud-page/crud-page.component';
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
+import { CrudCardComponent } from './components/crud-card/crud-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CrudProductsComponent } from './components/crud-products/crud-products.
     ListComponent,
     HomeComponent,
     CrudPageComponent,
-    CrudProductsComponent
+    CrudProductsComponent,
+    CrudCardComponent
   ],
   imports: [
     BrowserModule,
