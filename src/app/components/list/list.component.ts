@@ -11,6 +11,8 @@ export class ListComponent implements OnInit {
 
   constructor(public productoService: ProductoService, private router:Router) { }
 
+  filterProduct = '';
+
   ngOnInit(): void {
     this.getProductos();
   }
