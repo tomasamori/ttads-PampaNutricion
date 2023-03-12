@@ -14,6 +14,7 @@ import { CrudProductsComponent } from './components/crud-products/crud-products.
 import { CrudCardComponent } from './components/crud-card/crud-card.component';
 import { ProductCounterComponent } from './components/product-counter/product-counter.component';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
     CrudProductsComponent,
     CrudCardComponent, 
     ProductCounterComponent,
-    ListFilterPipe
+    ListFilterPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
