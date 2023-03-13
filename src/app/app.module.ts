@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule} from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -12,6 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { CrudPageComponent } from './components/crud-page/crud-page.component';
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
+import { CrudCardComponent } from './components/crud-card/crud-card.component';
+import { ProductCounterComponent } from './components/product-counter/product-counter.component';
+import { ListFilterPipe } from './pipes/list-filter.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -22,7 +25,11 @@ import { CrudProductsComponent } from './components/crud-products/crud-products.
     ListComponent,
     HomeComponent,
     CrudPageComponent,
-    CrudProductsComponent
+    CrudProductsComponent,
+    CrudCardComponent, 
+    ProductCounterComponent,
+    ListFilterPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

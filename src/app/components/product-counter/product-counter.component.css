@@ -1,0 +1,13 @@
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 0.5;
+}
+
+.minus {
+    font-size: 18px;
+    text-align: left;
+}

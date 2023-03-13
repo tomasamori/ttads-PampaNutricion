@@ -12,22 +12,54 @@
 <div class="listss">
   <br/>
   <div class="container">
-    <div class="search">
+    <div class="bg-secondary">
       <form class="d-flex">
-        <input class="form-control m-2" type="search" placeholder="Ingresa una palabra para buscar artículos y productos relacionados" aria-label="Search">
-        <button class="btn btn-dark m-2" type="submit">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-          </svg>
-        </button>
+        <input class="form-control m-2 me-3 ms-4" type="search" placeholder="Ingresa una palabra para buscar artículos y productos relacionados" aria-label="Search" [(ngModel)]="filterProduct" name="filterProduct">
+        <div class="dropdown m-2 me-4">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="filterDropDown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            Filtros
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="filterDropDown">
+            <li>
+              <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">Tipo de mascota</a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="dropdown-item">Perro</a></li>
+                <li><a href="#" class="dropdown-item">Gato</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">Tamaño</a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="dropdown-item">Pequeño</a></li>
+                <li><a href="#" class="dropdown-item">Mediano</a></li>
+                <li><a href="#" class="dropdown-item">Grande</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">Edad</a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="dropdown-item">Cachorro</a></li>
+                <li><a href="#" class="dropdown-item">Adulto</a></li>
+                <li><a href="#" class="dropdown-item">Senior</a></li>
+              </ul>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="d-flex flex-column ms-2 me-2 align-items-center">
+              <button class="btn btn-dark btn-sm mb-1">Aplicar</button>
+              <a class="text-sm fw-light text-dark" href="#">Limpiar todo</a>
+            </li>
+          </ul>
+        </div>
       </form>
     </div>
-    <div *ngFor="let p of productoService.productos">
+    <div *ngFor="let p of productoService.productos | listFilter: filterProduct.toLowerCase()">
       <app-product-card
+        _id="{{p._id}}"
         brand="{{p.marca}}"
         name="{{p.nombre}}"
         discount="{{p.promo}}"
         description="{{p.descripcion}}"
+        weight="{{p.peso}}"
         petName="{{p.tipoMascota.nombre}}"
         petAge="{{p.tipoMascota.edad}}"
         petSize="{{p.tipoMascota.tamanoRaza}}"
