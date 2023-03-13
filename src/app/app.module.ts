@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule} from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -11,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { CrudPageComponent } from './components/crud-page/crud-page.component';
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CrudProductsComponent } from './components/crud-products/crud-products.
     RouterLinkActive,
     RouterOutlet,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
