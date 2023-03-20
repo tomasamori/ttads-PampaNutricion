@@ -5,6 +5,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { CrudPageComponent } from "./components/crud-page/crud-page.component";
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
 import { LoginComponent } from './components/login/login.component';
+import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
 
 // routes
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'products', component: ListComponent},
   {path: 'crud', component: CrudPageComponent},
   {path: 'crud-products', component: CrudProductsComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'store-locator', component: StoreLocatorComponent}
 ];
 
 @NgModule({

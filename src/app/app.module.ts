@@ -16,6 +16,7 @@ import { ProductCounterComponent } from './components/product-counter/product-co
 import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
+import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { LoginComponent } from './components/login/login.component';
     ProductCounterComponent,
     ListFilterPipe,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    StoreLocatorComponent
   ],
   imports: [
     BrowserModule,
