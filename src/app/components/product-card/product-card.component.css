@@ -5,3 +5,15 @@
   font-weight: bold;
   border-radius: 50%;
 }
+
+.modal-header {
+  background-color: #fce0b6
+}
+
+.modal-body {
+  background-color: #fff4e3
+}
+
+.modal-footer {
+  background-color: #fce0b6
+}

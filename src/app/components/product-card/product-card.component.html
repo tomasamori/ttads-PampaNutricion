@@ -33,24 +33,27 @@
                 </div>
 
                 <div class="modal fade" id="detailsModal{{_id}}" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="detailsModalLabel{{_id}}">{{brand.toUpperCase()}} - {{name}}</h5>
+                        <h5 class="modal-title mt-2 mb-2 ms-3 me-5" id="detailsModalLabel{{_id}}">{{brand.toUpperCase()}} - {{name}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="modal-body row">
-                        <div class="col-6">
-                          <img src="{{imgUrl}}" class="img-thumbnail"/>
-                        </div>
-                        <div class="col-6">
-                          <p>{{description}}</p>
-                          <p>Peso: {{weight}}kg</p>
-                          <p>Para {{petName.toLowerCase()}}s {{petAge.toLowerCase()}}s {{petSize.toLowerCase()}}s</p>
+                      <div class="container-fluid">
+                        <div class="modal-body row">
+                          <div class="col-6">
+                            <img src="{{imgUrl}}" class="img-thumbnail"/>
+                          </div>
+                          <div class="col-6">
+                            <p>{{description}}</p>
+                            <p>Peso: {{weight}}kg</p>
+                            <p>Para {{petName.toLowerCase()}}s {{petAge.toLowerCase()}}s {{petSize.toLowerCase()}}s</p>
+                          </div>
                         </div>
                       </div>
+                      
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
                       </div>
                     </div>
                   </div>

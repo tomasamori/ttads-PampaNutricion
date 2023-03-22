@@ -2,3 +2,14 @@
   background: rgb(200,107,53);
   background: linear-gradient(356deg, rgba(200,107,53,1) 0%, rgba(33,37,41,0.8995973389355743) 100%);
 }
+
+a{
+  color: #ffffff;
+}
+a:link{
+  text-decoration: none;
+}
+a:hover {
+  color: #ffd8ab;
+  cursor: pointer;
+}
