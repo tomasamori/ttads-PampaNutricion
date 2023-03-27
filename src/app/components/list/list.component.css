@@ -11,3 +11,8 @@
 .listfs h1 {
     font-family: 'russooneregular';
 }
+
+.inputFilter {
+    width: 100%;
+    font-size: x-small;
+}

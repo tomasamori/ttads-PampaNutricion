@@ -43,6 +43,29 @@
                 <li><button class="dropdown-item" (click)="filterProductsByPetAge('Senior')">Senior</button></li>
               </ul>
             </li>
+            <li>
+              <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">Precio</a>
+              <ul class="dropdown-menu">
+                <li><button class="dropdown-item" (click)="filterProductsByPrice('Mayor')">Mayor precio</button></li>
+                <li><button class="dropdown-item" (click)="filterProductsByPrice('Menor')">Menor precio</button></li>
+                <li><hr class="dropdown-divider"></li>
+                <div class="input-group input-group-sm">
+                  <div class="row">
+                    <h6 class="ms-2 fw-light">Rango:</h6>
+                    <div class="col-6">
+                      <input class="input-group-text ms-2 inputFilter" placeholder="Mínimo" [(ngModel)]="minPrice" name="minPrice"/>
+                    </div>
+                    <div class="col-6">
+                      <input class="input-group-text me-2 inputFilter" placeholder="Máximo" [(ngModel)]="maxPrice" name="maxPrice"/>
+                    </div>
+                  </div>
+                </div>
+                <li><hr class="dropdown-divider"></li>
+                <li class="d-flex flex-column ms-2 me-2 align-items-center">
+                  <button class="btn btn-dark btn-sm mb-1" (click)="filterProductsByPriceRange()">Buscar</button>
+                </li>
+              </ul>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li class="d-flex flex-column ms-2 me-2 align-items-center">
               <button class="btn btn-dark btn-sm mb-1" (click)="clearFilters()">Limpiar filtros</button>
