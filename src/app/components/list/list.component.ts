@@ -14,8 +14,8 @@ export class ListComponent implements OnInit {
 
   productList: Producto[] = [];
   filterProduct = '';
-  minPrice = 0;
-  maxPrice = 99999999;
+  minPrice?: Number;
+  maxPrice?: Number;
 
   ngOnInit(): void {
     this.getProductos();
@@ -61,23 +61,24 @@ export class ListComponent implements OnInit {
   }
 
   filterProductsByPriceRange() {
-    if (this.minPrice > 0 && this.maxPrice < 99999999) {
-      this.productoService.productos = this.productList.filter(product => (product.promo == 0 && product.precio >= this.minPrice && product.precio <= this.maxPrice) || (product.promo > 0 && (product.precio - (product.precio * product.promo / 100)) >= this.minPrice && (product.precio - (product.precio * product.promo / 100)) <= this.maxPrice));
+    console.log(this.minPrice, this.maxPrice)
+    if ((this.minPrice || 0)> 0 && (this.maxPrice || 99999999) < 99999999) {
+      this.productoService.productos = this.productList.filter(product => (product.promo == 0 && product.precio >= (this.minPrice || 0) && product.precio <= (this.maxPrice || 99999999)) || (product.promo > 0 && (product.precio - (product.precio * product.promo / 100)) >= (this.minPrice || 0) && (product.precio - (product.precio * product.promo / 100)) <= (this.maxPrice || 99999999)));
     }
 
-    if (this.minPrice >= 0 && this.maxPrice == 99999999) {
-      this.productoService.productos = this.productList.filter(product => product.precio >= this.minPrice);
+    if ((this.minPrice || 0) >= 0 && (this.maxPrice || 99999999) == 99999999) {
+      this.productoService.productos = this.productList.filter(product => product.precio >= (this.minPrice || 0));
     }
 
-    if (this.maxPrice <= 99999999 && this.minPrice == 0) {
-      this.productoService.productos = this.productList.filter(product => product.precio <= this.maxPrice);
+    if ((this.maxPrice || 99999999) <= 99999999 && this.minPrice == 0) {
+      this.productoService.productos = this.productList.filter(product => product.precio <= (this.maxPrice || 99999999));
     }
   }
 
   clearFilters() {
       this.productoService.productos = this.productList.sort();
-      this.minPrice = 0;
-      this.maxPrice = 99999999;
+      delete this.minPrice;
+      delete this.maxPrice;
   }
 
 }
