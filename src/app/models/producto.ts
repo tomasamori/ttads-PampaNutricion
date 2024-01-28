@@ -5,7 +5,7 @@ export interface Producto {
   descripcion: string,
   peso: number,
   imgUrl: string,
-  tipoMascota: {nombre: string, tamanoRaza: string, edad: string},
+  tipoMascota: {_id: string, nombre: string, tamanoRaza: string, edad: string},
   precio: number,
   promo: number
 }

@@ -1,3 +1,38 @@
 .container {
     margin-top: 20px;
 }
+
+#h1-PUProd {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 50px;
+        font-weight: bold;
+        color: #ffffff;
+}
+
+
+#ProductModal .modal-body {
+    max-height: calc(100vh - 200px); /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+  }
+
+#ProductModal .modal-dialog {
+    max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
+  }
+
+#ProductModal .modal-content {
+    width: 100%;
+  }
+
+.mi-fila {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
+    gap: 10px; /* Espacio entre los elementos en la misma línea */
+}
+  
+.mi-elemento {
+    flex: 1; /* Hace que los elementos ocupen el espacio disponible en la línea */
+    margin: 10px; /* Espacio entre los elementos en líneas diferentes */
+}
+
+
+  

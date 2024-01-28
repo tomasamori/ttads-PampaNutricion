@@ -17,7 +17,7 @@ export class ProductoService {
   descripcion:'',
   peso:0,
   imgUrl:'',
-  tipoMascota: {nombre:'', tamanoRaza: '', edad: ''},
+  tipoMascota: {_id:'',nombre:'', tamanoRaza: '', edad: ''},
   precio: 0,
   promo:0
   };

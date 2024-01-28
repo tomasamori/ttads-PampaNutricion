@@ -12,62 +12,86 @@
             <th scope="col">Tipo de Mascota</th>
             <th scope="col">Precio</th>
             <th scope="col">Promo</th>
-            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">Nuevo</button></th>
+            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ProductModal"
+                (click)="resetForm(productForm)">Nuevo</button></th>
           </tr>
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          <div class="modal fade" id="ProductModal" #productModal tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog bg-transparent">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">NUEVO PRODUCTO</h1>
+                <div class="modal-header bg-warning">
+                  <h1 class="modal-title fs-5" id="h1-PUProd">{{ tituloModal }}</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                  <!--Form--> 
-                  <form #productForm="ngForm" (ngSubmit)="addproduct(productForm)">
 
-                    <div class="form-group">
-                      <input type="text" name="nombre" [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese nombre producto" class="form-control" 
-                         />
+                <!--Form-->
+                <form #productForm="ngForm" (ngSubmit)="addproduct(productForm)">
+
+                  <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProduct._id">
+                  <div class="col mi-fila">
+                    <div class="mi-elemento">
+                      <label for="nombre">Nombre:</label>
+                      <input type="text" name="nombre" [(ngModel)]="productoService.selectedProduct.nombre"
+                        placeholder="Ingrese nombre producto" class="form-control" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="mi-elemento">
+                      <label for="marca">Marca:</label>
                       <input type="text" name="marca" class="form-control" placeholder="Marca"
                         [(ngModel)]="productoService.selectedProduct.marca">
                     </div>
-
-                    <div class="form-group">
-                      <input type="text" name="descripcion" class="form-control" placeholder="Descripción"
-                        [(ngModel)]="productoService.selectedProduct.descripcion">
-                    </div>
-
-                    <div class="form-group">
+                  </div>
+                  <div class="col mi-fila">
+                    <div class="mi-elemento">
+                      <label for="peso">Peso:</label>
                       <input type="number" name="peso" class="form-control" placeholder="Peso (Kg)"
                         [(ngModel)]="productoService.selectedProduct.peso">
                     </div>
-
-                    <div class="form-group">
-                      <input type="text" name="imgUrl" class="form-control" placeholder="Ingrese la imagen del producto"
-                        [(ngModel)]="productoService.selectedProduct.imgUrl">
-                    </div>
-
-                    <!--<div class="form-group">
-                      <input type="text" name="tipoMascota.nombre" class="form-control" placeholder="Tipo de mascota"
-                        [(ngModel)]="productoService.selectedProduct.tipoMascota.nombre">
-                    </div>-->
-
-                    <div class="form-group">
+                    <div class="mi-elemento">
+                      <label for="precio">Precio:</label>
+                      <br>
                       <input type="number" name="precio" class="form-control" placeholder="Precio ($)"
                         [(ngModel)]="productoService.selectedProduct.precio">
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+
                   </div>
-                  </form>
-                </div>  
+                  <!--  <div class="form-group">
+                      <label for="imgUrl">Imagen:</label>
+                      <input type="file" name="imgUrl" class="form-control" placeholder="Ingrese la imagen del producto"
+                        [(ngModel)]="productoService.selectedProduct.imgUrl">
+                    </div>
+                    <br>-->
+                  <div class="col mi-fila">
+                    <div class="mi-elemento">
+                      <label for="tipoMascota">Tipo de Mascota:</label>
+                      <br>
+                      <select [(ngModel)]="tipoMascota" name="tipoMascota" class="form-control">
+                        <option *ngFor="let tm of tipoMascotasService.tipoMascotas" value="{{tm._id}}">{{tm.nombre}}
+                          {{tm.tamanoRaza}} {{tm.edad}}</option>
+                      </select>
+                    </div>
+                    <div class="mi-elemento">
+                      <label for="promo">Promo:</label>
+                      <input type="number" name="promo" class="form-control" placeholder="Ingrese codigo de promo"
+                        [(ngModel)]="productoService.selectedProduct.promo">
+                    </div>
+
+                  </div>
+
+                  <div class="mi-elemento">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea name="descripcion" id="" class="form-control" placeholder="Descripción" cols="20" rows="4"
+                      [(ngModel)]="productoService.selectedProduct.descripcion"></textarea>
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                  </div>
+
+                </form>
               </div>
             </div>
           </div>
@@ -84,14 +108,15 @@
             <td>${{p.precio}}</td>
             <td>{{p.promo}}</td>
             <td>
-              <button class="btn btn-primary btn-sm" >
+              <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ProductModal"
+                (click)="editProduct(p)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
                   viewBox="0 0 16 16">
                   <path
                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                 </svg>
               </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteproduct(p._id)">
+              <button class="btn btn-danger btn-sm" (click)="deleteProduct(p._id)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
                   viewBox="0 0 16 16">
                   <path
