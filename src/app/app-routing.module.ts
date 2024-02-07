@@ -13,8 +13,8 @@ const routes: Routes = [
   {path: 'products', component: ListComponent},
   {path: 'crud', component: CrudPageComponent},
   {path: 'crud-products', component: CrudProductsComponent},
-  {path: 'crud-products', component: CrudProductsComponent},
-  {path: 'store-locator', component: StoreLocatorComponent}
+  {path: 'store-locator', component: StoreLocatorComponent},
+  {path: 'crud-page', component: CrudPageComponent}
 ];
 
 @NgModule({
