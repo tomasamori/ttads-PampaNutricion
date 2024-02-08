@@ -17,9 +17,10 @@ export class ProductoService {
   descripcion:'',
   peso:0,
   imgUrl:'',
-  tipoMascota: {_id:'',nombre:'', tamanoRaza: '', edad: ''},
+  tipoMascota: {nombre:'', tamanoRaza: '', edad: ''},
   precio: 0,
-  promo:0
+  promo:0,
+  amount:0
   };
 
   constructor(private http: HttpClient) { }

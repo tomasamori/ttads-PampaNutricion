@@ -1,0 +1,71 @@
+<section style="background-color: rgb(246, 240, 237);">
+    <div class="container py-3">
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src={{imgUrl}} class="w-50" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h4>{{brand}}</h4>
+                  <h5>{{name}}</h5>
+                  <div class="mt-1 mb-2 text-muted small">
+                    <span>{{petName}}</span>
+                    <span class="text-primary"> • </span>
+                    <span>{{petAge}}</span>
+                    <span class="text-primary"> • </span>
+                    <span>{{petSize}}<br /></span>
+                  </div>
+                  <h6 class="mb-4">Peso: {{weight}}kg</h6>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                  <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount === '0'">
+                    <h6 class="mb-2 me-1">Precio:${{price}}</h6>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-1" *ngIf="discount !== '0'">
+                    <h6 class="mb-1 me-3">Precio:${{calculatePrice(+price, +discount)}}</h6>
+                    <span class="text-danger ms-1"><s>${{price}}</s></span>
+                    <label class="bg bg-danger text-white ms-2" id="disc">-{{discount}}%</label>
+                  </div>
+                  <div *ngIf="discount === '0'">
+                    <div>
+                      <span>Cantidad: </span>
+                      <button class="btn btn-dark btn-circle minus" (click)="subtract()">-</button>
+                      <span class="ms-1 me-1">{{amount}}</span>
+                      <button class="btn btn-dark btn-circle plus" (click)="add()">+</button>
+                    </div>
+                    <div>
+                      <span>Precio final $ {{calculateFinalPrice()}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="discount !== '0'">
+                    <span>Cantidad: </span>
+                    <button class="btn btn-dark btn-circle minus" (click)="subtract()">-</button>
+                    <span class="ms-1 me-1">{{amount}} </span>
+                    <button class="btn btn-dark btn-circle plus" (click)="add()">+</button>
+                    <div>
+                      <span>Precio final $ {{calculateFinalPrice()}} </span>
+                    </div>  
+                  </div>
+                  <div class="d-flex flex-column">
+                    <button type="button" class="btn btn-danger bg-gradient mt-2" (click)="delete()">Eliminar</button>
+                  </div>
+                  <div class="d-flex flex-column">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

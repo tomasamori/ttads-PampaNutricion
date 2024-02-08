@@ -1,52 +1,47 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component,EventEmitter,Input,Output ,OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
-  selector: 'app-product-counter',
-  templateUrl: './product-counter.component.html',
-  styleUrls: ['./product-counter.component.css']
+  selector: 'app-cart-counter',
+  templateUrl: './cart-counter.component.html',
+  styleUrls: ['./cart-counter.component.css']
 })
-export class ProductCounterComponent implements OnInit {
+export class CartCounterComponent implements OnInit {
 
-  constructor() { }
+  constructor(cart:CartService) { }
 
   ngOnInit(): void {
+    this.Asig()
   }
-
   @Input() price: string;
   @Output() updatePriceEvent = new EventEmitter<number>();
   @Output() updateAmountEvent = new EventEmitter<number>();
-
-  amount = 1;
+  @Input() amount1:string;
+  amount=1;
 
   add() {
-    this.amount =this.amount + 1;
-    this.updateAmountByInput(this.amount);
+    this.amount = this.amount+ 1;
     this.updatePrice(this.calculatePrice(this.amount, this.price));
+    this.updateAmount(this.amount);
   }
 
   subtract() {
     if (Number(this.amount) > 1)
     {
-      this.amount= this.amount - 1;
+      this.amount = this.amount - 1;
       this.updatePrice(this.calculatePrice(this.amount, this.price));
+      this.updateAmount(this.amount);
     }
   }
 
   calculatePrice(amount: any, price: any) {
     return (Number(amount)*Number(price));
   }
-  
+
   updatePrice(value: number) {
     this.updatePriceEvent.emit(value);
   }
 
-  updateAmountByInput(event: any) {
-    const inputValue = Number(event);
-    if (!isNaN(inputValue) && inputValue >= 0) {
-      this.amount = inputValue;
-      this.updateAmount(inputValue);
-    }
-  }
   updateAmount(value: number) {
     this.updateAmountEvent.emit(value);
   }

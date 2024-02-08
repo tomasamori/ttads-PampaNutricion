@@ -1,0 +1,46 @@
+<div class="navc">
+    <div class="container-fluid">
+      <div *ngIf="(cartService.getAllCarrito().length)==0">
+        <div class="contenedor imagen">
+          <a href="/products" class="imagen"> 
+            <img class="imagen" src="https://i.pinimg.com/564x/55/26/8c/55268c6a3e4ce1823888c9825eac5c5e.jpg" alt="Imagen Centrada" > 
+          </a>
+        </div> 
+      </div>
+      <div *ngIf="(cartService.getAllCarrito().length)>0">
+        <div class="DetalleP">
+          <div class="d-grid gap-2">
+            <button class="btn btn-ap text-white" type="button"(click)="List()">
+              Agregar productos
+            </button>
+            <button class="btn btn-det text-white" type="button" data-bs-toggle="collapse" (click)="getAllProd()"
+              data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Detalle del pedido
+            </button>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <h5 class="text-center text-white"> Cantidad de productos: {{CantidadAritulos()}} </h5>
+                <h5 class="text-center text-white"> Total: $ {{total()}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="list-cart" *ngFor="let p of cartService.getAllCarrito()">
+    <app-cart-card id="{{p._id}}" brand="{{p.marca}}" name="{{p.nombre}}" discount="{{p.promo}}"
+      description="{{p.descripcion}}" weight="{{p.peso}}" petName="{{p.tipoMascota.nombre}}"
+      petAge="{{p.tipoMascota.edad}}" petSize="{{p.tipoMascota.tamanoRaza}}" price="{{p.precio}}" imgUrl="{{p.imgUrl}}"
+      amount="{{p.amount}}">
+    </app-cart-card>
+
+    <div class="row justify-content-center mt-3 w-100">
+      <div class="col-6"> <!-- col-6 para ocupar el 50% del ancho -->
+        <button type="button" class="btn btn-success w-100" (click)="Pay()">
+          Comprar
+        </button>
+      </div>
+    </div>
+  </div>

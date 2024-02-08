@@ -5,7 +5,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { CrudPageComponent } from "./components/crud-page/crud-page.component";
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
 import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
-
+import { CartComponent } from './components/cart/cart.component';
 // routes
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'crud', component: CrudPageComponent},
   {path: 'crud-products', component: CrudProductsComponent},
   {path: 'store-locator', component: StoreLocatorComponent},
+  {path:'cart', component:CartComponent},
   {path: 'crud-page', component: CrudPageComponent}
 ];
 

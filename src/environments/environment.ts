@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   URL_PRODUCTO: 'http://localhost:3000/api/v1/producto',
-  URL_TIPOMASCOTA: 'http://localhost:3000/api/v1/tipoMascota'
+  URL_TIPOMASCOTA: 'http://localhost:3000/api/v1/tipoMascota',
+  URL_SUCURSAL:'http://localhost:3000/api/v1/sucursal'
 };
 
 /*
