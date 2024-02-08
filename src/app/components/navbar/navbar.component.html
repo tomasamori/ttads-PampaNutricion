@@ -12,7 +12,7 @@
           <a class="nav-link" href="/products" routerLinkActive="active-link">Nuestros productos</a>
         </li>
         <li class="nav-item ms-4">
-          <a class="nav-link" href="/store-locator">Sucursales</a>
+          <a class="nav-link" href="/store-locator">Sobre nosotros</a>
         </li>
         <li class="nav-item ms-4">
           <a class="nav-link" href="#">Carrito</a>
@@ -80,35 +80,88 @@
 
 <!--MODAL DE REGISTRARME-->
 <div class="modal fade" id="Register" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100">
        
         <div class="flex-column">
           <button type="button" class="btn-close btn-close-white position-absolute top-0 start-100 translate-middle" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="bg-dark p-5 rounded-5 text-white">
-              <div class="d-flex justify-contect-center">
+              <div class="d-flex justify-content-center">
                   <img src="./assets/images/logo.png" alt="login-icon" style="height: 7rem">
               </div>
               <div class="text-center fs-1 fw-bold">Registrarme</div>
-              <div class="input-group mt-4">
+              
+             <div class="row">
+              <div class="col-md-6">
+              <div class="input-group mt-2">
                   <div class="input-group-text">
-                      <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
+                      <img src="./assets/images/mail.png" alt="mail-icon" style="height: 1rem">
                   </div>
-                  <input class="form-control" type="text" placeholder="Nuevo usuario" required>
+                  <input class="form-control" type="email" placeholder="Email" required>
               </div>
+              
+              <div class="input-group mt-2">
+                <div class="input-group-text">
+                    <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
+                </div>
+                <input class="form-control" type="text" placeholder="Nuevo usuario" required>
+              </div>
+
               <div class="input-group mt-2">
                   <div class="input-group-text">
                       <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
                   </div>
                   <input class="form-control" type="password" placeholder="Contraseña" required>
               </div>
+              
               <div class="input-group mt-2">
                 <div class="input-group-text">
                     <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
                 </div>
                 <input class="form-control" type="password" placeholder="Repetir contraseña" required>
+              </div>
+                
+              
+              </div>
+
+              <div class="col-md-6">
+              <div class="input-group mt-2">
+                <div class="input-group-text">
+                    <img src="./assets/images/pngwing.com.png" alt="name-icon" style="height: 1rem">
+                </div>
+                <input class="form-control" type="text" placeholder="Nombre" required>
+              </div>
+
+              <div class="input-group mt-2">
+                <div class="input-group-text">
+                    <img src="./assets/images/date.png" alt="date-icon" style="height: 1rem">
+                </div>
+                <input class="form-control" type="date" placeholder="Fecha de nacimiento" required>
+              </div>
+
+              <div class="input-group mt-2">
+                <div class="input-group-text">
+                    <img src="./assets/images/adress.png" alt="adress-icon" style="height: 1rem">
+                </div>
+                <input class="form-control" type="text" placeholder="Dirección" required>
+              </div>
+
+              <div class="input-group mt-2">
+                <div class="input-group-text">
+                    <img src="./assets/images/phone.png" alt="phone-icon" style="height: 1rem">
+                </div>
+                <input class="form-control" type="text" placeholder="Teléfono" required>
+              </div>
             </div>
+            </div>
+            <div class="input-group mt-2">
+              <div class="input-group-text">
+                  <img src="./assets/images/cuil.png" alt="cuil-icon" style="height: 1rem">
+              </div>
+              <input class="form-control" type="text" placeholder="Cuil" required>
+            </div>
+            <a target="_blank" class="text-decoration-none text-primary fst-italic" href="https://www.argentina.gob.ar/descarga-constancia-cuil">Click para conocer tu numero de cuil</a>
               <div class="btn btn-success text-white w-100 mt-4">Registrarme</div>
           </div>
       </div>
