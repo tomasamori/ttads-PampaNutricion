@@ -68,6 +68,7 @@
                 <div class="d-flex flex-column mt-2">
                   <div *ngIf="discount === '0'">
                     <app-product-counter 
+                    price="{{calculatePrice(+price, +discount)}}"
                     (updatePriceEvent)="updatePrice($event)"
                     (updateAmountEvent)="updateAmount($event)">
                     </app-product-counter>

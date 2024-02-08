@@ -29,11 +29,14 @@ export class ProductCounterComponent implements OnInit {
     {
       this.amount= this.amount - 1;
       this.updatePrice(this.calculatePrice(this.amount, this.price));
+      
     }
   }
 
   calculatePrice(amount: any, price: any) {
+    debugger;
     return (Number(amount)*Number(price));
+    debugger;
   }
   
   updatePrice(value: number) {
