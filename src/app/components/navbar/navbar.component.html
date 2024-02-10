@@ -37,7 +37,7 @@
   </div>
 </nav>
 
-<!--MODAL INICIO DE SECION-->
+<!--MODAL INICIO DE SESION-->
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -92,79 +92,84 @@
               </div>
               <div class="text-center fs-1 fw-bold">Registrarme</div>
               
-             <div class="row">
-              <div class="col-md-6">
-              <div class="input-group mt-2">
-                  <div class="input-group-text">
+            <form #userForm="ngForm" (ngSubmit)="register(userForm)">
+              <div class="row">
+                <div class="col-md-6">
+                               
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                      <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="text" placeholder="Nuevo usuario" [(ngModel)]="authService.user.usuario" name="usuario" required>
+                  </div>
+
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
                       <img src="./assets/images/mail.png" alt="mail-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="email" placeholder="Email" [(ngModel)]="authService.user.email" name="email" required>
                   </div>
-                  <input class="form-control" type="email" placeholder="Email" required>
-              </div>
-              
-              <div class="input-group mt-2">
-                <div class="input-group-text">
-                    <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
-                </div>
-                <input class="form-control" type="text" placeholder="Nuevo usuario" required>
-              </div>
 
-              <div class="input-group mt-2">
-                  <div class="input-group-text">
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
                       <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="password" placeholder="Contraseña" [(ngModel)]="authService.user.password" name="password" required>
                   </div>
-                  <input class="form-control" type="password" placeholder="Contraseña" required>
-              </div>
               
-              <div class="input-group mt-2">
-                <div class="input-group-text">
-                    <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
+                  <!--
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                      <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="password" placeholder="Repetir contraseña" required>
+                  </div>
+                  -->
                 </div>
-                <input class="form-control" type="password" placeholder="Repetir contraseña" required>
-              </div>
-                
-              
-              </div>
 
-              <div class="col-md-6">
-              <div class="input-group mt-2">
-                <div class="input-group-text">
-                    <img src="./assets/images/pngwing.com.png" alt="name-icon" style="height: 1rem">
-                </div>
-                <input class="form-control" type="text" placeholder="Nombre" required>
-              </div>
+                <div class="col-md-6">
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                      <img src="./assets/images/pngwing.com.png" alt="name-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="text" placeholder="Nombre" [(ngModel)]="authService.user.nombre" name="nombre" required>
+                  </div>
 
-              <div class="input-group mt-2">
-                <div class="input-group-text">
-                    <img src="./assets/images/date.png" alt="date-icon" style="height: 1rem">
-                </div>
-                <input class="form-control" type="date" placeholder="Fecha de nacimiento" required>
-              </div>
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                      <img src="./assets/images/date.png" alt="date-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="date" placeholder="Fecha de nacimiento" [(ngModel)]="authService.user.fechaNacimiento" name="fechaNacimiento" required>
+                  </div>
 
-              <div class="input-group mt-2">
-                <div class="input-group-text">
-                    <img src="./assets/images/adress.png" alt="adress-icon" style="height: 1rem">
-                </div>
-                <input class="form-control" type="text" placeholder="Dirección" required>
-              </div>
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                      <img src="./assets/images/adress.png" alt="adress-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="text" placeholder="Dirección" [(ngModel)]="authService.user.direccion" name="direccion" required>
+                  </div>
 
-              <div class="input-group mt-2">
-                <div class="input-group-text">
-                    <img src="./assets/images/phone.png" alt="phone-icon" style="height: 1rem">
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                      <img src="./assets/images/phone.png" alt="phone-icon" style="height: 1rem">
+                    </div>
+                  <input class="form-control" type="text" placeholder="Teléfono" [(ngModel)]="authService.user.telefono" name="telefono" required>
+                  </div>
                 </div>
-                <input class="form-control" type="text" placeholder="Teléfono" required>
-              </div>
             </div>
-            </div>
+          
             <div class="input-group mt-2">
               <div class="input-group-text">
                   <img src="./assets/images/cuil.png" alt="cuil-icon" style="height: 1rem">
               </div>
-              <input class="form-control" type="text" placeholder="Cuil" required>
+              <input class="form-control" type="text" placeholder="Cuil" [(ngModel)]="authService.user.cuil" name="cuil" required>
             </div>
             <a target="_blank" class="text-decoration-none text-primary fst-italic" href="https://www.argentina.gob.ar/descarga-constancia-cuil">Click para conocer tu numero de cuil</a>
-              <div class="btn btn-success text-white w-100 mt-4">Registrarme</div>
+            <br>  
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Registrarme</button>
+          </form>
           </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>
