@@ -13,3 +13,9 @@ a:hover {
   color: #ffd8ab;
   cursor: pointer;
 }
+
+.custom-modal-size {
+  max-width: 30%; 
+  width: auto;
+  border-radius: 20px;
+}

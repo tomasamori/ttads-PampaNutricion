@@ -41,11 +41,11 @@
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100">
+      <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100 rounded">
        
         <div class="flex-column">
-          <button type="button" class="btn-close btn-close-white position-absolute top-0 start-100 translate-middle" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="bg-dark p-5 rounded-5 text-white">
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="bg-dark p-5 text-white">
               <div class="d-flex justify-contect-center">
                   <img src="./assets/images/logo.png" alt="login-icon" style="height: 7rem">
               </div>
@@ -80,18 +80,18 @@
 
 <!--MODAL DE REGISTRARME-->
 <div class="modal fade" id="Register" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered custom-modal-size">
     <div class="modal-content">
-      <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100">
-       
+      <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100 rounded">
         <div class="flex-column">
-          <button type="button" class="btn-close btn-close-white position-absolute top-0 start-100 translate-middle" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="bg-dark p-5 rounded-5 text-white">
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="bg-dark p-5 rounded-10 text-white">
               <div class="d-flex justify-content-center">
                   <img src="./assets/images/logo.png" alt="login-icon" style="height: 7rem">
               </div>
+              <br>
               <div class="text-center fs-1 fw-bold">Registrarme</div>
-              
+              <br>
             <form #userForm="ngForm" (ngSubmit)="register(userForm)">
               <div class="row">
                 <div class="col-md-6">
@@ -100,7 +100,7 @@
                     <div class="input-group-text">
                       <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
                     </div>
-                    <input class="form-control" type="text" placeholder="Nuevo usuario" [(ngModel)]="authService.user.usuario" name="usuario" required>
+                    <input class="form-control" type="text" placeholder="Usuario" [(ngModel)]="authService.user.usuario" name="usuario" required>
                   </div>
 
                   <div class="input-group mt-2">
@@ -116,6 +116,14 @@
                     </div>
                     <input class="form-control" type="password" placeholder="Contraseña" [(ngModel)]="authService.user.password" name="password" required>
                   </div>
+
+                  <div class="input-group mt-2">
+                    <div class="input-group-text">
+                        <img src="./assets/images/cuil.png" alt="cuil-icon" style="height: 1rem">
+                    </div>
+                    <input class="form-control" type="text" placeholder="Cuil" [(ngModel)]="authService.user.cuil" name="cuil" required>
+                  </div>
+                  <a target="_blank" class="text-decoration-none text-primary fst-italic" href="https://www.argentina.gob.ar/descarga-constancia-cuil">Click para conocer cuil</a>
               
                   <!--
                   <div class="input-group mt-2">
@@ -130,9 +138,9 @@
                 <div class="col-md-6">
                   <div class="input-group mt-2">
                     <div class="input-group-text">
-                      <img src="./assets/images/pngwing.com.png" alt="name-icon" style="height: 1rem">
+                      <img src="./assets/images/nomApe.png" alt="name-icon" style="height: 1rem">
                     </div>
-                    <input class="form-control" type="text" placeholder="Nombre" [(ngModel)]="authService.user.nombre" name="nombre" required>
+                    <input class="form-control" type="text" placeholder="Nombres y Apellido" [(ngModel)]="authService.user.nombre" name="nombre" required>
                   </div>
 
                   <div class="input-group mt-2">
@@ -157,16 +165,10 @@
                   </div>
                 </div>
             </div>
-          
-            <div class="input-group mt-2">
-              <div class="input-group-text">
-                  <img src="./assets/images/cuil.png" alt="cuil-icon" style="height: 1rem">
-              </div>
-              <input class="form-control" type="text" placeholder="Cuil" [(ngModel)]="authService.user.cuil" name="cuil" required>
-            </div>
-            <a target="_blank" class="text-decoration-none text-primary fst-italic" href="https://www.argentina.gob.ar/descarga-constancia-cuil">Click para conocer tu numero de cuil</a>
             <br>  
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Registrarme</button>
+            <div class="d-grid gap-2 col-md-6 mx-auto">
+              <button type="submit" class="btn btn-success btn-lg" data-bs-dismiss="modal">Registrarme</button>
+            </div>
           </form>
           </div>
         </div>
@@ -179,10 +181,10 @@
 <div class="modal fade" id="ForgotPass" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100">
+      <div class="modal-body bg-dark d-flex justify-content-center align-item-center vh100 rounded">
        
         <div class="flex-column">
-          <button type="button" class="btn-close btn-close-white position-absolute top-0 start-100 translate-middle" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="bg-dark p-5 rounded-5 text-white">
               <div class="d-flex justify-contect-center">
                   <img src="./assets/images/logo.png" alt="login-icon" style="height: 7rem">
