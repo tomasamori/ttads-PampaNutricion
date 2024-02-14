@@ -92,7 +92,7 @@
               <br>
               <div class="text-center fs-1 fw-bold">Registrarme</div>
               <br>
-            <form #userForm="ngForm" (ngSubmit)="register(userForm)">
+              <form #userForm="ngForm" (ngSubmit)="register(userForm)" class="form needs-validation" ngNativeValidate>
               <div class="row">
                 <div class="col-md-6">
                                
@@ -124,15 +124,7 @@
                     <input class="form-control" type="text" placeholder="Cuil" [(ngModel)]="authService.user.cuil" name="cuil" required>
                   </div>
                   <a target="_blank" class="text-decoration-none text-primary fst-italic" href="https://www.argentina.gob.ar/descarga-constancia-cuil">Click para conocer cuil</a>
-              
-                  <!--
-                  <div class="input-group mt-2">
-                    <div class="input-group-text">
-                      <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
-                    </div>
-                    <input class="form-control" type="password" placeholder="Repetir contraseña" required>
-                  </div>
-                  -->
+
                 </div>
 
                 <div class="col-md-6">
@@ -165,9 +157,18 @@
                   </div>
                 </div>
             </div>
+            
+            <div *ngIf="registrationSuccess" class="overlay">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ¡Usuario registrado con éxito!
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+          </div>
+            
             <br>  
+            
             <div class="d-grid gap-2 col-md-6 mx-auto">
-              <button type="submit" class="btn btn-success btn-lg" data-bs-dismiss="modal">Registrarme</button>
+              <button type="submit" class="btn btn-success btn-lg">Registrarme</button>
             </div>
           </form>
           </div>
@@ -190,16 +191,21 @@
                   <img src="./assets/images/logo.png" alt="login-icon" style="height: 7rem">
               </div>
               <div class="text-center fs-2 fw-bold">Recupero de contraseña</div>
-            
+              <div class="input-group mt-2">
+                <div class="input-group-text">
+                  <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
+                </div>
+                <input class="form-control" type="text" placeholder="Usuario" name="usuario" required>
+              </div>
               <div class="input-group mt-4">
                 <div class="input-group-text">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
                   </svg>
                 </div>
-                <input class="form-control" type="text" placeholder="Escriba su email" required>
+                <input class="form-control" type="text" placeholder="Email" required>
             </div>
-              <div class="btn btn-success text-white w-100 mt-4">Enviar email</div>
+              <div class="btn btn-success text-white w-100 mt-4">Recuperar contraseña</div>
           </div>
       </div>
       </div>
