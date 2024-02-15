@@ -8,11 +8,11 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class CartCounterComponent implements OnInit {
 
-  constructor(cart:CartService) { }
+  constructor(cart: CartService) { }
 
   ngOnInit(): void {
-    this.Asig()
   }
+
   @Input() price: string;
   @Output() updatePriceEvent = new EventEmitter<number>();
   @Output() updateAmountEvent = new EventEmitter<number>();
@@ -45,7 +45,5 @@ export class CartCounterComponent implements OnInit {
   updateAmount(value: number) {
     this.updateAmountEvent.emit(value);
   }
-  Asig(){
-    return this.amount;
-  }
+
 }
