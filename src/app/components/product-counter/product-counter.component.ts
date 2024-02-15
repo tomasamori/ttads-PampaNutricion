@@ -49,8 +49,4 @@ export class ProductCounterComponent implements OnInit {
   updateAmount(value: number) {
     this.updateAmountEvent.emit(value);
   }
-
-  Asig() {
-    return this.amount;
-  }
 }

@@ -8,10 +8,11 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class CartCounterComponent implements OnInit {
 
-  constructor(cart:CartService) { }
+  constructor(cart: CartService) { }
 
   ngOnInit(): void {
   }
+
   @Input() price: string;
   @Output() updatePriceEvent = new EventEmitter<number>();
   @Output() updateAmountEvent = new EventEmitter<number>();
