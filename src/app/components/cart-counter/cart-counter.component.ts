@@ -11,7 +11,6 @@ export class CartCounterComponent implements OnInit {
   constructor(cart:CartService) { }
 
   ngOnInit(): void {
-    this.Asig()
   }
   @Input() price: string;
   @Output() updatePriceEvent = new EventEmitter<number>();
@@ -44,8 +43,5 @@ export class CartCounterComponent implements OnInit {
 
   updateAmount(value: number) {
     this.updateAmountEvent.emit(value);
-  }
-  Asig(){
-    return this.amount;
   }
 }

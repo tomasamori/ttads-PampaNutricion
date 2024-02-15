@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-cart',
@@ -47,6 +52,8 @@ export class CartComponent implements OnInit {
   Pay(){
     this.cartService.vaciarCarrito()
     this.router.navigate(['home'])
+    //conts pdf
+
   }
 
 }
