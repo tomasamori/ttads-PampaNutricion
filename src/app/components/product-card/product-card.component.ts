@@ -37,7 +37,7 @@ export class ProductCardComponent implements OnInit {
     peso:0,
     precio:0,
     promo:0,
-    tipoMascota:{tamanoRaza:'',edad:'',nombre:''},
+    tipoMascota:{_id:'', tamanoRaza:'',edad:'',nombre:''},
     imgUrl:'',
     amount:1
   }

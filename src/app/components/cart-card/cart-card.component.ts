@@ -34,7 +34,7 @@ export class CartCardComponent implements OnInit {
     peso:0,
     precio:0,
     promo:0,
-    tipoMascota:{nombre: '', tamanoRaza: '', edad: ''},
+    tipoMascota:{_id:'',nombre: '', tamanoRaza: '', edad: ''},
     imgUrl:'',
     amount:1
   }

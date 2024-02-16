@@ -13,6 +13,7 @@
 #ProductModal .modal-body {
     max-height: calc(100vh - 200px); /* Ajusta la altura máxima según tus necesidades */
     overflow-y: auto;
+    background-color: #b86637;
   }
 
 #ProductModal .modal-dialog {
@@ -32,6 +33,10 @@
 .mi-elemento {
     flex: 1; /* Hace que los elementos ocupen el espacio disponible en la línea */
     margin: 10px; /* Espacio entre los elementos en líneas diferentes */
+}
+
+.bg-warning {
+    background-color: #ee7f3f !important; 
 }
 
 

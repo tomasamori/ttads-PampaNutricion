@@ -2,7 +2,7 @@
   <div class="col">
     <div class="col">
       <table class="table table-bordered table-hover">
-        <thead class="table-primary">
+        <thead class="table-responsive">
           <tr>
             <th scope="col">Marca</th>
             <th scope="col">Nombre</th>
@@ -26,14 +26,14 @@
                 </div>
 
                 <!--Form-->
-                <form #productForm="ngForm" (ngSubmit)="addproduct(productForm)">
+                <form ngNativeValidate #productForm="ngForm" (ngSubmit)="addproduct(productForm)">
 
                   <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProduct._id">
+
                   <div class="col mi-fila">
                     <div class="mi-elemento">
                       <label for="nombre">Nombre:</label>
-                      <input type="text" name="nombre" [(ngModel)]="productoService.selectedProduct.nombre"
-                        placeholder="Ingrese nombre producto" class="form-control" />
+                      <input type="text" name="nombre" [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese nombre producto" class="form-control" required/>
                     </div>
 
                     <div class="mi-elemento">
@@ -56,27 +56,33 @@
                     </div>
 
                   </div>
-                  <!--  <div class="form-group">
-                      <label for="imgUrl">Imagen:</label>
-                      <input type="file" name="imgUrl" class="form-control" placeholder="Ingrese la imagen del producto"
-                        [(ngModel)]="productoService.selectedProduct.imgUrl">
-                    </div>
-                    <br>-->
+
                   <div class="col mi-fila">
                     <div class="mi-elemento">
                       <label for="tipoMascota">Tipo de Mascota:</label>
                       <br>
-                      <select [(ngModel)]="tipoMascota" name="tipoMascota" class="form-control">
+                      <select [(ngModel)]="productoService.selectedProduct.tipoMascota._id" name="tipoMascota"
+                        class="form-control" placeholder="Tipo de Mascota">
                         <option *ngFor="let tm of tipoMascotasService.tipoMascotas" value="{{tm._id}}">{{tm.nombre}}
                           {{tm.tamanoRaza}} {{tm.edad}}</option>
                       </select>
                     </div>
                     <div class="mi-elemento">
-                      <label for="promo">Promo:</label>
-                      <input type="number" name="promo" class="form-control" placeholder="Ingrese codigo de promo"
-                        [(ngModel)]="productoService.selectedProduct.promo">
+                      <div class="form-group">
+                        <label for="imgUrl">Imagen:</label>
+                        <input type="text" name="imgUrl" class="form-control"
+                          placeholder="Ingrese la imagen del producto"
+                          [(ngModel)]="productoService.selectedProduct.imgUrl">
+                      </div>
                     </div>
-
+                    <div class="mi-elemento">
+                      <div class="form-group">
+                        <label for="promo">Promo:</label>
+                        <input type="text" name="promo" class="form-control"
+                          placeholder="Ingrese porcentaje de descuento"
+                          [(ngModel)]="productoService.selectedProduct.promo">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="mi-elemento">
@@ -87,8 +93,9 @@
                   </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                      (click)="cancel()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" >Guardar</button>
                   </div>
 
                 </form>

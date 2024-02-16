@@ -16,14 +16,16 @@ export class CrudProductsComponent implements OnInit {
 
   tipoMascota: TipoMascota;
 
+
   ngOnInit(): void {
-    this.getProducts();
+    this.getProducts();   
   }
 
   resetForm(form: NgForm) {
     form.reset();
     this.getProducts();
     this.getTypesOfPets();
+    this.cambiarTituloModal("NUEVO PRODUCTO");
   }
 
   getProducts() {
@@ -38,14 +40,18 @@ export class CrudProductsComponent implements OnInit {
   addproduct(form: NgForm) {
     if (form.value._id) {
       this.productoService.updateProducto(form.value).subscribe(
-        (res) => console.log(res),
+        (res) => {
+        console.log(res),
+        this.ngOnInit()
+      },
         (err) => console.log(err)
+        
       );
     } else {
       this.productoService.createProducto(form.value).subscribe(
         res => {
-          this.getProducts();
-          form.reset();
+          this.getProducts(),
+          form.reset()
         },
         err => console.log(err)
       )
@@ -66,8 +72,9 @@ export class CrudProductsComponent implements OnInit {
   }
 
   editProduct(product: Producto) {
+    this.cambiarTituloModal("EDITAR PRODUCTO");
     this.productoService.selectedProduct = product;
-    
+    this.getTypesOfPets();
   }
 
   getTypesOfPets() {
@@ -80,11 +87,15 @@ export class CrudProductsComponent implements OnInit {
   }
 
  // Propiedad para almacenar el título dinámico del modal
- tituloModal: string = 'NUEVO PRODUCTO';
+ tituloModal: string = '';
 
  // Método para cambiar el título del modal
  cambiarTituloModal(nuevoTitulo: string) {
    this.tituloModal = nuevoTitulo;
  }
 
+ cancel() {
+  this.getProducts();
 }
+}
+
