@@ -49,27 +49,54 @@
               <div class="d-flex justify-contect-center">
                   <img src="./assets/images/logo.png" alt="login-icon" style="height: 7rem">
               </div>
+              
+              <br>
               <div class="text-center fs-1 fw-bold">Inicio de Sesión</div>
-              <div class="input-group mt-4">
+              <br>
+              <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form needs-validation" ngNativeValidate>
+              
+                <div class="input-group mt-2">
                   <div class="input-group-text">
-                      <img src="./assets/images/pngwing.com.png" alt="user-icon" style="height: 1rem">
+                    <img src="./assets/images/mail.png" alt="mail-icon" style="height: 1rem">
                   </div>
-                  <input class="form-control" type="text" placeholder="Usuario" required>
-              </div>
+                  <input class="form-control" type="email" placeholder="Email" [(ngModel)]="authService.user.email" name="email" required>
+                </div>
+              
               <div class="input-group mt-2">
                   <div class="input-group-text">
                       <img src="./assets/images/candado.png" alt="pass-icon" style="height: 1rem">
                   </div>
-                  <input class="form-control" type="password" placeholder="Contraseña" required>
+                  <input class="form-control" type="password" placeholder="Contraseña" [(ngModel)]="authService.user.password" name="password" required>
               </div>
+              
               <div class="d-flex justify-conttent-center pt-1">
                   <a href="#" class="text-decoration-none text-primary fw-semibold fst-italic" data-bs-toggle="modal" [attr.data-bs-target]="'#ForgotPass'" style="font-size: 0.9rem">¿Olvidaste tu contraseña?</a>
               </div>
-              <div class="btn btn-success text-white w-100 mt-4">Acceder</div>
+              
+              <div *ngIf="registrationSuccess" class="overlay">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  ¡Bienvenido!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+              </div>
+              
+              <div *ngIf="errorMessage" class="custom-error-message">
+                <br>
+                ¡Error! 
+                <br>
+                {{errorMessage}}
+                <br><br>
+              </div>
+              
+              <br>
+              <div class="d-grid gap-2 col-md-6 mx-auto">
+                <button type="submit" class="btn btn-success btn-lg">Acceder</button>
+              </div>
               <div class="d-flex gap-1 justify-content-center mt-4">
                   <div>¿Aún no estas registrado?</div>
                   <a href="#" class="text-decoration-none text-primary fw-semibold fst-italic" data-bs-toggle="modal" [attr.data-bs-target]="'#Register'">Registrarse</a>
               </div>
+            </form>
           </div>
       </div>
       </div>
@@ -137,13 +164,6 @@
 
                   <div class="input-group mt-2">
                     <div class="input-group-text">
-                      <img src="./assets/images/date.png" alt="date-icon" style="height: 1rem">
-                    </div>
-                    <input class="form-control" type="date" placeholder="Fecha de nacimiento" [(ngModel)]="authService.user.fechaNacimiento" name="fechaNacimiento" required>
-                  </div>
-
-                  <div class="input-group mt-2">
-                    <div class="input-group-text">
                       <img src="./assets/images/adress.png" alt="adress-icon" style="height: 1rem">
                     </div>
                     <input class="form-control" type="text" placeholder="Dirección" [(ngModel)]="authService.user.direccion" name="direccion" required>
@@ -155,15 +175,35 @@
                     </div>
                   <input class="form-control" type="text" placeholder="Teléfono" [(ngModel)]="authService.user.telefono" name="telefono" required>
                   </div>
+
+                  <div class="input-group mt-2">
+                    <label class="input-group-text" for="fechaNacimiento">
+                      <img src="./assets/images/date.png" alt="date-icon" style="height: 1rem">
+                    </label>
+                    <input class="form-control" type="date" id="fechaNacimiento" [(ngModel)]="authService.user.fechaNacimiento" name="fechaNacimiento" title="Fecha de nacimiento" required>
+                  </div>  
+
                 </div>
             </div>
-            
+
             <div *ngIf="registrationSuccess" class="overlay">
               <div class="alert alert-success alert-dismissible fade show" role="alert">
                 ¡Usuario registrado con éxito!
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
           </div>
+
+          <div *ngIf="registrationSuccess" class="overlay">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              ¡Usuario registrado con éxito!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="custom-error-message">
+          ¡Error!
+          {{errorMessage}}
+        </div>
             
             <br>  
             
