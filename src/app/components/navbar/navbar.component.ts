@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm } from "@angular/forms";
+import { empty } from 'rxjs';
 
 
 @Component({
@@ -13,9 +14,20 @@ export class NavbarComponent implements OnInit {
   registrationSuccess = false;
   errorMessage: string = "";
   
+  
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+
+    if (localStorage.getItem('currentUser')){
+      this.registrationSuccess = true;
+    }
+  }
+
+  
+  logOut(){
+    localStorage.clear();
+    this.registrationSuccess = false;
   }
   
   login(form: NgForm) {
@@ -24,6 +36,7 @@ export class NavbarComponent implements OnInit {
       console.log(res);
       this.registrationSuccess = true;
       form.reset();
+      localStorage.setItem('currentUser',JSON.stringify(res));
     },
     err => {
       console.log(err);
@@ -36,6 +49,7 @@ export class NavbarComponent implements OnInit {
     }
     )
   }
+
   
   register(form: NgForm){
     this.authService.register(form.value)

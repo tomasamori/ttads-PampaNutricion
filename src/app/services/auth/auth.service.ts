@@ -32,4 +32,5 @@ export class AuthService {
   register(user: Usuario) {
     return this.http.post(this.URL_API + '/signup', user);
   }
+
 }

@@ -19,8 +19,15 @@
         </li>
       </ul>
     </div>
+    
     <ul class="navbar-nav mx-auto">
-      <li class="nav-item">
+      <li *ngIf="registrationSuccess" class="nav-item">
+        <button type="button" class="btn btn-dark text-white fs-5 me-5" (click)="logOut()">Cerrar Sesión</button>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav mx-auto">
+      <li *ngIf="!registrationSuccess" class="nav-item">
         <button type="button" class="btn btn-dark text-white fs-5 me-5" data-bs-toggle="modal" [attr.data-bs-target]="'#login'">Acceder</button>
       </li>
     </ul>
