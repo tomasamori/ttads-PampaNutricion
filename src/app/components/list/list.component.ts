@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import {ProductoService} from "../../services/producto/producto.service";
-import {Router} from "@angular/router";
+import { ProductoService } from "../../services/producto/producto.service";
+import { Router } from "@angular/router";
 import { Producto } from "src/app/models/producto";
 
 @Component({
@@ -10,12 +10,12 @@ import { Producto } from "src/app/models/producto";
 })
 export class ListComponent implements OnInit {
 
-  constructor(public productoService: ProductoService, private router:Router) { }
+  constructor(public productoService: ProductoService, private router: Router) { }
 
   productList: Producto[] = [];
   filterProduct = '';
-  minPrice?: Number;
-  maxPrice?: Number;
+  minPrice?: number;
+  maxPrice?: number;
 
   ngOnInit(): void {
     this.getProductos();
@@ -49,36 +49,34 @@ export class ListComponent implements OnInit {
   filterProductsByPrice(price: string) {
     if (price == 'Mayor') {
       this.productoService.productos = this.productoService.productos.sort((a, b) => {
-        return (b.precio - a.precio);
+        return ((b.precio - (b.precio * b.promo / 100)) - (a.precio - (a.precio * a.promo / 100)));
       });
     }
 
     if (price == 'Menor') {
       this.productoService.productos = this.productoService.productos.sort((a, b) => {
-        return (a.precio - b.precio);
+        return ((a.precio - (a.precio * a.promo / 100)) - (b.precio - (b.precio * b.promo / 100)));
       });
     }
   }
 
   filterProductsByPriceRange() {
-    console.log(this.minPrice, this.maxPrice)
-    if ((this.minPrice || 0)> 0 && (this.maxPrice || 99999999) < 99999999) {
-      this.productoService.productos = this.productList.filter(product => (product.promo == 0 && product.precio >= (this.minPrice || 0) && product.precio <= (this.maxPrice || 99999999)) || (product.promo > 0 && (product.precio - (product.precio * product.promo / 100)) >= (this.minPrice || 0) && (product.precio - (product.precio * product.promo / 100)) <= (this.maxPrice || 99999999)));
-    }
-
-    if ((this.minPrice || 0) >= 0 && (this.maxPrice || 99999999) == 99999999) {
-      this.productoService.productos = this.productList.filter(product => product.precio >= (this.minPrice || 0));
-    }
-
-    if ((this.maxPrice || 99999999) <= 99999999 && this.minPrice == 0) {
-      this.productoService.productos = this.productList.filter(product => product.precio <= (this.maxPrice || 99999999));
+    if ((this.minPrice || 0) >= 0 && (this.maxPrice || 99999999) <= 99999999) {
+      this.productoService.productos = this.productList.filter(product => {
+        const discountedPrice = product.promo > 0 ? product.precio - (product.precio * product.promo / 100) : product.precio;
+        return discountedPrice >= (this.minPrice || 0) && discountedPrice <= (this.maxPrice || 99999999);
+      });
+    } else {
+      // Reset filter if invalid price range is provided
+      this.productoService.productos = this.productList;
     }
   }
 
+
   clearFilters() {
-      this.productoService.productos = this.productList.sort();
-      delete this.minPrice;
-      delete this.maxPrice;
+    this.productoService.productos = this.productList.sort();
+    delete this.minPrice;
+    delete this.maxPrice;
   }
 
 }

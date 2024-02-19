@@ -1,31 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoService } from 'src/app/services/producto/producto.service';
 import { TipoMascotaService } from 'src/app/services/tipoMascota/tipoMascota.service';
-import { NgForm } from "@angular/forms";
-import { Producto } from 'src/app/models/producto';
 import { TipoMascota } from 'src/app/models/tipoMascota';
+import { NgForm } from "@angular/forms";
+
 
 
 
 @Component({
-  selector: 'app-crud-products',
-  templateUrl: './crud-products.component.html',
-  styleUrls: ['./crud-products.component.css']
+  selector: 'app-crud-tipoMascota',
+  templateUrl: './crud-tipoMascota.component.html',
+  styleUrls: ['./crud-tipoMascota.component.css']
 })
-export class CrudProductsComponent implements OnInit {
+export class CrudTipoMascotaComponent implements OnInit {
+
+  constructor(public tipoMascotasService: TipoMascotaService) { }
   InsertSuccess =false;
   errorMessage: string = "";
-  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService) { }
-  //InsertSuccess: boolean;
 
   
-  tipoMascota: TipoMascota;
-  
-
- 
-
   ngOnInit(): void {
-    this.getProducts(); 
+    this.getTipoMascota(); 
     this.InsertSuccess =false;
   }
 
@@ -33,29 +27,28 @@ export class CrudProductsComponent implements OnInit {
   resetForm(form: NgForm) {
   
     form.reset();
-    this.getProducts();
-    this.getTypesOfPets();
-    this.cambiarTituloModal("NUEVO PRODUCTO");
-    this.cambiarTituloModalSuccess("Producto Creado con Exito!")
+    this.getTipoMascota();
+    this.cambiarTituloModal("NUEVO TIPO DE MASCOTA");
+    this.cambiarTituloModalSuccess("Tipo de Mascota Creado con Exito!")
 
   }
 
-  getProducts() {
-    this.productoService.getAllProducto().subscribe(
+  getTipoMascota() {
+    this.tipoMascotasService.getAllTiposMascotas().subscribe(
       (res) => {
-        this.productoService.productos = res;
+        this.tipoMascotasService.tipoMascotas = res;
       },
       err => console.log(err)
     )
   }
 
-  addproduct(form: NgForm) {
+  addTipoMascota(form: NgForm) {
     this.InsertSuccess = false;
     if (form.value._id) {
-      this.productoService.updateProducto(form.value).subscribe(
+      this.tipoMascotasService.updateTipoMascota(form.value).subscribe(
         res => {
         console.log(res);
-        this.getProducts();
+        this.getTipoMascota();
         this.InsertSuccess = true;   
       },
         err => {
@@ -65,16 +58,14 @@ export class CrudProductsComponent implements OnInit {
           } else {
             this.errorMessage = 'Se produjo un error desconocido';
            }
-           //this.InsertSuccess = false;
         }
       )
         
         } else {
-      this.productoService.createProducto(form.value).subscribe(
+      this.tipoMascotasService.createTipoMascota(form.value).subscribe(
         res => {
-          this.getProducts();
+          this.getTipoMascota();
           form.reset();
-          console.log('antes', this.InsertSuccess)
           this.InsertSuccess = true;
         },
         err => {console.log(err);
@@ -91,11 +82,11 @@ export class CrudProductsComponent implements OnInit {
   }
 
 
-  deleteProduct(id: string) {
-    if (confirm('Seguro quieres eliminar este producto?')) {
-      this.productoService.deleteProduct(id).subscribe(
+  deleteTipoMascota(id: string) {
+    if (confirm('Seguro quieres eliminar este tipo de mascota?')) {
+      this.tipoMascotasService.deleteTipoMacota(id).subscribe(
         (res) => {
-          this.getProducts();
+          this.getTipoMascota();
         },
         (err) => console.error(err)
       );
@@ -103,22 +94,13 @@ export class CrudProductsComponent implements OnInit {
 
   }
 
-  editProduct(product: Producto) {
+  editTipoMascota(tipoMascota: TipoMascota) {
    
-    this.cambiarTituloModal("EDITAR PRODUCTO");
-    this.cambiarTituloModalSuccess("Producto Actualizado con Exito!")
-    this.productoService.selectedProduct = product;
-    this.getTypesOfPets();
+    this.cambiarTituloModal("EDITAR TIPO DE MASCOTA");
+    this.cambiarTituloModalSuccess("Tipo de Mascota Actualizado con Exito!")
+    this.tipoMascotasService.selectedTipoMascota = tipoMascota;
   }
 
-  getTypesOfPets() {
-    this.tipoMascotasService.getAllTiposMascotas().subscribe(
-      (res) => {
-        this.tipoMascotasService.tipoMascotas = res;
-      },
-      err => console.log(err)
-    )
-  }
 
  // Propiedad para almacenar el título dinámico del modal
  tituloModal: string = '';
@@ -134,7 +116,7 @@ export class CrudProductsComponent implements OnInit {
 }
 
  cancel() {
-  this.getProducts();
+  this.getTipoMascota();
 }
 
   ModalClose(){

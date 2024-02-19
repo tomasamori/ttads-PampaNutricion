@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
 
@@ -9,12 +9,12 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class ProductCardComponent implements OnInit {
 
-  constructor(private cart:CartService) {}
+  constructor(private cart: CartService) { }
 
 
   ngOnInit(): void {
   }
-  
+
   @Input() _id: string;
   @Input() brand: string;
   @Input() name: string;
@@ -43,19 +43,21 @@ export class ProductCardComponent implements OnInit {
     imgUrl:'',
     amount:1
   }
+  
   calculatePrice(price:number, discount:number) {
-
     return (price - (price * discount / 100));
   }
 
   updatePrice(newPrice: number) {
     this.finalPrice = newPrice;
   }
+
   updateAmount(newAmount: number) {
     this.amount = newAmount;
   }
-    completeProd() {
-    this.product._id= this._id;
+
+  completeProd() {
+    this.product._id = this._id;
     this.product.descripcion = this.description;
     this.product.marca = this.brand;
     this.product.nombre = this.name;
@@ -65,12 +67,19 @@ export class ProductCardComponent implements OnInit {
     this.product.tipoMascota.tamanoRaza = this.petSize;
     this.product.tipoMascota.edad = this.petAge;
     this.product.tipoMascota.nombre = this.petName;
-    this.product.imgUrl=this.imgUrl;
-    this.product.amount=this.amount;
+    this.product.imgUrl = this.imgUrl;
+    this.product.amount = this.amount;
   }
 
   addProdCart() {
     this.completeProd();
     this.cart.addCart(this.product);
+
+    this.show = true;
+    this.MsjNot = 'Se agregó correctamente al carrito.'
+    setTimeout(()=>{
+      this.MsjNot='';
+      this.show = false;
+    },3000);
   }
 }

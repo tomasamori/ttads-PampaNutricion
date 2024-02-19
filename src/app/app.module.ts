@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { CrudPageComponent } from './components/crud-page/crud-page.component';
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
+import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tipoMascota.component';
 import { CrudCardComponent } from './components/crud-card/crud-card.component';
 import { ProductCounterComponent } from './components/product-counter/product-counter.component';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
@@ -20,11 +21,15 @@ import { CartComponent } from './components/cart/cart.component';
 import { CartCardComponent } from './components/cart-card/cart-card.component';
 import { CartCounterComponent } from './components/cart-counter/cart-counter.component';
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ProductCardComponent,
+    CrudTipoMascotaComponent,
     ListComponent,
     HomeComponent,
     CrudPageComponent,
@@ -45,7 +50,8 @@ import { StoreLocatorCardComponent } from './components/store-locator-card/store
     RouterOutlet,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
