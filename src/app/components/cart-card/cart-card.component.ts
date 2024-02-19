@@ -82,6 +82,6 @@ export class CartCardComponent implements OnInit {
    this.product.imgUrl = this.imgUrl;
   }
   calculateFinalPrice(){
-    return this.finalPrice = this.calculatePrice(this.product.precio,this.product.promo)* this.product.amount
+    return (this.finalPrice = this.calculatePrice(this.product.precio,this.product.promo)* this.product.amount).toFixed(2);
   }
 }

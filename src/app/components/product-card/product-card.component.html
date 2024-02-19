@@ -84,6 +84,9 @@
                     <button class="btn btn-warning bg-gradient mt-4" type="button" (click)="addProdCart()">
                       Agregar al carrito
                     </button>
+                    <div *ngIf="show" class="alert alert-success mt-3 notification" role="alert">
+                      {{MsjNot}}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -35,12 +35,12 @@
       petAge="{{p.tipoMascota.edad}}" petSize="{{p.tipoMascota.tamanoRaza}}" price="{{p.precio}}" imgUrl="{{p.imgUrl}}"
       amount="{{p.amount}}">
     </app-cart-card>
-
-    <div class="row justify-content-center mt-3 w-100">
-      <div class="col-6"> <!-- col-6 para ocupar el 50% del ancho -->
-        <button type="button" class="btn btn-success w-100" (click)="Pay()">
-          Comprar
-        </button>
-      </div>
+  </div>
+  <div class="row justify-content-center mt-3 w-100">
+    <div class="col-6"> <!-- col-6 para ocupar el 50% del ancho -->
+      <button type="button" class="btn btn-success w-100" (click)="Pay()" *ngIf="(cartService.getAllCarrito().length)>0">
+        Comprar
+      </button>
+      
     </div>
   </div>

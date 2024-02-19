@@ -29,6 +29,8 @@ export class ProductCardComponent implements OnInit {
 
   finalPrice = 0;
   amount=1;
+  show : boolean = false;
+  MsjNot : string ='';
   product:Producto={
     _id:'',
     marca:'',
@@ -42,6 +44,7 @@ export class ProductCardComponent implements OnInit {
     amount:1
   }
   calculatePrice(price:number, discount:number) {
+
     return (price - (price * discount / 100));
   }
 
