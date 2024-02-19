@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
 
@@ -9,12 +9,12 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class ProductCardComponent implements OnInit {
 
-  constructor(private cart:CartService) {}
+  constructor(private cart: CartService) { }
 
 
   ngOnInit(): void {
   }
-  
+
   @Input() _id: string;
   @Input() brand: string;
   @Input() name: string;
@@ -28,31 +28,34 @@ export class ProductCardComponent implements OnInit {
   @Input() discount: string;
 
   finalPrice = 0;
-  amount=1;
-  product:Producto={
-    _id:'',
-    marca:'',
-    descripcion:'',
-    nombre:'',
-    peso:0,
-    precio:0,
-    promo:0,
-    tipoMascota:{_id:'', tamanoRaza:'',edad:'',nombre:''},
-    imgUrl:'',
-    amount:1
+  amount = 1;
+  product: Producto = {
+    _id: '',
+    marca: '',
+    descripcion: '',
+    nombre: '',
+    peso: 0,
+    precio: 0,
+    promo: 0,
+    tipoMascota: { _id: '', tamanoRaza: '', edad: '', nombre: '' },
+    imgUrl: '',
+    amount: 1
   }
+  
   calculatePrice(price:number, discount:number) {
-    return (price - (price * discount / 100));
+    return parseFloat((price - (price * discount / 100)).toFixed(2));
   }
 
   updatePrice(newPrice: number) {
     this.finalPrice = newPrice;
   }
+
   updateAmount(newAmount: number) {
     this.amount = newAmount;
   }
-    completeProd() {
-    this.product._id= this._id;
+
+  completeProd() {
+    this.product._id = this._id;
     this.product.descripcion = this.description;
     this.product.marca = this.brand;
     this.product.nombre = this.name;
@@ -62,8 +65,8 @@ export class ProductCardComponent implements OnInit {
     this.product.tipoMascota.tamanoRaza = this.petSize;
     this.product.tipoMascota.edad = this.petAge;
     this.product.tipoMascota.nombre = this.petName;
-    this.product.imgUrl=this.imgUrl;
-    this.product.amount=this.amount;
+    this.product.imgUrl = this.imgUrl;
+    this.product.amount = this.amount;
   }
 
   addProdCart() {

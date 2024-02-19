@@ -22,8 +22,7 @@ export class ProductCounterComponent implements OnInit {
   }
 
   subtract() {
-    if (Number(this.amount) > 1)
-    {
+    if (Number(this.amount) > 1) {
       this.amount = Number(this.amount) - 1;
       this.updatePrice(this.calculatePrice(this.amount, this.price));
       this.updateAmount(this.amount);
@@ -31,8 +30,10 @@ export class ProductCounterComponent implements OnInit {
   }
 
   calculatePrice(amount: number, price: any) {
-    return (amount*Number(price));
+    const totalPrice = amount * Number(price);
+    return parseFloat(totalPrice.toFixed(2));
   }
+
 
   updatePrice(value: number) {
     this.updatePriceEvent.emit(value);
