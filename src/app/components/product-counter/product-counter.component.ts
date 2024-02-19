@@ -30,7 +30,7 @@ export class ProductCounterComponent implements OnInit {
   }
 
   calculatePrice(amount: number, price: any) {
-    return (amount*Number(price));
+    return (amount*Number(price)).toFixed(2);
   }
 
 

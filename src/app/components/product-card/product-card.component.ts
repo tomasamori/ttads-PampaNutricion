@@ -45,7 +45,7 @@ export class ProductCardComponent implements OnInit {
   }
   
   calculatePrice(price:number, discount:number) {
-    return (price - (price * discount / 100));
+    return (price - (price * discount / 100)).toFixed(2);
   }
 
   updatePrice(newPrice: number) {

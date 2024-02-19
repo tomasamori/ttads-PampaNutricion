@@ -78,13 +78,13 @@ export class CartComponent implements OnInit {
       left:10,
       right:10,
     };
-    var header = ['Nombre', 'Cantidad', 'Precio', 'Subtotal','IVA','Precio final'];
+    var header = ['Nombre', 'Cantidad', 'Precio','Dto' ,'Subtotal        ','IVA','Precio final   '];
     let data3 = this.cartService.ConvertDataForTicket();
     var config = {
       autoSize     : true,
       printHeaders : true,
       headerBackgroundColor : 'E96524',
-      tableWidth: 100,
+      //tableWidth: 100,
     }
     const doc = new jsPDF({
       orientation: 'l',
@@ -93,17 +93,19 @@ export class CartComponent implements OnInit {
       putOnlyUsedFonts:true
      })
 
-    doc.addImage('https://files.fm/thumb_show.php?i=yd493bc9a6','JPG',margins.left,10,48.6,27.12)
+    doc.addImage('https://files.fm/thumb_show.php?i=yd493bc9a6','JPG',margins.left,2,48.6,30)
     //let fechaDeHoy: Date = new Date(); 
     //let datos= [,'Fecha del pedido: '+ fechaDeHoy.toString().trim(),'Cliente: '+ this.pedido.usuario]
 
     doc.text('Nro. Pedido: '+PedidoP.nroPedido.toString(),70,20,);   
     
-    doc.table(10, 50, data3, header,config)
-    doc.rect(10, 190, 200, 10)
-    doc.text('Total s/IVA: '+ PedidoP.subtotal,15, 192) 
-    //let msjpdf = 'Compra-'+this.pedido.nropedido.toString().trim()+'.pdf'
-    doc.save('compra.pdf');//
+    doc.table(2, 50, data3, header,config);
+    doc.setFillColor('E96524');
+    doc.rect(2, 190, 250, 10,'DF');
+    doc.text('Total s/IVA: $'+ PedidoP.subtotal.toFixed(2),15, 197) ;
+    doc.text('Total IVA: $'+ (PedidoP.total-PedidoP.subtotal).toFixed(2),75, 197);
+    let msjpdf = 'Compra-'+PedidoP.nroPedido.toString().trim()+'.pdf'
+    doc.save(msjpdf);//
   }
 
   subtotal(amount:number,precio:number){
@@ -125,18 +127,22 @@ export class CartComponent implements OnInit {
         this.pedido.subtotal = this.Subtotal;
         this.pedido.total = this.pedido.subtotal * 1.21;
       }
-      //debugger;
+      debugger;
       //return this.pedido
     }
 
     Totales(Products: Producto[]){
+      this.Subtotal = 0;
     for (var i= 0; i < this.Products.length;i++){
       if (this.Products[i].promo>0){
-        this.Subtotal += this.Products[i].precio * this.Products[i].amount * (100- this.Products[i].promo) * 1.21
+        this.Subtotal += this.Products[i].precio * this.Products[i].amount * ((100- this.Products[i].promo)/100)
+        debugger;
       }else{
-        this.Subtotal += this.Products[i].precio * this.Products[i].amount * 1.21
+        this.Subtotal += this.Products[i].precio * this.Products[i].amount
+        debugger;
       }
    }
+   debugger;
    //total = subtotal * 1.21;
 
   }

@@ -111,17 +111,32 @@ export class CartService {
 
       const objetoConvertido: { [key: string]: string; } = {};
       
-      objetoConvertido['Nombre'] = this.truncarString(producto.nombre.trim(),70);
+      objetoConvertido['Nombre'] = this.truncarString(producto.nombre.trim(),55);
       objetoConvertido['Cantidad'] = String(producto.amount).trim();
       objetoConvertido['Precio'] = '$'+String(producto.precio.toFixed(2)).trim();
-      objetoConvertido['Subtotal'] = '$'+String((producto.precio*producto.amount).toFixed(2)).trim();
-      objetoConvertido['IVA'] = '$'+String(((producto.precio*producto.amount*1.21)-(producto.precio*producto.amount)).toFixed(2)).trim();
-      objetoConvertido['Precio final'] = '$'+String((producto.precio*producto.amount*1.21).toFixed(2)).trim();
+      objetoConvertido['Dto'] = String(producto.promo).trim()+' %';
+      let subto = (this.subtotal(producto.precio,producto.amount,producto.promo))
+      objetoConvertido['Subtotal        '] = '$'+String(subto.toFixed(2)).trim();//NO BORRAR ESPACIOS 
+      objetoConvertido['IVA'] = '$'+String(((subto*1.21)-(subto)).toFixed(2)).trim();
+      objetoConvertido['Precio final   '] = '$'+String((subto*1.21).toFixed(2)).trim();
       return objetoConvertido;
     });
       //debugger;
       return arrayConvertido;
     }  
+
+    subtotal(precio:number,cantidad:number,promo:number){
+      let subtot = 0;
+
+      if (promo >0){
+        subtot += precio*cantidad *((100-promo)/100)
+      }else
+      {
+        subtot += precio*cantidad
+      }
+      return subtot;
+
+    }
     truncarString(str: string, maxLength: number): string {
       if (str.length <= maxLength) {
           return str; // Si la longitud del string es menor o igual al maxLength, no se necesita truncar
