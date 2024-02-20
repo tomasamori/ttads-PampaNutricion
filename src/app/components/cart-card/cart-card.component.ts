@@ -8,7 +8,9 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class CartCardComponent implements OnInit {
 
-  constructor(private cart:CartService) { }
+  constructor(private cart:CartService) { 
+    let p = Number(this.price).toFixed(2)
+  }
 
   ngOnInit(): void {
    this.map();
@@ -40,7 +42,7 @@ export class CartCardComponent implements OnInit {
   }
   finalPrice=0;
   calculatePrice(price:number, discount:number) {
-    return (price - (price * discount / 100));
+    return Number((price - (price * discount / 100)).toFixed(2));
   }
 
   updatePrice(newPrice: number) {

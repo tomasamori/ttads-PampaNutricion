@@ -40,8 +40,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-#Components
-/src/app/components/cart/
-/src/app/components/cart-card/
-/src/app/components/cart-counter/
-/src/app/services/cart/

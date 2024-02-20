@@ -15,6 +15,8 @@ export class ProductCounterComponent implements OnInit {
   @Output() updateAmountEvent = new EventEmitter<number>();
   amount = 1;
 
+
+
   add() {
     this.amount = Number(this.amount) + 1;
     this.updatePrice(Number(this.calculatePrice(this.amount, this.price)));

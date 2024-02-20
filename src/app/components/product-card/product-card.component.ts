@@ -62,7 +62,7 @@ export class ProductCardComponent implements OnInit {
     this.product.marca = this.brand;
     this.product.nombre = this.name;
     this.product.peso = Number(this.weight);
-    this.product.precio = Number(this.price);
+    this.product.precio = (Number(this.price));
     this.product.promo = Number(this.discount);
     this.product.tipoMascota.tamanoRaza = this.petSize;
     this.product.tipoMascota.edad = this.petAge;

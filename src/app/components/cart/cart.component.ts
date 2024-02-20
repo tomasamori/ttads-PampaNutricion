@@ -62,23 +62,23 @@ export class CartComponent implements OnInit {
       this.MapProdToPed(1);
       this.cartService.createPedido(this.pedido).subscribe(
         (res:Pedido) => {
-          //debugger;
           this.CreatePDF(res)
         },
-        err => console.log(err)
+        err => {console.log(err)
+        }
+        
       )
     }
     
   }
   CreatePDF(PedidoP:Pedido){
-    //debugger;
    const margins ={
       top:30,
       bottom:30,
       left:10,
       right:10,
     };
-    var header = ['Nombre', 'Cantidad', 'Precio','Dto' ,'Subtotal        ','IVA','Precio final   '];
+    var header = ['Nombre', 'Cantidad', 'Precio','Dto' ,'Subtotal        ','IVA       ','Precio final   '];
     let data3 = this.cartService.ConvertDataForTicket();
     var config = {
       autoSize     : true,
@@ -96,14 +96,18 @@ export class CartComponent implements OnInit {
     doc.addImage('https://files.fm/thumb_show.php?i=yd493bc9a6','JPG',margins.left,2,48.6,30)
     //let fechaDeHoy: Date = new Date(); 
     //let datos= [,'Fecha del pedido: '+ fechaDeHoy.toString().trim(),'Cliente: '+ this.pedido.usuario]
-
-    doc.text('Nro. Pedido: '+PedidoP.nroPedido.toString(),70,20,);   
-    
-    doc.table(2, 50, data3, header,config);
+    //doc.setFont('times','italic')
+    //doc.setFont('arial')
+    doc.table(8, 50, data3, header,config);
     doc.setFillColor('E96524');
-    doc.rect(2, 190, 250, 10,'DF');
-    doc.text('Total s/IVA: $'+ PedidoP.subtotal.toFixed(2),15, 197) ;
-    doc.text('Total IVA: $'+ (PedidoP.total-PedidoP.subtotal).toFixed(2),75, 197);
+    doc.rect(8, 145, 80, 55,'DF');
+    doc.text('Totales:',10,152).setFont('times','italic');
+    doc.text('Total s/IVA: $'+ PedidoP.subtotal.toFixed(2),10, 165) ;
+    doc.text('Total IVA: $'+ (PedidoP.total-PedidoP.subtotal).toFixed(2),10, 180);
+    doc.text('Total c/IVA: $'+ (PedidoP.total).toFixed(2),10, 195).setFont('times');
+    doc.setFillColor('E96524');
+    doc.rect(65, 2, 220, 30,'DF');
+    doc.text('Nro. Pedido: '+PedidoP.nroPedido.toString(),70,10);
     let msjpdf = 'Compra-'+PedidoP.nroPedido.toString().trim()+'.pdf'
     doc.save(msjpdf);//
   }
@@ -127,7 +131,6 @@ export class CartComponent implements OnInit {
         this.pedido.subtotal = this.Subtotal;
         this.pedido.total = this.pedido.subtotal * 1.21;
       }
-      debugger;
       //return this.pedido
     }
 
@@ -136,13 +139,10 @@ export class CartComponent implements OnInit {
     for (var i= 0; i < this.Products.length;i++){
       if (this.Products[i].promo>0){
         this.Subtotal += this.Products[i].precio * this.Products[i].amount * ((100- this.Products[i].promo)/100)
-        debugger;
       }else{
         this.Subtotal += this.Products[i].precio * this.Products[i].amount
-        debugger;
       }
    }
-   debugger;
    //total = subtotal * 1.21;
 
   }

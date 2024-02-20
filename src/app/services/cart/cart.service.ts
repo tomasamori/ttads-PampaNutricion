@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, observable } from 'rxjs';
 import {Producto} from "../../models/producto";
 import { Pedido } from 'src/app/models/pedido';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
 import {Observable} from "rxjs";
 
@@ -92,7 +92,7 @@ export class CartService {
 
   vaciarCarrito() {
     this.products=[];
-    localStorage.clear();
+    localStorage.removeItem('products');
   }
   validar(productoDetalle: Producto) {
     this.products=JSON.parse(localStorage.getItem('products')!);
@@ -114,10 +114,10 @@ export class CartService {
       objetoConvertido['Nombre'] = this.truncarString(producto.nombre.trim(),55);
       objetoConvertido['Cantidad'] = String(producto.amount).trim();
       objetoConvertido['Precio'] = '$'+String(producto.precio.toFixed(2)).trim();
-      objetoConvertido['Dto'] = String(producto.promo).trim()+' %';
+      objetoConvertido['Dto'] = String(producto.promo).trim()+'%';
       let subto = (this.subtotal(producto.precio,producto.amount,producto.promo))
       objetoConvertido['Subtotal        '] = '$'+String(subto.toFixed(2)).trim();//NO BORRAR ESPACIOS 
-      objetoConvertido['IVA'] = '$'+String(((subto*1.21)-(subto)).toFixed(2)).trim();
+      objetoConvertido['IVA       '] = '$'+String(((subto*1.21)-(subto)).toFixed(2)).trim();
       objetoConvertido['Precio final   '] = '$'+String((subto*1.21).toFixed(2)).trim();
       return objetoConvertido;
     });
@@ -149,8 +149,17 @@ export class CartService {
     }
   
     createPedido(pedido: Pedido){
-      //this.MapProdToPed(1);
-      return this.http.post<Pedido>(this.URL_API, pedido);
+      //let token2  = JSON.parse(localStorage.getItem('currentUser'));
+      //const regex = /"(.*?)"/;
+      //const token = token2.match(regex)[1];
+      debugger;
+     /*const httpOptions = {
+        headers: new HttpHeaders({
+          "x-access-token": token2
+        })
+      };*/
+      debugger;
+      return this.http.post<Pedido>(this.URL_API, pedido/*,httpOptions*/);
     }
   
     updatePedido(pedido : Pedido){
