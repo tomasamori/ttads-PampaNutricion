@@ -1,12 +1,11 @@
 
 h1 {
-  text-align: center;
-  color: #ffffff;
-  background-color: #b86637;
-  width: 400px; /* Ancho deseado */
-  display: block;
-  margin-left: auto;
+  text-align:left;
+  color: #ee7f3f;
+  width: 700px; /* Ancho deseado */
+  margin-left: 10px;
   margin-right: auto;
+  font-weight: bold;
 }
 .container {
     margin-top: 20px;
@@ -14,11 +13,27 @@ h1 {
 
 #h1-PUProd {
         font-family: 'Helvetica Neue', Arial, sans-serif;
-        font-size: 50px;
+        font-size: 30px !important;
         font-weight: bold;
         color: #ffffff;
+        background-color: #ee7f3f;
+        margin-left:20%;
 }
 
+.dropdown i {
+  position: absolute;
+  top: 50%;
+  right: 5px; /* Ajusta la posición de la flecha */
+  transform: translateY(-50%);
+
+}
+
+#dropdownList {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 20px; /* Ajusta el espacio para la flecha */
+}
 
 #ProductModal .modal-body {
     max-height: calc(100vh - 200px); /* Ajusta la altura máxima según tus necesidades */
@@ -36,16 +51,55 @@ h1 {
 #ProductModal .modal-backdrop {
   background-color: rgba(0, 0, 0, 0.5); /* Color oscuro con 50% de opacidad */
 }
+
 .mi-fila {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
     gap: 10px; /* Espacio entre los elementos en la misma línea */
 }
-  
-.mi-elemento {
-    flex: 1; /* Hace que los elementos ocupen el espacio disponible en la línea */
-    margin: 10px; /* Espacio entre los elementos en líneas diferentes */
+
+#ProductModal .mi-elemento {
+  width: calc(92% - 10px); /* Ancho del 50% menos el espacio entre elementos */
+  margin-right: 20px; /* Margen derecho entre elementos */
+  margin-bottom: 5px; /* Margen inferior para separar las líneas */
+  margin-left: 20px; 
+  box-sizing: border-box; /* Incluye el borde y el relleno en el ancho total */
 }
+
+#ProductModal .mi-elemento:last-child {
+  margin-right: 0px; /* Elimina el margen derecho del último elemento de cada línea */
+}
+
+.agrupaColumnas {
+  display: flex;
+}
+
+.columna {
+  flex: 1; /* Las columnas se expanden para ocupar todo el espacio disponible */
+  padding: 0 10px; /* Agrega un poco de espacio entre las columnas */
+  /* Ajusta otros estilos según sea necesario */
+}
+.imagen {
+  width: 300px; /* Ancho de la imagen */
+  height: 300px; /* Altura de la imagen */
+  background-size: contain; /* Ajusta el tamaño de la imagen para cubrir todo el div */
+  background-repeat: no-repeat;
+  background-position-y: center; /* Centra la imagen verticalmente */
+  margin-bottom: 50%;
+  margin-top: 60%;
+  background-position: center; /* Centra la imagen */
+  margin-left: 25px;
+  margin-right: auto;
+}
+#imgConteiner .imagen {
+  border: 5px solid #ee7f3f; /* Cambia el color y el grosor del borde según necesites */
+  border-radius: 10px;
+
+}
+/*.mi-elemento {
+  flex: 1; /* Hace que los elementos ocupen el espacio disponible en la línea 
+  margin: 10px; /* Espacio entre los elementos en líneas diferentes 
+}*/
 
 .bg-warning {
     background-color: #ee7f3f !important; 
@@ -88,7 +142,7 @@ h1 {
 }
 
 .input-success {
-  border-color: rgb(0, 255, 0);
+  border-color: rgb(27, 141, 27);
   border-width: 2px;
 }
 

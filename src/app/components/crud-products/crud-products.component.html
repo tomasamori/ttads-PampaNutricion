@@ -1,4 +1,4 @@
-<h1>Trabajar con Producto</h1>
+<h1>TRABAJAR CON PRODUCTO</h1>
 <div class="container">
   <div class="col">
     <div class="col">
@@ -23,13 +23,14 @@
                 <div class="modal-header bg-warning">
                   <h1 class="modal-title fs-5" id="h1-PUProd">{{ tituloModal }}</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <!--<span aria-hidden="true">&times;</span>-->
                   </button>
                 </div>
 
                 <!--Form-->
                 <form ngNativeValidate #productForm="ngForm" (ngSubmit)="addproduct(productForm)">
-
+                <div class="agrupaColumnas">
+                <div class="columna">
                   <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProduct._id">
 
                   <div class="col mi-fila">
@@ -68,19 +69,18 @@
                           <div class="camposRequeridos" *ngIf="precio.errors['required']"> -> Precio es requerido</div>
                         </div>
                     </div>
-
                   </div>
 
                   <div class="col mi-fila">
                     <div class="mi-elemento">
                       <label for="tipoMascota">Tipo de Mascota:</label>
-                      <br>
-                      <select [ngClass]="{'input-error': tipoMascota.touched && !tipoMascota.valid, 'input-success': tipoMascota.valid && !tipoMascota.errors}" [(ngModel)]="productoService.selectedProduct.tipoMascota._id" #tipoMascota="ngModel" name="tipoMascota"
+                      <br>  
+                      <select id="dropdownList" [ngClass]="{'input-error': tipoMascota.touched && !tipoMascota.valid, 'input-success': tipoMascota.valid && !tipoMascota.errors}" [(ngModel)]="productoService.selectedProduct.tipoMascota._id" #tipoMascota="ngModel" name="tipoMascota"
                         class="form-control" placeholder="Tipo de Mascota" required>
                         <option *ngFor="let tm of tipoMascotasService.tipoMascotas" value="{{tm._id}}">{{tm.nombre}}
-                          {{tm.tamanoRaza}} {{tm.edad}}</option>
-                          
+                          {{tm.tamanoRaza}} {{tm.edad}}</option>    
                       </select>
+                      <i class="fas fa-chevron-down"></i> <!-- Icono de flecha hacia abajo -->
                       <div *ngIf="tipoMascota.touched && !tipoMascota.valid">
                         <div class="camposRequeridos" *ngIf="tipoMascota.errors['required']"> -> Tipo de Mascota es requerido</div>
                       </div>
@@ -132,11 +132,17 @@
                   {{errorMessage}}
                 </div>
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancel()">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
-                  </div>
-
+                </div>
+                <div class="columna">
+                <div id="imgConteiner">
+                  <div class="imagen" [style.background-image]="'url(' + productoService.selectedProduct.imgUrl + ')'" *ngIf="productoService.selectedProduct.imgUrl"></div>
+                </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancel()">Cancelar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+              </div>
                 </form>
               </div>
             </div>

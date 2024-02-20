@@ -12,5 +12,6 @@ export class CrudCardComponent implements OnInit {
   ngOnInit(): void {
   }
   @Input() name: string;
+  @Input() link: string;
 
 }

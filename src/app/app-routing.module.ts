@@ -6,6 +6,7 @@ import { CrudPageComponent } from "./components/crud-page/crud-page.component";
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
 import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tipoMascota.component';
 // routes
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'products', component: ListComponent},
   {path: 'crud', component: CrudPageComponent},
   {path: 'crud-products', component: CrudProductsComponent},
+  {path: 'crud-typeOfPets', component: CrudTipoMascotaComponent},
   {path: 'store-locator', component: StoreLocatorComponent},
   {path:'cart', component:CartComponent},
   {path: 'crud-page', component: CrudPageComponent}
