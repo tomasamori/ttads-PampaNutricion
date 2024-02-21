@@ -12,6 +12,7 @@ import { empty } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   registrationSuccess = false;
+  forgotPasswordFormSuccess = false;
   errorMessage: string = "";
   
   
@@ -68,4 +69,28 @@ export class NavbarComponent implements OnInit {
         this.registrationSuccess = false;
       }
     )}  
-    }
+
+  isSubmitting: boolean = false;
+
+  forgotPassword(form: NgForm) {
+    this.isSubmitting = true;
+    this.authService.forgotPassword(form.value)
+      .subscribe(
+        res => {
+          form.reset();
+          this.forgotPasswordFormSuccess = true;
+          this.isSubmitting = false;
+        },
+        err => {
+          console.log(err);
+          if (err && err.message) {
+            this.errorMessage = err.error.message;
+          } else {
+            this.errorMessage = 'Se produjo un error desconocido';
+          }
+          this.forgotPasswordFormSuccess = false;
+          this.isSubmitting = false;
+        }
+      );
+  }
+}
