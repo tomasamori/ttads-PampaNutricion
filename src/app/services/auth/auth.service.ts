@@ -33,4 +33,12 @@ export class AuthService {
     return this.http.post(this.URL_API + '/signup', user);
   }
 
+  forgotPassword(email: string) {
+    return this.http.post(this.URL_API + '/forgot-password', email);
+  }
+
+  resetPassword(token: string, newPass: string) {
+    return this.http.post(this.URL_API + '/reset-password/' + token, { token, newPass });
+  }
+
 }

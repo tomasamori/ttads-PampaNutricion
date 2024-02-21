@@ -22,6 +22,7 @@ import { CartCardComponent } from './components/cart-card/cart-card.component';
 import { CartCounterComponent } from './components/cart-counter/cart-counter.component';
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     StoreLocatorCardComponent,
     CartCounterComponent,
     CartCardComponent,
-    CartComponent
+    CartComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
