@@ -110,21 +110,34 @@ export class CartService {
     const arrayConvertido: { [key: string]: string; }[] = this.products.map(producto => {
 
       const objetoConvertido: { [key: string]: string; } = {};
-      
-      objetoConvertido['Nombre'] = this.truncarString(producto.nombre.trim(),55);
-      objetoConvertido['Cantidad'] = String(producto.amount).trim();
-      objetoConvertido['Precio'] = '$'+String(producto.precio.toFixed(2)).trim();
-      objetoConvertido['Dto'] = String(producto.promo).trim()+'%';
+      if (producto.nombre.length <55 ){
+        let nom  = this.truncarString(producto.nombre.trim(),40);
+        objetoConvertido['Nombre'] = this.fillString(nom,90-nom.length,' ').toUpperCase();
+      }else{
+        objetoConvertido['Nombre'] = this.truncarString(producto.nombre,55);//this.fillString(nom,80-nom.length,' ').toUpperCase();
+      }
+      //'Croquetas Adulto Razas Pequeñas Sabor Carne y Vegetales';//
+      objetoConvertido['Cantidad'] = this.fillString(String(producto.amount).trim(),3,' ').toLowerCase();//'100';//
+      objetoConvertido['Precio'] = this.fillString('$'+String(producto.precio.toFixed(2)).trim(),10,' ').toLowerCase();//'$25000.00';//
+      objetoConvertido['Dto'] = this.fillString(String(producto.promo).trim()+'%',3,' ').toLowerCase(); //'20%';// 
       let subto = (this.subtotal(producto.precio,producto.amount,producto.promo))
-      objetoConvertido['Subtotal        '] = '$'+String(subto.toFixed(2)).trim();//NO BORRAR ESPACIOS 
-      objetoConvertido['IVA       '] = '$'+String(((subto*1.21)-(subto)).toFixed(2)).trim();
-      objetoConvertido['Precio final   '] = '$'+String((subto*1.21).toFixed(2)).trim();
+      objetoConvertido['Subtotal        '] = this.fillString('$'+String(subto.toFixed(2)).trim(),15,' ').toLowerCase();//NO BORRAR ESPACIOS  '$2000000.00';//
+      objetoConvertido['IVA       '] =this.fillString('$'+String(((subto*1.21)-(subto)).toFixed(2)).trim(),12,' ').toLowerCase(); //'$420000.00';// 
+      objetoConvertido['Precio final   '] = this.fillString('$'+String((subto*1.21).toFixed(2)).trim(),12,' ').toLowerCase();//'$2420000.00 ';//
       return objetoConvertido;
     });
-      //debugger;
       return arrayConvertido;
     }  
-
+    fillString(str: string, long: number, carct: string = ' '): string {
+      if (str.length >= long) {
+          return str; // No se necesita rellenar, la longitud del string es igual o mayor que la longitud deseada
+      }
+      
+      const filllong = long - str.length;
+      const fill = carct.repeat(filllong);
+      
+      return str + fill;
+  }
     subtotal(precio:number,cantidad:number,promo:number){
       let subtot = 0;
 
@@ -149,17 +162,13 @@ export class CartService {
     }
   
     createPedido(pedido: Pedido){
-      //let token2  = JSON.parse(localStorage.getItem('currentUser'));
-      //const regex = /"(.*?)"/;
-      //const token = token2.match(regex)[1];
-      debugger;
-     /*const httpOptions = {
+      let token2  = localStorage.getItem('token');
+     const httpOptions = {
         headers: new HttpHeaders({
-          "x-access-token": token2
+          "x-access-token": localStorage.getItem('token')
         })
-      };*/
-      debugger;
-      return this.http.post<Pedido>(this.URL_API, pedido/*,httpOptions*/);
+      };
+      return this.http.post<Pedido>(this.URL_API, pedido,httpOptions);
     }
   
     updatePedido(pedido : Pedido){
@@ -174,6 +183,19 @@ export class CartService {
       return this.http.get<Pedido>(`${this.URL_API}/${_id}`);
     }
 
-    
+    loadImageAsBase64(imageUrl: string): Promise<string> {
+      return this.http.get(imageUrl, { responseType: 'blob' })
+        .toPromise()
+        .then(blob => this.blobToBase64(blob));
+    }
+  
+    private blobToBase64(blob: Blob): Promise<string> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    }
 
   }

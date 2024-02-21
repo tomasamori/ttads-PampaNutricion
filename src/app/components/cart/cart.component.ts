@@ -4,6 +4,9 @@ import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { Pedido } from 'src/app/models/pedido';
 
 @Component({
@@ -13,7 +16,10 @@ import { Pedido } from 'src/app/models/pedido';
 })
 export class CartComponent implements OnInit {
   isLoading: boolean = false;
-  constructor(protected cartService:CartService,private router:Router) { }
+  base64Image: string;
+  constructor(protected cartService:CartService,private router:Router) { 
+    this.loadImage();
+  }
   Products:Producto[];
   Subtotal:number = 0
   pedido : Pedido = {
@@ -62,58 +68,14 @@ export class CartComponent implements OnInit {
       this.MapProdToPed(1);
       this.cartService.createPedido(this.pedido).subscribe(
         (res:Pedido) => {
-          this.CreatePDF(res)
+          //this.CreatePDF(res)
+          this.createPDF(res)
         },
         err => {console.log(err)
         }
         
       )
-    }
-    
-  }
-  CreatePDF(PedidoP:Pedido){
-   const margins ={
-      top:30,
-      bottom:30,
-      left:10,
-      right:10,
-    };
-    var header = ['Nombre', 'Cantidad', 'Precio','Dto' ,'Subtotal        ','IVA       ','Precio final   '];
-    let data3 = this.cartService.ConvertDataForTicket();
-    var config = {
-      autoSize     : true,
-      printHeaders : true,
-      headerBackgroundColor : 'E96524',
-      //tableWidth: 100,
-    }
-    const doc = new jsPDF({
-      orientation: 'l',
-      unit: 'mm',
-      format: 'a4',
-      putOnlyUsedFonts:true
-     })
-
-    doc.addImage('https://files.fm/thumb_show.php?i=yd493bc9a6','JPG',margins.left,2,48.6,30)
-    //let fechaDeHoy: Date = new Date(); 
-    //let datos= [,'Fecha del pedido: '+ fechaDeHoy.toString().trim(),'Cliente: '+ this.pedido.usuario]
-    //doc.setFont('times','italic')
-    //doc.setFont('arial')
-    doc.table(8, 50, data3, header,config);
-    doc.setFillColor('E96524');
-    doc.rect(8, 145, 80, 55,'DF');
-    doc.text('Totales:',10,152).setFont('times','italic');
-    doc.text('Total s/IVA: $'+ PedidoP.subtotal.toFixed(2),10, 165) ;
-    doc.text('Total IVA: $'+ (PedidoP.total-PedidoP.subtotal).toFixed(2),10, 180);
-    doc.text('Total c/IVA: $'+ (PedidoP.total).toFixed(2),10, 195).setFont('times');
-    doc.setFillColor('E96524');
-    doc.rect(65, 2, 220, 30,'DF');
-    doc.text('Nro. Pedido: '+PedidoP.nroPedido.toString(),70,10);
-    let msjpdf = 'Compra-'+PedidoP.nroPedido.toString().trim()+'.pdf'
-    doc.save(msjpdf);//
-  }
-
-  subtotal(amount:number,precio:number){
-    return amount*precio;
+    } 
   }
 
   MapProdToPed(nro : number){
@@ -133,7 +95,6 @@ export class CartComponent implements OnInit {
       }
       //return this.pedido
     }
-
     Totales(Products: Producto[]){
       this.Subtotal = 0;
     for (var i= 0; i < this.Products.length;i++){
@@ -146,5 +107,130 @@ export class CartComponent implements OnInit {
    //total = subtotal * 1.21;
 
   }
+
+ createPDF(pedido:Pedido){
+  let pro = this.cartService.getAllCarrito();
+  const filasDeDatos = pro.map(producto => [
+    producto.nombre,
+    producto.amount.toString(),
+    `$${producto.precio.toFixed(2)}`,
+    `$${producto.promo.toString().trim()+'%'}`,
+    `$${this.subtotal2(producto.precio,producto.amount,producto.promo)}`,
+    `$${this.iva(producto.precio,producto.amount,producto.promo)}`,
+    `$${this.total2(producto.precio,producto.amount,producto.promo)}`
+  ]);
+  let invoiceheader = '\n'+'Nro. Pedido: '+pedido.nroPedido.toString().trim()+'\t\t'+'Direccion :RN9 km 204, Ramallo, Provincia de Buenos Aires'+'\t\t'+'Telefono: 03407 48-0936'+'\n\n\n'+'hola'
+  const tabla1 = {
+    headerRows: 1,
+    widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+    body: [
+      [            
+        { text: 'Nombre', fillColor: '#E96524' },
+        { text: 'Cantidad', fillColor: '#E96524' },
+        { text: 'Precio', fillColor: '#E96524' },
+        { text: 'Dto', fillColor: '#E96524' },
+        { text: 'Subtotal', fillColor: '#E96524' },
+        { text: 'IVA', fillColor: '#E96524' },
+        { text: 'Precio final', fillColor: '#E96524' }
+      ],
+      ...filasDeDatos
+    ]
+  };
+
+  const tabla2 = {
+    headerRows: 1,
+    widths: ['*', '*', '*'],
+    body: [
+      [            
+        { text: 'Total s/IVA', fillColor: '#E96524' },
+        { text: 'Total IVA', fillColor: '#E96524' },
+        { text: 'Total c/IVA', fillColor: '#E96524' }
+      ],
+      ['$'+pedido.subtotal.toFixed(2), '$'+(pedido.total-pedido.subtotal).toFixed(2), '$'+pedido.total.toFixed(2)]
+    ]
+  };
+  const documentDefinition = {
+    content: [
+      
+      {
+        columns: [
+          // Columna izquierda: imagen
+          {
+            image: this.base64Image,
+            width: 100,
+            height: 100,
+            alignment: 'left',
+            margin: [0, 10, 0, 0] // Margen arriba-izquierda-derecha-abajo
+          },
+          // Columna derecha: tabla con texto
+          {
+            table: {
+              widths: ['*'],
+              body: [
+                    [
+                  {text:invoiceheader,//'\n \t\t\t\t\t\t\t\t\t\t\t\tPrueba\t\t1 Prueba2 Prueba 2 Prueba \n\n\n \t\t\tPrueba 1 Prueba 2 Prueba 2 Prueba\n\n',
+                  fillColor:"#E96524"
+                },
+                    ]
+              ]
+            },
+            //layout: 'noBorders', // Opcional: elimina los bordes de la tabla
+            margin: [10, 10, 0, 0] // Ajusta el margen izquierdo para alinear con la columna izquierda
+          }
+        ]
+      },
+      {
+        text: '\n\n' // Agregar espacio entre las tablas
+      },
+      {
+        table: tabla1
+      },
+      {
+        text: '\n\n' // Agregar espacio entre las tablas
+      },
+      {
+        table: tabla2,
+        absolutePosition: { x: 40, y: 740 }
+      }
+    ]
+  };
+  
+  
+  pdfMake.createPdf(documentDefinition).open();
+  pdfMake.createPdf(documentDefinition).download();
+ }
+
+total2(precio:number,cantidad:number,promo:number){
+  let iva = this.iva(precio,cantidad,promo);
+  let sub = this.subtotal2(precio,cantidad,promo);
+  let total = (Number(iva) + Number(sub)).toFixed(2);
+  return total
+
+}
+iva(precio:number,cantidad:number,promo:number){
+  let iva:number = 0;
+  let sub:number = Number(this.subtotal2(precio,cantidad,promo))
+  iva = sub*1.21 - sub
+  return iva.toFixed(2);
+}
+
+ subtotal2(precio:number,cantidad:number,promo:number){
+  let subtot:number = 0;
+
+  if (promo >0){
+    subtot += precio*cantidad *((100-promo)/100)
+  }else
+  {
+    subtot += precio*cantidad
+  }
+  return subtot.toFixed(2);
+
+}
+loadImage() {
+  const imageUrl = 'assets/images/Pampa-LogoV.png';
+  this.cartService.loadImageAsBase64(imageUrl)
+    .then(base64 => this.base64Image = base64)
+    .catch(error => console.error('Error loading image:', error));
+}
 
 }

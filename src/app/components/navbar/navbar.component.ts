@@ -19,8 +19,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (localStorage.getItem('currentUser')){
+    if (localStorage.getItem('usuarioFoundId')){
+      if (localStorage.getItem('token')){
       this.registrationSuccess = true;
+      }
     }
   }
 
@@ -35,8 +37,9 @@ export class NavbarComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
       this.registrationSuccess = true;
+      localStorage.setItem('usuarioFoundId',res['usuarioFoundId']);
+      localStorage.setItem('token',res['token']);
       form.reset();
-      localStorage.setItem('currentUser',JSON.stringify(res));
     },
     err => {
       console.log(err);
@@ -55,8 +58,9 @@ export class NavbarComponent implements OnInit {
     this.authService.register(form.value)
       .subscribe(res => {
         form.reset();
-        console.log(res); // acá va a mostrar el token que vuelve del back. habría que guardar el token en el local storage y redirigir al usuario a la home logueado (luego usar ese token para hacer peticiones al back y que el back sepa que el usuario está logueado)
+        console.log(res['token']); // acá va a mostrar el token que vuelve del back. habría que guardar el token en el local storage y redirigir al usuario a la home logueado (luego usar ese token para hacer peticiones al back y que el back sepa que el usuario está logueado)
         this.registrationSuccess = true;
+        debugger;
       },
       err => {
         console.log(err);
