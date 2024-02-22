@@ -234,8 +234,9 @@ export class CartComponent implements OnInit {
   };
   
   let name = 'Pedido-'+pedido.nroPedido.toString().trim();
-  pdfMake.createPdf(documentDefinition).open();
+  //pdfMake.createPdf(documentDefinition).open();
   pdfMake.createPdf(documentDefinition).download(name);
+  this.toastr.success('Su compra ha finalizado con éxito.')
  }
 
 total2(precio:number,cantidad:number,promo:number){
