@@ -105,64 +105,12 @@ export class CartService {
   return estado
   }
 
-  ConvertDataForTicket(){
 
-    const arrayConvertido: { [key: string]: string; }[] = this.products.map(producto => {
-
-      const objetoConvertido: { [key: string]: string; } = {};
-      if (producto.nombre.length <55 ){
-        let nom  = this.truncarString(producto.nombre.trim(),40);
-        objetoConvertido['Nombre'] = this.fillString(nom,90-nom.length,' ').toUpperCase();
-      }else{
-        objetoConvertido['Nombre'] = this.truncarString(producto.nombre,55);//this.fillString(nom,80-nom.length,' ').toUpperCase();
-      }
-      //'Croquetas Adulto Razas Pequeñas Sabor Carne y Vegetales';//
-      objetoConvertido['Cantidad'] = this.fillString(String(producto.amount).trim(),3,' ').toLowerCase();//'100';//
-      objetoConvertido['Precio'] = this.fillString('$'+String(producto.precio.toFixed(2)).trim(),10,' ').toLowerCase();//'$25000.00';//
-      objetoConvertido['Dto'] = this.fillString(String(producto.promo).trim()+'%',3,' ').toLowerCase(); //'20%';// 
-      let subto = (this.subtotal(producto.precio,producto.amount,producto.promo))
-      objetoConvertido['Subtotal        '] = this.fillString('$'+String(subto.toFixed(2)).trim(),15,' ').toLowerCase();//NO BORRAR ESPACIOS  '$2000000.00';//
-      objetoConvertido['IVA       '] =this.fillString('$'+String(((subto*1.21)-(subto)).toFixed(2)).trim(),12,' ').toLowerCase(); //'$420000.00';// 
-      objetoConvertido['Precio final   '] = this.fillString('$'+String((subto*1.21).toFixed(2)).trim(),12,' ').toLowerCase();//'$2420000.00 ';//
-      return objetoConvertido;
-    });
-      return arrayConvertido;
-    }  
-    fillString(str: string, long: number, carct: string = ' '): string {
-      if (str.length >= long) {
-          return str; // No se necesita rellenar, la longitud del string es igual o mayor que la longitud deseada
-      }
-      
-      const filllong = long - str.length;
-      const fill = carct.repeat(filllong);
-      
-      return str + fill;
-  }
-    subtotal(precio:number,cantidad:number,promo:number){
-      let subtot = 0;
-
-      if (promo >0){
-        subtot += precio*cantidad *((100-promo)/100)
-      }else
-      {
-        subtot += precio*cantidad
-      }
-      return subtot;
-
-    }
-    truncarString(str: string, maxLength: number): string {
-      if (str.length <= maxLength) {
-          return str; // Si la longitud del string es menor o igual al maxLength, no se necesita truncar
-      } else {
-          return str.substring(0, maxLength); // Si la longitud del string es mayor que maxLength, se trunca el string hasta maxLength
-      }
-  }
     getAllPedido() {
       return this.http.get<Pedido>(this.URL_API);
     }
   
     createPedido(pedido: Pedido){
-      let token2  = localStorage.getItem('token');
      const httpOptions = {
         headers: new HttpHeaders({
           "x-access-token": localStorage.getItem('token')

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -9,7 +9,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class ProductCardComponent implements OnInit {
 
-  constructor(private cart: CartService) { }
+  constructor(private cart: CartService,private toastr: ToastrService) { }
 
 
   ngOnInit(): void {
@@ -74,12 +74,12 @@ export class ProductCardComponent implements OnInit {
   addProdCart() {
     this.completeProd();
     this.cart.addCart(this.product);
-
-    this.show = true;
+    this.toastr.success('Se agregó correctamente al carrito.')
+    /*this.show = true;
     this.MsjNot = 'Se agregó correctamente al carrito.'
     setTimeout(()=>{
       this.MsjNot='';
       this.show = false;
-    },3000);
+    },3000);*/
   }
 }

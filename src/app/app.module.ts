@@ -23,6 +23,9 @@ import { CartCounterComponent } from './components/cart-counter/cart-counter.com
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -53,9 +56,16 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(
+      {
+        positionClass: 'toast-top-center'
+      }
+    )
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

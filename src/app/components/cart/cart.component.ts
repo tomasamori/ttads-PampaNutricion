@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { Pedido } from 'src/app/models/pedido';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -17,9 +16,11 @@ import { Pedido } from 'src/app/models/pedido';
 export class CartComponent implements OnInit {
   isLoading: boolean = false;
   base64Image: string;
-  constructor(protected cartService:CartService,private router:Router) { 
+  messageVisible = false;
+  constructor(protected cartService:CartService,private router:Router,private toastr: ToastrService) { 
     this.loadImage();
   }
+
   Products:Producto[];
   Subtotal:number = 0
   pedido : Pedido = {
@@ -63,19 +64,29 @@ export class CartComponent implements OnInit {
     this.router.navigate(['products'])
   }
   Pay(){
-    //const data = this.getAllProd();
-    if (confirm('¿Desea finalizar la compra?')) {
-      this.MapProdToPed(1);
-      this.cartService.createPedido(this.pedido).subscribe(
-        (res:Pedido) => {
-          //this.CreatePDF(res)
-          this.createPDF(res)
-        },
-        err => {console.log(err)
+    if (localStorage.getItem('usuarioFoundId')){
+      if (localStorage.getItem('token')){
+        if (confirm('¿Desea finalizar la compra?')) {
+          this.MapProdToPed(1);
+          this.cartService.createPedido(this.pedido).subscribe(
+            (res:Pedido) => {
+              //this.CreatePDF(res)
+              this.createPDF(res)
+            },
+            err => {console.log(err)
+            }
+            
+          )
         }
-        
-      )
-    } 
+      }
+    }
+    else{
+      this.toastr.info('Inicie sesión para poder continuar la compra.')/*,'', {
+        toastClass: 'custom-toast-class' // Clase CSS personalizada para este toast
+      });*/
+    }
+    //const data = this.getAllProd();
+
   }
 
   MapProdToPed(nro : number){
@@ -107,6 +118,21 @@ export class CartComponent implements OnInit {
    //total = subtotal * 1.21;
 
   }
+  
+  Date() {
+    const currentDate = new Date();
+    let formattedDate: any;
+    const day = this.addLeadingZero(currentDate.getDate());
+    const month = this.addLeadingZero(currentDate.getMonth() + 1);
+    const year = currentDate.getFullYear();
+    const hours = this.addLeadingZero(currentDate.getHours());
+    const minutes = this.addLeadingZero(currentDate.getMinutes());
+
+     return formattedDate = (`${day}/${month}/${year} ${hours}:${minutes}`).toString();
+  }
+  addLeadingZero(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
 
  createPDF(pedido:Pedido){
   let pro = this.cartService.getAllCarrito();
@@ -119,7 +145,9 @@ export class CartComponent implements OnInit {
     `$${this.iva(producto.precio,producto.amount,producto.promo)}`,
     `$${this.total2(producto.precio,producto.amount,producto.promo)}`
   ]);
-  let invoiceheader = '\n'+'Nro. Pedido: '+pedido.nroPedido.toString().trim()+'\t\t'+'Direccion :RN9 km 204, Ramallo, Provincia de Buenos Aires'+'\t\t'+'Telefono: 03407 48-0936'+'\n\n\n'+'hola'
+  let invoiceheader = '\n'+'Nro. Pedido: '+pedido.nroPedido.toString().trim()+'\t\t\t\t\t\t\t\t\t'+'  Telefono: 03407 48-0936'+'\n\n'+'Mail: pampanutricion@gmail.com'+'\t\t'+ 'Fecha: '+this.Date()+'\n\n'+'Cuit: 30-71453418-8'+'\t\t\t\t\t\t\t\t'+'Cliente: Alexis'+'\n\n'+'Direccion: RN9 km 204, Ramallo, Provincia de Buenos Aires'+'\n'+'  ';
+
+  //+
   const tabla1 = {
     headerRows: 1,
     widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
@@ -150,8 +178,9 @@ export class CartComponent implements OnInit {
     ]
   };
   const documentDefinition = {
-    content: [
-      
+    pageSize: 'A4',
+    pageOrientation: 'portrait',
+    content: [      
       {
         columns: [
           // Columna izquierda: imagen
@@ -190,14 +219,23 @@ export class CartComponent implements OnInit {
       },
       {
         table: tabla2,
-        absolutePosition: { x: 40, y: 740 }
+        absolutePosition: { x: 40, y: 760 }
+      }
+    ],
+    background: [
+      {
+        image: this.base64Image,
+        width: 416.5, // Ancho de la página A4 en puntos (1 punto = 1/72 pulgadas)
+        height: 416.5, // Alto de la página A4 en puntos
+        absolutePosition: { x: 90, y: 251.92}, // Posición en la esquina superior izquierda
+        opacity: 0.2 // Opacidad de la imagen (0 a 1)
       }
     ]
   };
   
-  
+  let name = 'Pedido-'+pedido.nroPedido.toString().trim();
   pdfMake.createPdf(documentDefinition).open();
-  pdfMake.createPdf(documentDefinition).download();
+  pdfMake.createPdf(documentDefinition).download(name);
  }
 
 total2(precio:number,cantidad:number,promo:number){
