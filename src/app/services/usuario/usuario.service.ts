@@ -4,46 +4,53 @@ import { Usuario } from "../../models/usuario";
 import { environment } from "../../../environments/environment";
 import {Observable} from "rxjs";
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  URL_API = environment.URL_USUARIO;
+    URL_API = environment.URL_USUARIO;
 
-  selectedUsuario: Usuario = {
-    usuario: '',
-    password: '',
-    email: '',
-    rol: [], 
-    cuil: '',
-    nombre: '',
-    fechaNacimiento: null,
-    direccion: '', 
-    telefono: ''  
-  };
+    selectedUsuario: Usuario = {
+        _id: '',
+        usuario: '',
+        password: '',
+        email: '',
+        rol: [''],
+        cuil: '',
+        nombre: '',
+        fechaNacimiento: new Date(),
+        direccion: '',
+        telefono: ''
+    };
 
-  constructor(private http: HttpClient) { }
-  usuario: Usuario[];
+    constructor(private http: HttpClient) { }
 
-  getAllUsuarios() {
-    return this.http.get<Usuario[]>(this.URL_API);
-  }
+    usuarios: Usuario[];
 
-  createUsuario(usuario : Usuario){
-    console.log(usuario.fechaNacimiento.toString());
-    return this.http.post(this.URL_API, usuario);
-  }
+    getAllUsuario() {
+        return this.http.get<Usuario[]>(this.URL_API).subscribe(
+            (res) => {
+                this.usuarios = res;
+            },
+            err => console.log(err)
+        )
+    }
 
-  updateUsuario(usuario : Usuario){
-    return this.http.put(`${this.URL_API}/${usuario._id}`, usuario);
-  }
+    createUsuario(usuario : Usuario){
+        return this.http.post(this.URL_API, usuario);
+    }
 
-  deleteUsuario(_id:string){
-    return this.http.delete(`${this.URL_API}/${_id}`)
-  }
+    updateUsuario(usuario : Usuario){
+        return this.http.put(`${this.URL_API}/${usuario._id}`, usuario);
+    }
 
-  getRecordById(_id: String): Observable<Usuario>{
-    return this.http.get<Usuario>(`${this.URL_API}/${_id}`);
-  }
+    deleteUsuario(_id:string){
+        return this.http.delete(`${this.URL_API}/${_id}`)
+    }
+
+    getRecordById(_id: String){
+        return this.http.get<Usuario>(`${this.URL_API}/${_id}`);
+    }
 }

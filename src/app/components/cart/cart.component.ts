@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { Pedido } from 'src/app/models/pedido';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -13,14 +15,19 @@ import { Pedido } from 'src/app/models/pedido';
 })
 export class CartComponent implements OnInit {
   isLoading: boolean = false;
-  constructor(protected cartService:CartService,private router:Router) { }
+  base64Image: string;
+  messageVisible = false;
+  constructor(protected cartService:CartService,private router:Router,private toastr: ToastrService) { 
+    this.loadImage();
+  }
+
   Products:Producto[];
   Subtotal:number = 0
   pedido : Pedido = {
     cantidad: [],
     productos: [],
     estado: 'En preparacion',
-    usuario: 'Alexis',
+    usuario: {_id: '', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}, // --> Cambiado para evitar el error del model
     subtotal: 0, // Asigna el valor inicial adecuado si es necesario
     total: 0, // Asigna el valor inicial adecuado si es necesario,
     nroPedido:0
@@ -57,63 +64,29 @@ export class CartComponent implements OnInit {
     this.router.navigate(['products'])
   }
   Pay(){
-    //const data = this.getAllProd();
-    if (confirm('¿Desea finalizar la compra?')) {
-      this.MapProdToPed(1);
-      this.cartService.createPedido(this.pedido).subscribe(
-        (res:Pedido) => {
-          this.CreatePDF(res)
-        },
-        err => {console.log(err)
+    if (localStorage.getItem('usuarioFoundId')){
+      if (localStorage.getItem('token')){
+        if (confirm('¿Desea finalizar la compra?')) {
+          this.MapProdToPed(1);
+          this.cartService.createPedido(this.pedido).subscribe(
+            (res:Pedido) => {
+              //this.CreatePDF(res)
+              this.createPDF(res)
+            },
+            err => {console.log(err)
+            }
+            
+          )
         }
-        
-      )
+      }
     }
-    
-  }
-  CreatePDF(PedidoP:Pedido){
-   const margins ={
-      top:30,
-      bottom:30,
-      left:10,
-      right:10,
-    };
-    var header = ['Nombre', 'Cantidad', 'Precio','Dto' ,'Subtotal        ','IVA       ','Precio final   '];
-    let data3 = this.cartService.ConvertDataForTicket();
-    var config = {
-      autoSize     : true,
-      printHeaders : true,
-      headerBackgroundColor : 'E96524',
-      //tableWidth: 100,
+    else{
+      this.toastr.info('Inicie sesión para poder continuar la compra.')/*,'', {
+        toastClass: 'custom-toast-class' // Clase CSS personalizada para este toast
+      });*/
     }
-    const doc = new jsPDF({
-      orientation: 'l',
-      unit: 'mm',
-      format: 'a4',
-      putOnlyUsedFonts:true
-     })
+    //const data = this.getAllProd();
 
-    doc.addImage('https://files.fm/thumb_show.php?i=yd493bc9a6','JPG',margins.left,2,48.6,30)
-    //let fechaDeHoy: Date = new Date(); 
-    //let datos= [,'Fecha del pedido: '+ fechaDeHoy.toString().trim(),'Cliente: '+ this.pedido.usuario]
-    //doc.setFont('times','italic')
-    //doc.setFont('arial')
-    doc.table(8, 50, data3, header,config);
-    doc.setFillColor('E96524');
-    doc.rect(8, 145, 80, 55,'DF');
-    doc.text('Totales:',10,152).setFont('times','italic');
-    doc.text('Total s/IVA: $'+ PedidoP.subtotal.toFixed(2),10, 165) ;
-    doc.text('Total IVA: $'+ (PedidoP.total-PedidoP.subtotal).toFixed(2),10, 180);
-    doc.text('Total c/IVA: $'+ (PedidoP.total).toFixed(2),10, 195).setFont('times');
-    doc.setFillColor('E96524');
-    doc.rect(65, 2, 220, 30,'DF');
-    doc.text('Nro. Pedido: '+PedidoP.nroPedido.toString(),70,10);
-    let msjpdf = 'Compra-'+PedidoP.nroPedido.toString().trim()+'.pdf'
-    doc.save(msjpdf);//
-  }
-
-  subtotal(amount:number,precio:number){
-    return amount*precio;
   }
 
   MapProdToPed(nro : number){
@@ -125,7 +98,7 @@ export class CartComponent implements OnInit {
         this.pedido.productos.push(this.Products[i]._id);
         this.pedido.estado = 'En preparacion'
         //this.pedido.subtotal = this.subtotal(this.products[i].promo,this.products[i].precio,this.products[i].amount)
-        this.pedido.usuario = '65d0ce0a267fbfbf43d25d7f'
+        this.pedido.usuario = {_id: '65d0ce0a267fbfbf43d25d7f', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}; // --> Cambiado para evitar el error del model
         }
         this.Totales(this.Products);
         this.pedido.subtotal = this.Subtotal;
@@ -133,7 +106,6 @@ export class CartComponent implements OnInit {
       }
       //return this.pedido
     }
-
     Totales(Products: Producto[]){
       this.Subtotal = 0;
     for (var i= 0; i < this.Products.length;i++){
@@ -146,5 +118,158 @@ export class CartComponent implements OnInit {
    //total = subtotal * 1.21;
 
   }
+  
+  Date() {
+    const currentDate = new Date();
+    let formattedDate: any;
+    const day = this.addLeadingZero(currentDate.getDate());
+    const month = this.addLeadingZero(currentDate.getMonth() + 1);
+    const year = currentDate.getFullYear();
+    const hours = this.addLeadingZero(currentDate.getHours());
+    const minutes = this.addLeadingZero(currentDate.getMinutes());
+
+     return formattedDate = (`${day}/${month}/${year} ${hours}:${minutes}`).toString();
+  }
+  addLeadingZero(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
+
+ createPDF(pedido:Pedido){
+  let pro = this.cartService.getAllCarrito();
+  const filasDeDatos = pro.map(producto => [
+    producto.nombre,
+    producto.amount.toString(),
+    `$${producto.precio.toFixed(2)}`,
+    `$${producto.promo.toString().trim()+'%'}`,
+    `$${this.subtotal2(producto.precio,producto.amount,producto.promo)}`,
+    `$${this.iva(producto.precio,producto.amount,producto.promo)}`,
+    `$${this.total2(producto.precio,producto.amount,producto.promo)}`
+  ]);
+  let invoiceheader = '\n'+'Nro. Pedido: '+pedido.nroPedido.toString().trim()+'\t\t\t\t\t\t\t\t\t'+'  Telefono: 03407 48-0936'+'\n\n'+'Mail: pampanutricion@gmail.com'+'\t\t'+ 'Fecha: '+this.Date()+'\n\n'+'Cuit: 30-71453418-8'+'\t\t\t\t\t\t\t\t'+'Cliente: Alexis'+'\n\n'+'Direccion: RN9 km 204, Ramallo, Provincia de Buenos Aires'+'\n'+'  ';
+
+  //+
+  const tabla1 = {
+    headerRows: 1,
+    widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+    body: [
+      [            
+        { text: 'Nombre', fillColor: '#E96524' },
+        { text: 'Cantidad', fillColor: '#E96524' },
+        { text: 'Precio', fillColor: '#E96524' },
+        { text: 'Dto', fillColor: '#E96524' },
+        { text: 'Subtotal', fillColor: '#E96524' },
+        { text: 'IVA', fillColor: '#E96524' },
+        { text: 'Precio final', fillColor: '#E96524' }
+      ],
+      ...filasDeDatos
+    ]
+  };
+
+  const tabla2 = {
+    headerRows: 1,
+    widths: ['*', '*', '*'],
+    body: [
+      [            
+        { text: 'Total s/IVA', fillColor: '#E96524' },
+        { text: 'Total IVA', fillColor: '#E96524' },
+        { text: 'Total c/IVA', fillColor: '#E96524' }
+      ],
+      ['$'+pedido.subtotal.toFixed(2), '$'+(pedido.total-pedido.subtotal).toFixed(2), '$'+pedido.total.toFixed(2)]
+    ]
+  };
+  const documentDefinition = {
+    pageSize: 'A4',
+    pageOrientation: 'portrait',
+    content: [      
+      {
+        columns: [
+          // Columna izquierda: imagen
+          {
+            image: this.base64Image,
+            width: 100,
+            height: 100,
+            alignment: 'left',
+            margin: [0, 10, 0, 0] // Margen arriba-izquierda-derecha-abajo
+          },
+          // Columna derecha: tabla con texto
+          {
+            table: {
+              widths: ['*'],
+              body: [
+                    [
+                  {text:invoiceheader,//'\n \t\t\t\t\t\t\t\t\t\t\t\tPrueba\t\t1 Prueba2 Prueba 2 Prueba \n\n\n \t\t\tPrueba 1 Prueba 2 Prueba 2 Prueba\n\n',
+                  fillColor:"#E96524"
+                },
+                    ]
+              ]
+            },
+            //layout: 'noBorders', // Opcional: elimina los bordes de la tabla
+            margin: [10, 10, 0, 0] // Ajusta el margen izquierdo para alinear con la columna izquierda
+          }
+        ]
+      },
+      {
+        text: '\n\n' // Agregar espacio entre las tablas
+      },
+      {
+        table: tabla1
+      },
+      {
+        text: '\n\n' // Agregar espacio entre las tablas
+      },
+      {
+        table: tabla2,
+        absolutePosition: { x: 40, y: 760 }
+      }
+    ],
+    background: [
+      {
+        image: this.base64Image,
+        width: 416.5, // Ancho de la página A4 en puntos (1 punto = 1/72 pulgadas)
+        height: 416.5, // Alto de la página A4 en puntos
+        absolutePosition: { x: 90, y: 251.92}, // Posición en la esquina superior izquierda
+        opacity: 0.2 // Opacidad de la imagen (0 a 1)
+      }
+    ]
+  };
+  
+  let name = 'Pedido-'+pedido.nroPedido.toString().trim();
+  //pdfMake.createPdf(documentDefinition).open();
+  pdfMake.createPdf(documentDefinition).download(name);
+  this.toastr.success('Su compra ha finalizado con éxito.')
+ }
+
+total2(precio:number,cantidad:number,promo:number){
+  let iva = this.iva(precio,cantidad,promo);
+  let sub = this.subtotal2(precio,cantidad,promo);
+  let total = (Number(iva) + Number(sub)).toFixed(2);
+  return total
+
+}
+iva(precio:number,cantidad:number,promo:number){
+  let iva:number = 0;
+  let sub:number = Number(this.subtotal2(precio,cantidad,promo))
+  iva = sub*1.21 - sub
+  return iva.toFixed(2);
+}
+
+ subtotal2(precio:number,cantidad:number,promo:number){
+  let subtot:number = 0;
+
+  if (promo >0){
+    subtot += precio*cantidad *((100-promo)/100)
+  }else
+  {
+    subtot += precio*cantidad
+  }
+  return subtot.toFixed(2);
+
+}
+loadImage() {
+  const imageUrl = 'assets/images/Pampa-LogoV.png';
+  this.cartService.loadImageAsBase64(imageUrl)
+    .then(base64 => this.base64Image = base64)
+    .catch(error => console.error('Error loading image:', error));
+}
 
 }

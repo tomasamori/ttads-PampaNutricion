@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrudLocalidadComponent } from './crud-localidad.component';
+import { ResetPasswordComponent } from './reset-password.component';
 
-describe('CrudProductsComponent', () => {
-  let component: CrudLocalidadComponent;
-  let fixture: ComponentFixture<CrudLocalidadComponent>;
+describe('ResetPasswordComponent', () => {
+  let component: ResetPasswordComponent;
+  let fixture: ComponentFixture<ResetPasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CrudLocalidadComponent ]
+      declarations: [ ResetPasswordComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CrudLocalidadComponent);
+    fixture = TestBed.createComponent(ResetPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

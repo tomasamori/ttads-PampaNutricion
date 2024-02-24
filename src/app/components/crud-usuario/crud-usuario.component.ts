@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 import { NgForm } from "@angular/forms";
-//import { DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -14,10 +14,12 @@ import { NgForm } from "@angular/forms";
 })
 export class CrudUsuarioComponent implements OnInit {
 
-  constructor(public usuarioService: UsuarioService) { }
+  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe) { }
   InsertSuccess =false;
   isDisabled = false;
   errorMessage: string = "";
+  
+
 
   ngOnInit(): void {
     this.getUsuario(); 
@@ -35,24 +37,20 @@ export class CrudUsuarioComponent implements OnInit {
   }
 
   getUsuario() {
-    this.usuarioService.getAllUsuarios().subscribe(
-      (res) => {
-        this.usuarioService.usuario = res;
-      },
-      err => console.log(err)
-    )
+    return this.usuarioService.getAllUsuario();
   }
 
   addUsuario(form: NgForm) {
     this.InsertSuccess = true;
     this.isDisabled = false;
     if (form.value._id) {
+      console.log(form.value, 'Fecha Nacimiento')
       this.isDisabled = true;
       this.usuarioService.updateUsuario(form.value).subscribe(
         res => {
         console.log(res);
         this.getUsuario();
-        this.InsertSuccess = true;   
+        this.InsertSuccess = true;      
       },
         err => {
           console.log(err);
@@ -99,10 +97,14 @@ export class CrudUsuarioComponent implements OnInit {
   }
 
   editUsuario(usuario: Usuario) {
+    let fechaNacimiento = new Date(usuario.fechaNacimiento);
     this.isDisabled = true;
     this.cambiarTituloModal("EDITAR USUARIO");
     this.cambiarTituloModalSuccess("Usuario Actualizado con Exito!")
     this.usuarioService.selectedUsuario = usuario;
+    this.usuarioService.selectedUsuario.fechaNacimiento = fechaNacimiento;
+    
+
   }
 
 
@@ -127,7 +129,23 @@ export class CrudUsuarioComponent implements OnInit {
     this.InsertSuccess = false;
   }
 
+  formatDate(date: any): string {
+    // Verificar si date es un objeto Date válido
+    if (!(date instanceof Date) || isNaN(date.getTime())) return ''; // Si no es válido, devolver una cadena vacía
+  
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Añade ceros a la izquierda si es necesario
+    const dd = String(date.getDate() + 1).padStart(2, '0'); // Añade ceros a la izquierda si es necesario
+    return `${yyyy}-${mm}-${dd}`;
+  }
 
+  transformDate(date): string{
+    return this.datePipe.transform(date, 'short');
+  }
+
+  formatearFecha(date){
+    return new Date(date).toLocaleDateString('es-ES', {timeZone: 'UTC'});
+  }
 }
 
 

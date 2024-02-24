@@ -9,6 +9,9 @@ import { CartComponent } from './components/cart/cart.component';
 import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tipoMascota.component';
 import { CrudUsuarioComponent } from './components/crud-usuario/crud-usuario.component';
 import { CrudLocalidadComponent } from './components/crud-localidad/crud-localidad.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { OrderManagerComponent } from './components/order-manager/order-manager.component';
+
 // routes
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -21,7 +24,10 @@ const routes: Routes = [
   {path: 'crud-locations', component: CrudLocalidadComponent},
   {path: 'store-locator', component: StoreLocatorComponent},
   {path:'cart', component:CartComponent},
-  {path: 'crud-page', component: CrudPageComponent}
+  {path: 'crud-page', component: CrudPageComponent},
+  {path: 'reset-password/:token', component: ResetPasswordComponent },
+  {path: 'order-manager', component: OrderManagerComponent},
+  {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

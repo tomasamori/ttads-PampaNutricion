@@ -24,6 +24,11 @@ import { CartCardComponent } from './components/cart-card/cart-card.component';
 import { CartCounterComponent } from './components/cart-counter/cart-counter.component';
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 import { DatePipe } from '@angular/common';
 
 
@@ -47,7 +52,9 @@ import { DatePipe } from '@angular/common';
     StoreLocatorCardComponent,
     CartCounterComponent,
     CartCardComponent,
-    CartComponent
+    CartComponent,
+    ResetPasswordComponent,
+    OrderManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +63,16 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(
+      {
+        positionClass: 'toast-top-center'
+      }
+    )
   ],
   providers: [DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

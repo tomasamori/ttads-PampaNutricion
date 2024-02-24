@@ -5,7 +5,7 @@
 <div class="container">
   <div class="col">
     <div class="col">
-      <table class="table table-bordered table-hover" id="tabla">
+      <table class="table table-striped table-hover" id="tabla">
         <thead class="table-responsive">
           <tr>
             <th scope="col">Nombre</th>
@@ -68,7 +68,7 @@
                             [ngClass]="{'input-error': fechaNacimiento.touched && !fechaNacimiento.valid, 'input-success': fechaNacimiento.valid && !fechaNacimiento.errors}"
                             type="date" name="fechaNacimiento" #fechaNacimiento="ngModel" class="form-control"
                             placeholder="fechaNacimiento"
-                            [ngModel]="usuarioService.selectedUsuario.fechaNacimiento" required>
+                            [ngModel]="formatDate(usuarioService.selectedUsuario.fechaNacimiento)" required>
                           <div *ngIf="fechaNacimiento.touched && !fechaNacimiento.valid">
                             <div class="camposRequeridos" *ngIf="fechaNacimiento.errors['required']"> -> Fecha de
                               Nacimiento es requerido</div>
@@ -174,10 +174,10 @@
         </thead>
         <tbody>
           <!-- Fin Modal -->
-          <tr *ngFor="let u of usuarioService.usuario">
+          <tr *ngFor="let u of usuarioService.usuarios">
             <td>{{u.nombre}}</td>
             <td>{{u.cuil}}</td>
-            <td>{{u.fechaNacimiento | date: 'yyyy-MM-dd'}}</td>
+            <td>{{ formatearFecha(u.fechaNacimiento) }}</td>
             <td>{{u.email}}</td>
             <td>{{u.usuario}}</td>
             <td>{{u.direccion}}</td>

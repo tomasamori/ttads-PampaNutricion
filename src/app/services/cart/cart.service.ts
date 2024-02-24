@@ -33,7 +33,7 @@ export class CartService {
 
     selectedPedido: Pedido = {
       _id: '',
-      usuario: '',
+      usuario: {_id: '', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}, // --> Cambiado para evitar el error del model
       productos: [],
       cantidad : [],
       subtotal: 0,
@@ -105,61 +105,18 @@ export class CartService {
   return estado
   }
 
-  ConvertDataForTicket(){
 
-    const arrayConvertido: { [key: string]: string; }[] = this.products.map(producto => {
-
-      const objetoConvertido: { [key: string]: string; } = {};
-      
-      objetoConvertido['Nombre'] = this.truncarString(producto.nombre.trim(),55);
-      objetoConvertido['Cantidad'] = String(producto.amount).trim();
-      objetoConvertido['Precio'] = '$'+String(producto.precio.toFixed(2)).trim();
-      objetoConvertido['Dto'] = String(producto.promo).trim()+'%';
-      let subto = (this.subtotal(producto.precio,producto.amount,producto.promo))
-      objetoConvertido['Subtotal        '] = '$'+String(subto.toFixed(2)).trim();//NO BORRAR ESPACIOS 
-      objetoConvertido['IVA       '] = '$'+String(((subto*1.21)-(subto)).toFixed(2)).trim();
-      objetoConvertido['Precio final   '] = '$'+String((subto*1.21).toFixed(2)).trim();
-      return objetoConvertido;
-    });
-      //debugger;
-      return arrayConvertido;
-    }  
-
-    subtotal(precio:number,cantidad:number,promo:number){
-      let subtot = 0;
-
-      if (promo >0){
-        subtot += precio*cantidad *((100-promo)/100)
-      }else
-      {
-        subtot += precio*cantidad
-      }
-      return subtot;
-
-    }
-    truncarString(str: string, maxLength: number): string {
-      if (str.length <= maxLength) {
-          return str; // Si la longitud del string es menor o igual al maxLength, no se necesita truncar
-      } else {
-          return str.substring(0, maxLength); // Si la longitud del string es mayor que maxLength, se trunca el string hasta maxLength
-      }
-  }
     getAllPedido() {
       return this.http.get<Pedido>(this.URL_API);
     }
   
     createPedido(pedido: Pedido){
-      //let token2  = JSON.parse(localStorage.getItem('currentUser'));
-      //const regex = /"(.*?)"/;
-      //const token = token2.match(regex)[1];
-      debugger;
-     /*const httpOptions = {
+     const httpOptions = {
         headers: new HttpHeaders({
-          "x-access-token": token2
+          "x-access-token": localStorage.getItem('token')
         })
-      };*/
-      debugger;
-      return this.http.post<Pedido>(this.URL_API, pedido/*,httpOptions*/);
+      };
+      return this.http.post<Pedido>(this.URL_API, pedido,httpOptions);
     }
   
     updatePedido(pedido : Pedido){
@@ -174,6 +131,19 @@ export class CartService {
       return this.http.get<Pedido>(`${this.URL_API}/${_id}`);
     }
 
-    
+    loadImageAsBase64(imageUrl: string): Promise<string> {
+      return this.http.get(imageUrl, { responseType: 'blob' })
+        .toPromise()
+        .then(blob => this.blobToBase64(blob));
+    }
+  
+    private blobToBase64(blob: Blob): Promise<string> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    }
 
   }
