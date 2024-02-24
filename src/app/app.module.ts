@@ -26,6 +26,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { OrderManagerComponent } from './components/order-manager/order-manager.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { ToastrModule } from 'ngx-toastr';
     CartCounterComponent,
     CartCardComponent,
     CartComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    OrderManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,7 @@ import { ToastrModule } from 'ngx-toastr';
       }
     )
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

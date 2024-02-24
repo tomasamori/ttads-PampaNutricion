@@ -33,7 +33,7 @@ export class CartService {
 
     selectedPedido: Pedido = {
       _id: '',
-      usuario: '',
+      usuario: {_id: '', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}, // --> Cambiado para evitar el error del model
       productos: [],
       cantidad : [],
       subtotal: 0,

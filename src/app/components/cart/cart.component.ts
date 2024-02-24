@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
     cantidad: [],
     productos: [],
     estado: 'En preparacion',
-    usuario: 'Alexis',
+    usuario: {_id: '', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}, // --> Cambiado para evitar el error del model
     subtotal: 0, // Asigna el valor inicial adecuado si es necesario
     total: 0, // Asigna el valor inicial adecuado si es necesario,
     nroPedido:0
@@ -98,7 +98,7 @@ export class CartComponent implements OnInit {
         this.pedido.productos.push(this.Products[i]._id);
         this.pedido.estado = 'En preparacion'
         //this.pedido.subtotal = this.subtotal(this.products[i].promo,this.products[i].precio,this.products[i].amount)
-        this.pedido.usuario = '65d0ce0a267fbfbf43d25d7f'
+        this.pedido.usuario = {_id: '65d0ce0a267fbfbf43d25d7f', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}; // --> Cambiado para evitar el error del model
         }
         this.Totales(this.Products);
         this.pedido.subtotal = this.Subtotal;

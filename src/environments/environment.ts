@@ -8,7 +8,8 @@ export const environment = {
   URL_TIPOMASCOTA: 'http://localhost:3000/api/v1/tipoMascota',
   URL_SUCURSAL:'http://localhost:3000/api/v1/sucursal',
   URL_AUTH: 'http://localhost:3000/api/v1/auth',
-  URL_PEDIDO: 'http://localhost:3000/api/v1/pedido'
+  URL_PEDIDO: 'http://localhost:3000/api/v1/pedido',
+  URL_USUARIO: 'http://localhost:3000/api/v1/usuario'
 };
 
 /*
