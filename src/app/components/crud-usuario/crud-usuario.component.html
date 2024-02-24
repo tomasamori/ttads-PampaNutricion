@@ -1,0 +1,210 @@
+<div class="Presentacion">
+  <img id="imgPresentacion" src="assets/images/Usuario1.png" alt="">
+  <h1>TRABAJAR CON USUARIO</h1>
+</div>
+<div class="container">
+  <div class="col">
+    <div class="col">
+      <table class="table table-bordered table-hover" id="tabla">
+        <thead class="table-responsive">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">CUIL</th>
+            <th scope="col">Fecha de Nacimiento</th>
+            <th scope="col">Email</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Rol</th>
+            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UsuarioModal"
+                (click)="resetForm(usuarioForm)">Nuevo</button></th>
+          </tr>
+          <!-- Modal -->
+          <div class="modal" id="UsuarioModal" #usuarioModal tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog bg-transparent">
+              <div class="modal-content">
+                <div class="modal-header bg-warning">
+                  <h1 class="modal-title fs-5" id="h1-PUProd">{{ tituloModal }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <!--<span aria-hidden="true">&times;</span>-->
+                  </button>
+                </div>
+                <!--FORM-->
+                <form ngNativeValidate #usuarioForm="ngForm" (ngSubmit)="addUsuario(usuarioForm)">
+                  <div class="agrupaColumnas">
+                    <div class="columna">
+                      <input type="hidden" name="_id" [(ngModel)]="usuarioService.selectedUsuario._id">
+
+                      <div class="col mi-fila">
+                        <div class="mi-elemento">
+                          <label for="nombre">Nombre:</label>
+                          <input
+                            [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
+                            type="text" name="nombre" #nombre="ngModel"
+                            [(ngModel)]="usuarioService.selectedUsuario.nombre" placeholder="Ingrese nombre del usuario"
+                            class="form-control" required />
+                          <div *ngIf="nombre.touched && !nombre.valid">
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> Nombre es requerido
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mi-elemento">
+                          <label for="cuil">CUIL:</label>
+                          <input
+                            [ngClass]="{'input-error': cuil.touched && !cuil.valid, 'input-success': cuil.valid && !cuil.errors}"
+                            type="text" name="cuil" #cuil="ngModel" class="form-control" placeholder="CUIL"
+                            [(ngModel)]="usuarioService.selectedUsuario.cuil" required>
+                          <div *ngIf="cuil.touched && !cuil.valid">
+                            <div class="camposRequeridos" *ngIf="cuil.errors['required']"> -> CUIL es requerido</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col mi-fila">
+                        <div class="mi-elemento">
+                          <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                          <input
+                            [ngClass]="{'input-error': fechaNacimiento.touched && !fechaNacimiento.valid, 'input-success': fechaNacimiento.valid && !fechaNacimiento.errors}"
+                            type="date" name="fechaNacimiento" #fechaNacimiento="ngModel" class="form-control"
+                            placeholder="fechaNacimiento"
+                            [ngModel]="usuarioService.selectedUsuario.fechaNacimiento" required>
+                          <div *ngIf="fechaNacimiento.touched && !fechaNacimiento.valid">
+                            <div class="camposRequeridos" *ngIf="fechaNacimiento.errors['required']"> -> Fecha de
+                              Nacimiento es requerido</div>
+                          </div>
+                        </div>
+                        <div class="mi-elemento">
+                          <label for="email">E-mail:</label>
+                          <br>
+                          <input
+                            [ngClass]="{'input-error': email.touched && !email.valid, 'input-success': email.valid && !email.errors}"
+                            type="email" name="email" #email="ngModel" class="form-control" placeholder="E-mail"
+                            [(ngModel)]="usuarioService.selectedUsuario.email" [disabled]="isDisabled" required>
+                          <div *ngIf="email.touched && !email.valid">
+                            <div class="camposRequeridos" *ngIf="email.errors['required']"> -> Email es requerido
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col mi-fila">
+                        <div class="mi-elemento">
+                          <label for="usuario">Usuario:</label>
+                          <br>
+                          <input
+                            [ngClass]="{'input-error': usuario.touched && !usuario.valid, 'input-success': usuario.valid && !usuario.errors}"
+                            type="text" name="usuario" #usuario="ngModel" class="form-control" placeholder="Usuario"
+                            [(ngModel)]="usuarioService.selectedUsuario.usuario" [disabled]="isDisabled" required>
+                          <div *ngIf="usuario.touched && !usuario.valid">
+                            <div class="camposRequeridos" *ngIf="usuario.errors['required']"> -> Usuario es requerido
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mi-elemento">
+                          <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input
+                              [ngClass]="{'input-error': password.touched && !password.valid, 'input-success': password.valid && !password.errors}"
+                              type="password" name="password" class="form-control" placeholder="Ingrese Contraseña"
+                              [(ngModel)]="usuarioService.selectedUsuario.password" #password="ngModel"
+                              [disabled]="isDisabled" required>
+                            <div *ngIf="password.touched && !password.valid">
+                              <div class="camposRequeridos" *ngIf="password.errors['required']"> -> Contraseña es
+                                requerido
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mi-elemento">
+                          <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input
+                              [ngClass]="{'input-error': direccion.touched && !direccion.valid, 'input-success': direccion.valid && !direccion.errors}"
+                              type="text" name="dirección" class="form-control" placeholder="Ingrese su dirección"
+                              [(ngModel)]="usuarioService.selectedUsuario.direccion" #direccion="ngModel" required>
+                            <div *ngIf="direccion.touched && !direccion.valid">
+                              <div class="camposRequeridos" *ngIf="direccion.errors['required']"> -> Dirección es
+                                requerido
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="mi-elemento">
+                        <label for="telefono">Teléfono:</label>
+                        <input
+                          [ngClass]="{'input-error': telefono.touched && !telefono.valid, 'input-success': telefono.valid && !telefono.errors}"
+                          type="tel" name="telefono" id="telefono" class="form-control" placeholder="Teléfono"
+                          [(ngModel)]="usuarioService.selectedUsuario.telefono" #telefono="ngModel" required>
+                        <div *ngIf="telefono.touched && !telefono.valid">
+                          <div class="camposRequeridos" *ngIf="telefono.errors['required']"> -> Telefono es
+                            requerido</div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="InsertSuccess" class="overlay">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          {{tituloModalSucces}}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            data-bs-dismiss="modal" (click)="ModalClose()"></button>
+                        </div>
+                      </div>
+
+
+
+                      <div *ngIf="errorMessage" class="custom-error-message">
+                        ¡Error!
+                        {{errorMessage}}
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                      (click)="cancel()">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </thead>
+        <tbody>
+          <!-- Fin Modal -->
+          <tr *ngFor="let u of usuarioService.usuario">
+            <td>{{u.nombre}}</td>
+            <td>{{u.cuil}}</td>
+            <td>{{u.fechaNacimiento | date: 'yyyy-MM-dd'}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.usuario}}</td>
+            <td>{{u.direccion}}</td>
+            <td>{{u.telefono}}</td>
+            <td>{{u.rol}}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#UsuarioModal"
+                (click)="editUsuario(u)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                </svg>
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="deleteUsuario(u._id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

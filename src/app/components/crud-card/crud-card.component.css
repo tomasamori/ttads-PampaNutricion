@@ -1,0 +1,8 @@
+ img{
+    width: 200px; /* Establece el ancho deseado */
+    height: auto; /* Mantiene la proporción original */
+}
+
+#card{
+    margin-bottom: 20px;
+}
