@@ -1,6 +1,7 @@
 import { Component, Input ,OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cart-card',
   templateUrl: './cart-card.component.html',
@@ -8,7 +9,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class CartCardComponent implements OnInit {
 
-  constructor(private cart:CartService) { 
+  constructor(private cart:CartService,private toastr: ToastrService) { 
     let p = Number(this.price).toFixed(2)
   }
 
@@ -68,6 +69,8 @@ export class CartCardComponent implements OnInit {
   }
   delete(){
     this.cart.deleteProd(this.product)
+    this.toastr.error('Se ha eliminado el producto.')
+
   }
   map(){
    this.product._id= this.id.toString();

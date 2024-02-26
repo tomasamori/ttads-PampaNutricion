@@ -71,7 +71,10 @@ export class CartComponent implements OnInit {
           this.cartService.createPedido(this.pedido).subscribe(
             (res:Pedido) => {
               //this.CreatePDF(res)
-              this.createPDF(res)
+              let pro = this.cartService.getAllCarrito();
+              //var subarrays = this.dividirArrayEnSubarrays(pro, 15);
+              //this.createPDF(subarrays,res);
+              this.createSheet(res,pro)
             },
             err => {console.log(err)
             }
@@ -88,6 +91,9 @@ export class CartComponent implements OnInit {
     //const data = this.getAllProd();
 
   }
+
+
+ 
 
   MapProdToPed(nro : number){
     this.Products = this.cartService.getAllCarrito();
@@ -134,110 +140,145 @@ export class CartComponent implements OnInit {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
- createPDF(pedido:Pedido){
-  let pro = this.cartService.getAllCarrito();
-  const filasDeDatos = pro.map(producto => [
-    producto.nombre,
-    producto.amount.toString(),
-    `$${producto.precio.toFixed(2)}`,
-    `$${producto.promo.toString().trim()+'%'}`,
-    `$${this.subtotal2(producto.precio,producto.amount,producto.promo)}`,
-    `$${this.iva(producto.precio,producto.amount,producto.promo)}`,
-    `$${this.total2(producto.precio,producto.amount,producto.promo)}`
-  ]);
-  let invoiceheader = '\n'+'Nro. Pedido: '+pedido.nroPedido.toString().trim()+'\t\t\t\t\t\t\t\t\t'+'  Telefono: 03407 48-0936'+'\n\n'+'Mail: pampanutricion@gmail.com'+'\t\t'+ 'Fecha: '+this.Date()+'\n\n'+'Cuit: 30-71453418-8'+'\t\t\t\t\t\t\t\t'+'Cliente: Alexis'+'\n\n'+'Direccion: RN9 km 204, Ramallo, Provincia de Buenos Aires'+'\n'+'  ';
+  createPDF(subArr: Producto[][], pedido: Pedido) {
+    let documents = []; // Cambié el nombre de la variable a "documents" para ser más descriptivo
+    for (let i = 0; i < subArr.length; i++) {
+        documents.push(this.createSheet(pedido, subArr[i]));
+    }
 
-  //+
-  const tabla1 = {
-    headerRows: 1,
-    widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
-    body: [
-      [            
-        { text: 'Nombre', fillColor: '#E96524' },
-        { text: 'Cantidad', fillColor: '#E96524' },
-        { text: 'Precio', fillColor: '#E96524' },
-        { text: 'Dto', fillColor: '#E96524' },
-        { text: 'Subtotal', fillColor: '#E96524' },
-        { text: 'IVA', fillColor: '#E96524' },
-        { text: 'Precio final', fillColor: '#E96524' }
-      ],
-      ...filasDeDatos
-    ]
-  };
+}
+createSheet(pedido, pro) {
+  const productosPorPagina = 20;
+  const totalProductos = pro.length;
+  const numPaginas = Math.ceil(totalProductos / productosPorPagina);
 
-  const tabla2 = {
-    headerRows: 1,
-    widths: ['*', '*', '*'],
-    body: [
-      [            
-        { text: 'Total s/IVA', fillColor: '#E96524' },
-        { text: 'Total IVA', fillColor: '#E96524' },
-        { text: 'Total c/IVA', fillColor: '#E96524' }
-      ],
-      ['$'+pedido.subtotal.toFixed(2), '$'+(pedido.total-pedido.subtotal).toFixed(2), '$'+pedido.total.toFixed(2)]
-    ]
-  };
-  const documentDefinition = {
-    pageSize: 'A4',
-    pageOrientation: 'portrait',
-    content: [      
-      {
-        columns: [
-          // Columna izquierda: imagen
+  let documentDefinition = {
+      pageSize: 'A4',
+      pageOrientation: 'portrait',
+      content: [],
+      background: [
           {
-            image: this.base64Image,
-            width: 100,
-            height: 100,
-            alignment: 'left',
-            margin: [0, 10, 0, 0] // Margen arriba-izquierda-derecha-abajo
-          },
-          // Columna derecha: tabla con texto
-          {
-            table: {
-              widths: ['*'],
-              body: [
-                    [
-                  {text:invoiceheader,//'\n \t\t\t\t\t\t\t\t\t\t\t\tPrueba\t\t1 Prueba2 Prueba 2 Prueba \n\n\n \t\t\tPrueba 1 Prueba 2 Prueba 2 Prueba\n\n',
-                  fillColor:"#E96524"
-                },
-                    ]
-              ]
-            },
-            //layout: 'noBorders', // Opcional: elimina los bordes de la tabla
-            margin: [10, 10, 0, 0] // Ajusta el margen izquierdo para alinear con la columna izquierda
+              image: this.base64Image,
+              width: 416.5,
+              height: 416.5,
+              absolutePosition: { x: 90, y: 251.92 },
+              opacity: 0.2
           }
-        ]
-      },
-      {
-        text: '\n\n' // Agregar espacio entre las tablas
-      },
-      {
-        table: tabla1
-      },
-      {
-        text: '\n\n' // Agregar espacio entre las tablas
-      },
-      {
-        table: tabla2,
-        absolutePosition: { x: 40, y: 760 }
-      }
-    ],
-    background: [
-      {
-        image: this.base64Image,
-        width: 416.5, // Ancho de la página A4 en puntos (1 punto = 1/72 pulgadas)
-        height: 416.5, // Alto de la página A4 en puntos
-        absolutePosition: { x: 90, y: 251.92}, // Posición en la esquina superior izquierda
-        opacity: 0.2 // Opacidad de la imagen (0 a 1)
-      }
-    ]
+      ]
   };
-  
-  let name = 'Pedido-'+pedido.nroPedido.toString().trim();
-  //pdfMake.createPdf(documentDefinition).open();
+
+  for (let i = 0; i < numPaginas; i++) {
+      const productosPagina = pro.slice(i * productosPorPagina, (i + 1) * productosPorPagina);
+
+      const filasDeDatos = productosPagina.map(producto => [
+          producto.nombre,
+          producto.amount.toString(),
+          `$${producto.precio.toFixed(2)}`,
+          `$${producto.promo.toString().trim() + '%'}`,
+          `$${this.subtotal2(producto.precio, producto.amount, producto.promo)}`,
+          `$${this.iva(producto.precio, producto.amount, producto.promo)}`,
+          `$${this.total2(producto.precio, producto.amount, producto.promo)}`
+      ]);
+
+      let invoiceheader = '\n' + 'Nro. Pedido: ' + pedido.nroPedido.toString().trim() + '\t\t\t\t\t\t\t\t\t' + '  Telefono: 03407 48-0936' + '\n\n' + 'Mail: pampanutricion@gmail.com' + '\t\t' + 'Fecha: ' + this.Date() + '\n\n' + 'Cuit: 30-71453418-8' + '\t\t\t\t\t\t\t\t' + 'Cliente: Alexis' + '\n\n' + 'Direccion: RN9 km 204, Ramallo, Provincia de Buenos Aires' + '\n' + '  ';
+
+      const tabla1 = {
+          headerRows: 1,
+          widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+          body: [
+              [
+                  { text: 'Nombre', fillColor: '#FF945F' },
+                  { text: 'Cantidad', fillColor: '#FF945F' },
+                  { text: 'Precio', fillColor: '#FF945F' },
+                  { text: 'Dto', fillColor: '#FF945F' },
+                  { text: 'Subtotal', fillColor: '#FF945F' },
+                  { text: 'IVA', fillColor: '#FF945F' },
+                  { text: 'Precio final', fillColor: '#FF945F' }
+              ],
+              ...filasDeDatos
+          ]
+      };
+
+      const tabla2 = {
+          headerRows: 1,
+          widths: ['*', '*', '*'],
+          body: [
+              [
+                  { text: 'Total s/IVA', fillColor: '#FF945F' },
+                  { text: 'Total IVA', fillColor: '#FF945F' },
+                  { text: 'Total c/IVA', fillColor: '#FF945F' }
+              ],
+              ['$' + pedido.subtotal.toFixed(2), '$' + (pedido.total - pedido.subtotal).toFixed(2), '$' + pedido.total.toFixed(2)]
+          ]
+      };
+
+      const paginaContent = [
+          {
+              columns: [
+                  {
+                      image: this.base64Image,
+                      width: 100,
+                      height: 100,
+                      alignment: 'left',
+                      margin: [0, 10, 0, 0]
+                  },
+                  {
+                      table: {
+                          widths: ['*'],
+                          body: [
+                              [
+                                  {
+                                      text: invoiceheader,
+                                      fillColor: "#FF945F"
+                                  },
+                              ]
+                          ]
+                      },
+                      margin: [10, 10, 0, 0]
+                  }
+              ]
+          },
+          {
+              text: '\n\n'
+          },
+          {
+              table: tabla1
+          },
+          {
+              text: '\n\n'
+          },
+          {
+              table: tabla2,
+              absolutePosition: { x: 40, y: 760 }
+          }
+      ];
+
+      documentDefinition.content.push(...paginaContent);
+
+      // Agregar una nueva página al final de cada ciclo, excepto en la última iteración
+      if (i < numPaginas - 1) {
+          documentDefinition.content.push({ text: '', pageBreak: 'after' });
+      }
+  }
+
+  let name = 'Pedido-' + pedido.nroPedido.toString().trim();
   pdfMake.createPdf(documentDefinition).download(name);
-  this.toastr.success('Su compra ha finalizado con éxito.')
- }
+  this.toastr.success('Su compra ha finalizado con éxito.');
+}
+
+
+
+
+ 
+ dividirArrayEnSubarrays(array:Producto[], tamanoSubarray:number) {
+  var subarrays = [];
+  for (var i = 0; i < array.length; i += tamanoSubarray) {
+      subarrays.push(array.slice(i, i + tamanoSubarray));
+  }
+  return subarrays;
+}
+
+
 
 total2(precio:number,cantidad:number,promo:number){
   let iva = this.iva(precio,cantidad,promo);
