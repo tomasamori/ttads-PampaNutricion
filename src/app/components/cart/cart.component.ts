@@ -11,34 +11,41 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  //Variables
   isLoading: boolean = false;
   base64Image: string;
+  Products:Producto[];
+  Subtotal:number = 0
   messageVisible = false;
+  Total:Number = 0;
+  SubTotal:Number=0;
   constructor(protected cartService:CartService,private router:Router,private toastr: ToastrService) { 
     this.loadImage();
   }
-
-  Products:Producto[];
-  Subtotal:number = 0
+  
   pedido : Pedido = {
     cantidad: [],
     productos: [],
     estado: 'En preparacion',
     usuario: {_id: '', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}, // --> Cambiado para evitar el error del model
-    subtotal: 0, // Asigna el valor inicial adecuado si es necesario
-    total: 0, // Asigna el valor inicial adecuado si es necesario,
+    subtotal: 0, 
+    total: 0, 
     nroPedido:0
   };
+
+
   ngOnInit(): void {
     this.getAllProd();
-
+    this.total();
   }
+
   getAllProd(){
     return this.cartService.getAllCarrito();
   }
+
   CantidadAritulos(){
     let TotalArt = 0;
     this.cartService.getAllCarrito().forEach(produc => {
@@ -58,11 +65,14 @@ export class CartComponent implements OnInit {
         a+=(produc.precio - (produc.precio  * produc.promo / 100))*produc.amount;
       }
     });
-  return (a*1.21).toFixed(2);
+    this.SubTotal = Number((a).toFixed(2));
+    this.Total =  Number((a*1.21).toFixed(2));
   }
+
   List(){
     this.router.navigate(['products'])
   }
+
   Pay(){
     if (localStorage.getItem('usuarioFoundId')){
       if (localStorage.getItem('token')){
@@ -70,11 +80,8 @@ export class CartComponent implements OnInit {
           this.MapProdToPed(1);
           this.cartService.createPedido(this.pedido).subscribe(
             (res:Pedido) => {
-              //this.CreatePDF(res)
               let pro = this.cartService.getAllCarrito();
-              //var subarrays = this.dividirArrayEnSubarrays(pro, 15);
-              //this.createPDF(subarrays,res);
-              this.createSheet(res,pro)
+              this.createPDF(res,pro)
             },
             err => {console.log(err)
             }
@@ -84,26 +91,23 @@ export class CartComponent implements OnInit {
       }
     }
     else{
-      this.toastr.info('Inicie sesión para poder continuar la compra.')/*,'', {
-        toastClass: 'custom-toast-class' // Clase CSS personalizada para este toast
-      });*/
+      this.toastr.info('Inicie sesión para poder continuar la compra.')
     }
-    //const data = this.getAllProd();
 
   }
-
+  dividirRedondearArriba(numero:number,div:number) {
+    return Math.ceil(numero / div);
+  }
 
  
 
   MapProdToPed(nro : number){
     this.Products = this.cartService.getAllCarrito();
-    //this.pedido = null;
     if (nro = 1){
       for (var i= 0; i < this.Products.length;i++){
         this.pedido.cantidad.push(this.Products[i].amount);
         this.pedido.productos.push(this.Products[i]._id);
         this.pedido.estado = 'En preparacion'
-        //this.pedido.subtotal = this.subtotal(this.products[i].promo,this.products[i].precio,this.products[i].amount)
         this.pedido.usuario = {_id: '65d0ce0a267fbfbf43d25d7f', usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}; // --> Cambiado para evitar el error del model
         }
         this.Totales(this.Products);
@@ -121,8 +125,6 @@ export class CartComponent implements OnInit {
         this.Subtotal += this.Products[i].precio * this.Products[i].amount
       }
    }
-   //total = subtotal * 1.21;
-
   }
   
   Date() {
@@ -140,17 +142,10 @@ export class CartComponent implements OnInit {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
-  createPDF(subArr: Producto[][], pedido: Pedido) {
-    let documents = []; // Cambié el nombre de la variable a "documents" para ser más descriptivo
-    for (let i = 0; i < subArr.length; i++) {
-        documents.push(this.createSheet(pedido, subArr[i]));
-    }
-
-}
-createSheet(pedido, pro) {
+createPDF(pedido, pro) {
   const productosPorPagina = 20;
   const totalProductos = pro.length;
-  const numPaginas = Math.ceil(totalProductos / productosPorPagina);
+  const numPaginas = this.dividirRedondearArriba(totalProductos,productosPorPagina)//Math.ceil(totalProductos / productosPorPagina);
 
   let documentDefinition = {
       pageSize: 'A4',

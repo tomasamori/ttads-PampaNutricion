@@ -31,7 +31,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 import { DatePipe } from '@angular/common';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,12 +64,14 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule, 
     ToastrModule.forRoot(
       {
-        positionClass: 'toast-top-center'
+        positionClass: 'toast-top-center',
+        maxOpened:3,
+        autoDismiss: true
       }
-    )
+    ),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
