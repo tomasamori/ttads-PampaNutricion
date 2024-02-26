@@ -1,4 +1,5 @@
-export interface lLocalidad {
+export interface Localidad {
+_id?: any,
 codPostal: String,
 nombre: String
 }

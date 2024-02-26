@@ -12,6 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CrudPageComponent } from './components/crud-page/crud-page.component';
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
 import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tipoMascota.component';
+import { CrudUsuarioComponent } from './components/crud-usuario/crud-usuario.component';
+import { CrudLocalidadComponent } from './components/crud-localidad/crud-localidad.component';
 import { CrudCardComponent } from './components/crud-card/crud-card.component';
 import { ProductCounterComponent } from './components/product-counter/product-counter.component';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
@@ -26,6 +28,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { OrderManagerComponent } from './components/order-manager/order-manager.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -34,12 +38,14 @@ import { ToastrModule } from 'ngx-toastr';
     NavbarComponent,
     ProductCardComponent,
     CrudTipoMascotaComponent,
+    CrudUsuarioComponent,
     ListComponent,
     HomeComponent,
     CrudPageComponent,
     CrudProductsComponent,
     CrudCardComponent, 
     ProductCounterComponent,
+    CrudLocalidadComponent,
     ListFilterPipe,
     FooterComponent,
     StoreLocatorComponent,
@@ -47,7 +53,8 @@ import { ToastrModule } from 'ngx-toastr';
     CartCounterComponent,
     CartCardComponent,
     CartComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    OrderManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +72,7 @@ import { ToastrModule } from 'ngx-toastr';
       }
     )
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

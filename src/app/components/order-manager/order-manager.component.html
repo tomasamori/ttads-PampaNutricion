@@ -1,0 +1,111 @@
+<div class="container-fluid p-0">
+    <div class="listfs align-items-center">
+      <br/>
+      <div class="container-fluid p-3">
+        <h1 class="text-center text-white display-2 tbg">Gestor de pedidos</h1>
+      </div>
+    </div>
+  </div>
+
+<br/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="table-dark">
+                                <th class="text-center">Nro. de Pedido</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of this.pedidoService.pedidos">
+                                <td class="text-center">{{ order.nroPedido }}</td>
+                                <td class="text-center"><button data-bs-toggle="modal" [attr.data-bs-target]="'#userModal'" (click)="setSelectedUser(order.usuario)" class="btn btn-secondary">{{ order.usuario.nombre }}</button></td>
+                                <td class="text-center">{{ order.createdAt | date: 'dd/MM/yyyy' }}</td>
+                                <td class="text-center">
+                                    <select [(ngModel)]="order.estado" (change)="updateOrder(order.nroPedido)" class="form-select form-select-sm">
+                                        <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+                                    </select>
+                                </td>                                
+                                <td class="text-center">
+                                    <button data-bs-toggle="modal" [attr.data-bs-target]="'#orderDetailsModal'" class="btn btn-primary me-3" (click)="setSelectedOrder(order)">Ver</button>
+                                    <button class="btn btn-danger" (click)="deleteOrder(order._id)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+
+
+<!-- User Modal -->
+<div class="modal fade" id="userModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ selectedUser.nombre }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+                <div class="col-6"> 
+                    <img src="./assets/images/Usuario1.png" alt="Imagen del usuario" class="img-fluid" style="max-width: 200px;">
+                </div>
+                <div  class="col-6"> 
+                    <strong>Email</strong>
+                    <p>{{ selectedUser.email }}</p>
+                    <strong>Cuil</strong>
+                    <p>{{ selectedUser.cuil }}</p>
+                    <strong>Teléfono</strong>
+                    <p>{{ selectedUser.telefono }}</p>
+                    <strong>Dirección</strong>
+                    <p>{{ selectedUser.direccion }}</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Order Modal -->
+<div class="modal fade" id="orderDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalles del Pedido {{ selectedOrder.nroPedido }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li *ngFor="let product of selectedOrder.productos; let i = index" class="list-group-item bg-light">
+                        <div class="row">
+                            <div class="col">{{ product.marca }} -  {{ product.nombre }}</div>
+                            <div class="col-auto">{{ selectedOrder.cantidad[i] }} un.</div>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>                       
+            <div class="modal-footer">
+                <!--
+                <p><strong>Subtotal</strong></p>
+                <p>${{ selectedOrder.subtotal }}</p>
+                -->
+                <p><strong>Total</strong></p>
+                <p>${{ selectedOrder.total }}</p>
+            </div>
+        </div>
+    </div>
+</div>

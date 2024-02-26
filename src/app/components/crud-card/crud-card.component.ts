@@ -13,5 +13,6 @@ export class CrudCardComponent implements OnInit {
   }
   @Input() name: string;
   @Input() link: string;
+  @Input() imagen: string;
 
 }

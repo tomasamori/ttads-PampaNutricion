@@ -1,8 +1,7 @@
-
 h1 {
   text-align:left;
   color: #ee7f3f;
-  width: 450px; /* Ancho deseado */
+  width: 550px; /* Ancho deseado */
   margin-left: 10px;
   margin-right: auto;
   margin-top: 50px;
@@ -12,9 +11,8 @@ h1 {
   border-bottom: 3px solid #ee7f3f; /* Añade una línea de un píxel de grosor debajo del campo */
   outline: none; /* Elimina el contorno cuando el campo está enfocado */
 }
-.container {
-    margin-top: 20px;
-}
+
+
 .Presentacion{
   display: flex;
 }
@@ -65,22 +63,22 @@ h1 {
 }
 
 .mi-fila {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
+    display: block;
+    flex-wrap:wrap-reverse; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
     gap: 10px; /* Espacio entre los elementos en la misma línea */
 }
 
 #ProductModal .mi-elemento {
-  width: calc(92% - 10px); /* Ancho del 50% menos el espacio entre elementos */
+  width: calc(50% - 10px); /* Ancho del 50% menos el espacio entre elementos */
   margin-right: 20px; /* Margen derecho entre elementos */
   margin-bottom: 5px; /* Margen inferior para separar las líneas */
   margin-left: 20px; 
   box-sizing: border-box; /* Incluye el borde y el relleno en el ancho total */
+  
+  
 }
 
-#ProductModal .mi-elemento:last-child {
-  margin-right: 0px; /* Elimina el margen derecho del último elemento de cada línea */
-}
+
 
 .agrupaColumnas {
   display: flex;
