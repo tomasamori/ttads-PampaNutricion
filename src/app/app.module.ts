@@ -20,8 +20,6 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
 import { CartComponent } from './components/cart/cart.component';
-import { CartCardComponent } from './components/cart-card/cart-card.component';
-import { CartCounterComponent } from './components/cart-counter/cart-counter.component';
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -49,8 +47,6 @@ import { DatePipe } from '@angular/common';
     FooterComponent,
     StoreLocatorComponent,
     StoreLocatorCardComponent,
-    CartCounterComponent,
-    CartCardComponent,
     CartComponent,
     ResetPasswordComponent,
     OrderManagerComponent

@@ -31,11 +31,11 @@
     </div>
   </div>
   <div class="list-cart" *ngFor="let p of cartService.getAllCarrito()">
-    <app-cart-card id="{{p._id}}" brand="{{p.marca}}" name="{{p.nombre}}" discount="{{p.promo}}"
+    <app-product-card _id="{{p._id}}" brand="{{p.marca}}" name="{{p.nombre}}" discount="{{p.promo}}"
       description="{{p.descripcion}}" weight="{{p.peso}}" petName="{{p.tipoMascota.nombre}}"
       petAge="{{p.tipoMascota.edad}}" petSize="{{p.tipoMascota.tamanoRaza}}" price="{{p.precio.toFixed(2)}}" imgUrl="{{p.imgUrl}}"
-      amount="{{p.amount}}">
-    </app-cart-card>
+      amount1="{{p.amount}}" TpoObj="1" (counterChanged)="onCounterChange()">
+    </app-product-card>
   </div>
 
   <div class="row justify-content-center mt-3 w-100">
@@ -48,12 +48,3 @@
 
 
   
-<div class="container-fluid">
-  <div class="row">
-      <div class="fs">
-          <div class="row align-items-center">
-
-          </div>
-      </div>
-  </div>
-</div>

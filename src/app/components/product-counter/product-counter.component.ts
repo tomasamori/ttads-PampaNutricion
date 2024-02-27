@@ -7,15 +7,25 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export class ProductCounterComponent implements OnInit {
 
-  constructor() { }
-  ngOnInit(): void {
-  }
+
   @Input() price: string;
   @Output() updatePriceEvent = new EventEmitter<number>();
   @Output() updateAmountEvent = new EventEmitter<number>();
-  amount = 1;
+  @Input() amount1:string;
+  @Input() TpoObj :string;
+  @Output() counterChanged: EventEmitter<any> = new EventEmitter<any>();
+  amount:number;
 
+  constructor() { }
+  ngOnInit(): void {
 
+   if (this.TpoObj==='1'){
+    this.amount = Number(this.amount1)
+   }
+   if (this.TpoObj==='2'){
+    this.amount = 1
+   }
+  }
 
   add() {
     this.amount = Number(this.amount) + 1;
@@ -35,7 +45,6 @@ export class ProductCounterComponent implements OnInit {
     return (amount*Number(price)).toFixed(2);
   }
 
-
   updatePrice(value: number) {
     this.updatePriceEvent.emit(value);
   }
@@ -50,5 +59,10 @@ export class ProductCounterComponent implements OnInit {
 
   updateAmount(value: number) {
     this.updateAmountEvent.emit(value);
+    this.onChange();
+  }
+
+  onChange() {
+    this.counterChanged.emit();
   }
 }
