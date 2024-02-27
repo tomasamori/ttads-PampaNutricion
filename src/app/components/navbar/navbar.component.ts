@@ -12,6 +12,7 @@ import { empty } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   registrationSuccess = false;
+  loginSuccess = false;
   forgotPasswordFormSuccess = false;
   errorMessage: string = "";
   
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit {
 
     if (localStorage.getItem('usuarioFoundId')){
       if (localStorage.getItem('token')){
-      this.registrationSuccess = true;
+      this.loginSuccess = true;
       }
     }
   }
@@ -30,16 +31,16 @@ export class NavbarComponent implements OnInit {
   
   logOut(){
     localStorage.clear();
-    this.registrationSuccess = false;
+    this.loginSuccess = false;
   }
   
   login(form: NgForm) {
     this.authService.login(form.value)
     .subscribe(res => {
-      console.log(res);
-      this.registrationSuccess = true;
+      this.loginSuccess = true;
       localStorage.setItem('usuarioFoundId',res['usuarioFoundId']);
       localStorage.setItem('token',res['token']);
+      localStorage.setItem('rol',res['usuarioFoundRol']);
       form.reset();
     },
     err => {
@@ -59,9 +60,7 @@ export class NavbarComponent implements OnInit {
     this.authService.register(form.value)
       .subscribe(res => {
         form.reset();
-        console.log(res['token']); // acá va a mostrar el token que vuelve del back. habría que guardar el token en el local storage y redirigir al usuario a la home logueado (luego usar ese token para hacer peticiones al back y que el back sepa que el usuario está logueado)
         this.registrationSuccess = true;
-        debugger;
       },
       err => {
         console.log(err);

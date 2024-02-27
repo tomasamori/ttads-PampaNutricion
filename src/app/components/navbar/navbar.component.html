@@ -21,13 +21,13 @@
     </div>
     
     <ul class="navbar-nav mx-auto">
-      <li *ngIf="registrationSuccess" class="nav-item">
+      <li *ngIf="loginSuccess" class="nav-item">
         <button type="button" class="btn btn-dark text-white fs-5 me-5" (click)="logOut()">Cerrar Sesión</button>
       </li>
     </ul>
 
     <ul class="navbar-nav mx-auto">
-      <li *ngIf="!registrationSuccess" class="nav-item">
+      <li *ngIf="!loginSuccess" class="nav-item">
         <button type="button" class="btn btn-dark text-white fs-5 me-5" data-bs-toggle="modal" [attr.data-bs-target]="'#login'">Acceder</button>
       </li>
     </ul>
@@ -80,7 +80,7 @@
                   <a href="#" class="text-decoration-none text-primary fw-semibold fst-italic" data-bs-toggle="modal" [attr.data-bs-target]="'#ForgotPass'" style="font-size: 0.9rem">¿Olvidaste tu contraseña?</a>
               </div>
               
-              <div *ngIf="registrationSuccess" class="overlay">
+              <div *ngIf="loginSuccess" class="overlay">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                   ¡Bienvenido!
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
@@ -199,13 +199,6 @@
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
           </div>
-
-          <div *ngIf="registrationSuccess" class="overlay">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              ¡Usuario registrado con éxito!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal"></button>
-          </div>
-        </div>
 
         <div *ngIf="errorMessage" class="custom-error-message">
           ¡Error!
