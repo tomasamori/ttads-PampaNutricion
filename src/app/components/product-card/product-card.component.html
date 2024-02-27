@@ -70,23 +70,29 @@
                     <app-product-counter 
                     price="{{calculatePrice(+price, +discount)}}"
                     (updatePriceEvent)="updatePrice($event)"
-                    (updateAmountEvent)="updateAmount($event)">
+                    (updateAmountEvent)="updateAmount($event)"
+                    amount1 = amount1
+                    TpoObj = {{TipOBJ()}}
+                    (counterChanged)="onCounterChange()"
+                    >
                     </app-product-counter>
                   </div>
                   <div *ngIf="discount !== '0'">
                     <app-product-counter 
                       price="{{calculatePrice(+price, +discount)}}"
                       (updatePriceEvent)="updatePrice($event)"
-                      (updateAmountEvent)="updateAmount($event)">
+                      (updateAmountEvent)="updateAmount($event)"
+                      amount1 = {{amount1}}
+                      TpoObj = {{TipOBJ()}}
+                      (counterChanged)="onCounterChange()"
+                      >
                     </app-product-counter>
                   </div>
-                  <div class="d-flex flex-column mt-5">
-                    <button class="btn btn-warning bg-gradient mt-4" type="button" (click)="addProdCart()">
+                  <div class="d-flex flex-column mt-5" >
+                    <button  type="button" *ngIf="TpoObj === '2'"  class="btn btn-warning bg-gradient mt-4"  (click)="addProdCart()">
                       Agregar al carrito
                     </button>
-                    <!--<div *ngIf="show" class="alert alert-success mt-3 notification" role="alert">
-                      {{MsjNot}}
-                    </div>-->
+                    <button type="button" *ngIf="TpoObj === '1'" class="btn btn-danger bg-gradient mt-2" (click)="delete()">Eliminar</button>
                   </div>
                 </div>
               </div>

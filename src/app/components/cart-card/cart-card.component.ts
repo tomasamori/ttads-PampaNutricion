@@ -28,7 +28,7 @@ export class CartCardComponent implements OnInit {
   @Input() discount: string;
   @Input() id: string;
   @Input() amount:string;
-
+  finalPrice=0;
   product:Producto={
     _id:'',
     marca:'',
@@ -41,7 +41,7 @@ export class CartCardComponent implements OnInit {
     imgUrl:'',
     amount:1
   }
-  finalPrice=0;
+
   calculatePrice(price:number, discount:number) {
     return Number((price - (price * discount / 100)).toFixed(2));
   }
@@ -70,7 +70,6 @@ export class CartCardComponent implements OnInit {
   delete(){
     this.cart.deleteProd(this.product)
     this.toastr.error('Se ha eliminado el producto.')
-
   }
   map(){
    this.product._id= this.id.toString();

@@ -16,7 +16,7 @@ export class ListComponent implements OnInit {
   filterProduct = '';
   minPrice?: number;
   maxPrice?: number;
-
+  TpoObj:string ='2';
   ngOnInit(): void {
     this.getProductos();
   }

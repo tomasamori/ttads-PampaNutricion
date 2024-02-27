@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,SimpleChanges  } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -22,10 +22,12 @@ export class CartComponent implements OnInit {
   messageVisible = false;
   Total:Number = 0;
   SubTotal:Number=0;
+  //TpoObj:string ='1';
   constructor(protected cartService:CartService,private router:Router,private toastr: ToastrService) { 
     this.loadImage();
   }
-  
+
+
   pedido : Pedido = {
     cantidad: [],
     productos: [],
@@ -36,6 +38,12 @@ export class CartComponent implements OnInit {
     nroPedido:0
   };
 
+  ngOnChanges(changes: SimpleChanges) {
+    if ('SubTotal' in changes) {
+      console.log('Nuevo valor de TpoObj:', this.SubTotal);
+      debugger;
+    }
+  }
 
   ngOnInit(): void {
     this.getAllProd();
@@ -49,7 +57,7 @@ export class CartComponent implements OnInit {
   CantidadAritulos(){
     let TotalArt = 0;
     this.cartService.getAllCarrito().forEach(produc => {
-      TotalArt = TotalArt +  produc.amount
+      TotalArt += +  produc.amount
     });
   return TotalArt;
   }
@@ -106,7 +114,7 @@ export class CartComponent implements OnInit {
     if (nro = 1){
       for (var i= 0; i < this.Products.length;i++){
         this.pedido.cantidad.push(this.Products[i].amount);
-        this.pedido.productos.push(this.Products[i]._id);
+        this.pedido.productos.push(this.Products[i]);
         this.pedido.estado = 'En preparacion'
         this.pedido.usuario = {_id: '65d0ce0a267fbfbf43d25d7f', usuario: '', password: '', email: '', rol: {_id: '', name: ''}, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}; // --> Cambiado para evitar el error del model
         }
@@ -307,5 +315,10 @@ loadImage() {
     .then(base64 => this.base64Image = base64)
     .catch(error => console.error('Error loading image:', error));
 }
+  onCounterChange() {
+  this.total();
+  }
+
+
 
 }
