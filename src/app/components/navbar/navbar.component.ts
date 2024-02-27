@@ -54,6 +54,8 @@ export class NavbarComponent implements OnInit {
       localStorage.setItem('usuarioFoundId',res['usuarioFoundId']);
       localStorage.setItem('token',res['token']);
       localStorage.setItem('rol',res['usuarioFoundRol']);
+      localStorage.setItem('usuarioFoundNombre',res['usuarioFoundNombre']);
+      localStorage.setItem('usuarioFoundCuil',res['usuarioFoundCuil']);
       form.reset();
     },
     err => {
