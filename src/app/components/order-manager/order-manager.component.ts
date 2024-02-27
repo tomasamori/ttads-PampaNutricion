@@ -12,6 +12,8 @@ export class OrderManagerComponent {
 
   constructor(public pedidoService: PedidoService) { }
 
+  isCliente = false; 
+  
   selectedUser = {
     _id: '',
     usuario: '',
@@ -67,6 +69,7 @@ export class OrderManagerComponent {
   ngOnInit(): void {
     if (localStorage.getItem('rol') === 'cliente') {
       this.pedidoService.getPedidosByUser(localStorage.getItem('usuarioFoundId'));
+      this.isCliente = true;
     }
     else {
       this.pedidoService.getAllPedido();

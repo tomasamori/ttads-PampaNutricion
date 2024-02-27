@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm } from "@angular/forms";
 import { empty } from 'rxjs';
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -15,21 +16,33 @@ export class NavbarComponent implements OnInit {
   loginSuccess = false;
   forgotPasswordFormSuccess = false;
   errorMessage: string = "";
+  isCliente = false;
+  isAdmin = false;
+  isEmpleado = false;
   
-  
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
     if (localStorage.getItem('usuarioFoundId')){
       if (localStorage.getItem('token')){
       this.loginSuccess = true;
+      if (localStorage.getItem('rol') === 'cliente'){
+        this.isCliente = true; 
+      } else {
+        this.isCliente = false;
+        if (localStorage.getItem('rol') === 'admin'){
+          this.isAdmin = true;
+        } else{
+          this.isEmpleado = true;
+        }
+      }
       }
     }
   }
 
-  
   logOut(){
+    this.router.navigate(['/home']);
     localStorage.clear();
     this.loginSuccess = false;
   }

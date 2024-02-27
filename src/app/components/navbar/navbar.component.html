@@ -17,12 +17,23 @@
         <li class="nav-item ms-4">
           <a class="nav-link" href="/cart">Carrito</a>
         </li>
+        <li *ngIf="isAdmin" class="nav-item ms-4">
+            <a class="nav-link" href="/crud">ABMs</a>
+        </li>
       </ul>
     </div>
     
+
     <ul class="navbar-nav mx-auto">
-      <li *ngIf="loginSuccess" class="nav-item">
-        <button type="button" class="btn btn-dark text-white fs-5 me-5" (click)="logOut()">Cerrar Sesión</button>
+      <li *ngIf="loginSuccess" class="nav-item dropdown">
+        <a class="btn btn-dark text-white fs-5 me-5 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Opciones
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a *ngIf="isCliente" href="/order-manager"><button class="dropdown-item">Mis Pedidos</button></a>
+          <a *ngIf="!isCliente" href="/order-manager"><button class="dropdown-item">Gestor de Pedidos</button></a>
+          <button class="dropdown-item" (click)="logOut()">Cerrar Sesión</button>
+        </div>
       </li>
     </ul>
 
@@ -35,11 +46,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <!-- <ul class="navbar-nav mx-auto"> esto debería aparecer unicamente en el caso de que la cuenta tenga rol de administrador
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/crud">ABMs</a>
-      </li>
-    </ul> -->
+    
   
   </div>
 </nav>
