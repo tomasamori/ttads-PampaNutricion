@@ -7,6 +7,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { Pedido } from 'src/app/models/pedido';
 import { ToastrService } from 'ngx-toastr';
+import {UsuarioService} from 'src/app/services/usuario/usuario.service'
 
 @Component({
   selector: 'app-cart',
@@ -22,8 +23,7 @@ export class CartComponent implements OnInit {
   messageVisible = false;
   Total:Number = 0;
   SubTotal:Number=0;
-  //TpoObj:string ='1';
-  constructor(protected cartService:CartService,private router:Router,private toastr: ToastrService) { 
+  constructor(protected cartService:CartService,private router:Router,private toastr: ToastrService, private UsuService:UsuarioService) { 
     this.loadImage();
   }
 
@@ -37,13 +37,6 @@ export class CartComponent implements OnInit {
     total: 0, 
     nroPedido:0
   };
-
-  ngOnChanges(changes: SimpleChanges) {
-    if ('SubTotal' in changes) {
-      console.log('Nuevo valor de TpoObj:', this.SubTotal);
-      debugger;
-    }
-  }
 
   ngOnInit(): void {
     this.getAllProd();
@@ -122,7 +115,6 @@ export class CartComponent implements OnInit {
         this.pedido.subtotal = this.Subtotal;
         this.pedido.total = this.pedido.subtotal * 1.21;
       }
-      //return this.pedido
     }
     Totales(Products: Producto[]){
       this.Subtotal = 0;
@@ -153,7 +145,7 @@ export class CartComponent implements OnInit {
 createPDF(pedido, pro) {
   const productosPorPagina = 20;
   const totalProductos = pro.length;
-  const numPaginas = this.dividirRedondearArriba(totalProductos,productosPorPagina)//Math.ceil(totalProductos / productosPorPagina);
+  const numPaginas = this.dividirRedondearArriba(totalProductos,productosPorPagina);
 
   let documentDefinition = {
       pageSize: 'A4',
@@ -182,8 +174,7 @@ createPDF(pedido, pro) {
           `$${this.iva(producto.precio, producto.amount, producto.promo)}`,
           `$${this.total2(producto.precio, producto.amount, producto.promo)}`
       ]);
-
-      let invoiceheader = '\n' + 'Nro. Pedido: ' + pedido.nroPedido.toString().trim() + '\t\t\t\t\t\t\t\t\t' + '  Telefono: 03407 48-0936' + '\n\n' + 'Mail: pampanutricion@gmail.com' + '\t\t' + 'Fecha: ' + this.Date() + '\n\n' + 'Cuit: 30-71453418-8' + '\t\t\t\t\t\t\t\t' + 'Cliente: Alexis' + '\n\n' + 'Direccion: RN9 km 204, Ramallo, Provincia de Buenos Aires' + '\n' + '  ';
+      let invoiceheader = '\n' + 'Nro. Pedido: ' + pedido.nroPedido.toString().trim() + '\t\t\t\t\t\t\t\t\t\t' + ' Telefono: 03407 48-0936' + '\n\n' + 'Mail: pampanutricion@gmail.com' + '\t\t' + 'Fecha: ' + this.Date() + '\n\n' + 'Cuit: '+localStorage.getItem('usuarioFoundCuil').trim()+ '\t\t\t\t\t\t\t\t' + '  Cliente: '+ localStorage.getItem('usuarioFoundNombre').trim()+ '\n\n' + 'Direccion: RN9 km 204, Ramallo, Provincia de Buenos Aires' + '\n' + '  ';
 
       const tabla1 = {
           headerRows: 1,
@@ -258,7 +249,6 @@ createPDF(pedido, pro) {
 
       documentDefinition.content.push(...paginaContent);
 
-      // Agregar una nueva página al final de cada ciclo, excepto en la última iteración
       if (i < numPaginas - 1) {
           documentDefinition.content.push({ text: '', pageBreak: 'after' });
       }
@@ -267,10 +257,12 @@ createPDF(pedido, pro) {
   let name = 'Pedido-' + pedido.nroPedido.toString().trim();
   pdfMake.createPdf(documentDefinition).download(name);
   this.toastr.success('Su compra ha finalizado con éxito.');
+  //lo del tiempo se puede sacar
+  setTimeout(() => {
+    this.cartService.vaciarCarrito();
+  }, 2000);
+
 }
-
-
-
 
  
  dividirArrayEnSubarrays(array:Producto[], tamanoSubarray:number) {
@@ -280,7 +272,6 @@ createPDF(pedido, pro) {
   }
   return subarrays;
 }
-
 
 
 total2(precio:number,cantidad:number,promo:number){
@@ -318,7 +309,4 @@ loadImage() {
   onCounterChange() {
   this.total();
   }
-
-
-
 }
