@@ -5,8 +5,8 @@
 <div class="container">
   <div class="col">
     <div class="col">
-      <table class="table table-striped table-hover" id="tabla">
-        <thead class="table-responsive">
+      <table class="table table-bordered  table-hover" id="tabla">
+        <thead class="table-responsive thead-light">
           <tr>
             <th scope="col">Nombre</th>
             <th scope="col">CUIL</th>
@@ -54,7 +54,7 @@
                           <label for="cuil">CUIL:</label>
                           <input
                             [ngClass]="{'input-error': cuil.touched && !cuil.valid, 'input-success': cuil.valid && !cuil.errors}"
-                            type="text" name="cuil" #cuil="ngModel" class="form-control" placeholder="CUIL"
+                            type="number" name="cuil" #cuil="ngModel" class="form-control" placeholder="CUIL"
                             [(ngModel)]="usuarioService.selectedUsuario.cuil" required>
                           <div *ngIf="cuil.touched && !cuil.valid">
                             <div class="camposRequeridos" *ngIf="cuil.errors['required']"> -> CUIL es requerido</div>
@@ -143,6 +143,19 @@
                             requerido</div>
                         </div>
                       </div>
+                     <!--<div class="mi-elemento">
+                        <label for="rol">Rol:</label>
+                        <br>  
+                        <select id="dropdownList" [ngClass]="{'input-error': rol.touched && !rol.valid, 'input-success': rol.valid && !rol.errors}" [(ngModel)]="usuarioService.selectedUsuario.rol" #rol="ngModel" name="rol"
+                          class="form-control" placeholder="rol" required>
+                          <option *ngFor="let r of RolService.Roles" value="{{l._id}}">{{l.nombre}}
+                            {{l.codPostal}} </option>    
+                        </select>
+                        <i class="fas fa-chevron-down"></i>  Icono de flecha hacia abajo 
+                        <div *ngIf="localidad.touched && !localidad.valid">
+                          <div class="camposRequeridos" *ngIf="localidad.errors['required']"> -> Localidad es requerido</div>
+                        </div>
+                      </div>-->
 
                       <div *ngIf="InsertSuccess" class="overlay">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">

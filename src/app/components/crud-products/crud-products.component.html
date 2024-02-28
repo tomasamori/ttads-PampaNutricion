@@ -1,7 +1,6 @@
-
 <div class="Presentacion">
-<img id="imgPresentacion" src="assets/images/Producto.png" alt="">
-<h1>TRABAJAR CON PRODUCTO</h1>
+  <img id="imgPresentacion" src="assets/images/Producto.png" alt="">
+  <h1>TRABAJAR CON PRODUCTO</h1>
 </div>
 <div class="container">
   <div class="col">
@@ -18,10 +17,11 @@
             <th scope="col">Precio</th>
             <th scope="col">Promo</th>
             <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ProductModal"
-              (click)="resetForm(productForm)">Nuevo</button></th>
+                (click)="resetForm(productForm)">Nuevo</button></th>
           </tr>
           <!-- Modal -->
-          <div class="modal" id="ProductModal" #productModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal" id="ProductModal" #productModal tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog bg-transparent">
               <div class="modal-content">
                 <div class="modal-header bg-warning">
@@ -33,120 +33,150 @@
 
                 <!--Form-->
                 <form ngNativeValidate #productForm="ngForm" (ngSubmit)="addproduct(productForm)">
-                <div class="agrupaColumnas">
-                <div class="columna">
-                  <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProduct._id">
+                  <div class="agrupaColumnas">
+                    <div class="columna">
+                      <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProduct._id">
 
-                  <div class="col mi-fila">
-                    <div class="mi-elemento">
-                      <label for="nombre">Nombre:</label>
-                      <input [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}" type="text" name="nombre" #nombre="ngModel" [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese nombre producto" class="form-control" 
-                       required/>
-                      <div *ngIf="nombre.touched && !nombre.valid">
-                        <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> Nombre es requerido</div>
-                      </div>
-                    </div>
-
-                    <div class="mi-elemento">
-                      <label for="marca">Marca:</label>
-                      <input [ngClass]="{'input-error': marca.touched && !marca.valid, 'input-success': marca.valid && !marca.errors}" type="text" name="marca" #marca="ngModel" class="form-control" placeholder="Marca" [(ngModel)]="productoService.selectedProduct.marca" required>
-                      <div *ngIf="marca.touched && !marca.valid">
-                        <div class="camposRequeridos" *ngIf="marca.errors['required']"> -> Marca es requerido</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col mi-fila">
-                    <div class="mi-elemento">
-                      <label for="peso">Peso:</label>
-                      <input [ngClass]="{'input-error': peso.touched && !peso.valid, 'input-success': peso.valid && !peso.errors}" type="number" name="peso" #peso="ngModel" class="form-control" placeholder="Peso (Kg)"
-                        [(ngModel)]="productoService.selectedProduct.peso" required>
-                        <div *ngIf="peso.touched && !peso.valid">
-                          <div class="camposRequeridos" *ngIf="peso.errors['required']"> -> Peso es requerido</div>
-                        </div>
-                    </div>
-                    <div class="mi-elemento">
-                      <label for="precio">Precio:</label>
-                      <br>
-                      <input [ngClass]="{'input-error': precio.touched && !precio.valid, 'input-success': precio.valid && !precio.errors}" type="number" name="precio" #precio="ngModel" class="form-control" placeholder="Precio ($)"
-                        [(ngModel)]="productoService.selectedProduct.precio" required>
-                        <div *ngIf="precio.touched && !precio.valid">
-                          <div class="camposRequeridos" *ngIf="precio.errors['required']"> -> Precio es requerido</div>
-                        </div>
-                    </div>
-                  </div>
-
-                  <div class="col mi-fila">
-                    <div class="mi-elemento">
-                      <label for="tipoMascota">Tipo de Mascota:</label>
-                      <br>  
-                      <select id="dropdownList" [ngClass]="{'input-error': tipoMascota.touched && !tipoMascota.valid, 'input-success': tipoMascota.valid && !tipoMascota.errors}" [(ngModel)]="productoService.selectedProduct.tipoMascota._id" #tipoMascota="ngModel" name="tipoMascota"
-                        class="form-control" placeholder="Tipo de Mascota" required>
-                        <option *ngFor="let tm of tipoMascotasService.tipoMascotas" value="{{tm._id}}">{{tm.nombre}}
-                          {{tm.tamanoRaza}} {{tm.edad}}</option>    
-                      </select>
-                      <i class="fas fa-chevron-down"></i> <!-- Icono de flecha hacia abajo -->
-                      <div *ngIf="tipoMascota.touched && !tipoMascota.valid">
-                        <div class="camposRequeridos" *ngIf="tipoMascota.errors['required']"> -> Tipo de Mascota es requerido</div>
-                      </div>
-                    </div>
-                    <div class="mi-elemento">
-                      <div class="form-group">
-                        <label for="imgUrl">Imagen:</label>
-                        <input [ngClass]="{'input-error': imgUrl.touched && !imgUrl.valid, 'input-success': imgUrl.valid && !imgUrl.errors}" type="text" name="imgUrl" class="form-control"
-                          placeholder="Ingrese la imagen del producto"
-                          [(ngModel)]="productoService.selectedProduct.imgUrl" #imgUrl="ngModel" required>
-                          <div *ngIf="imgUrl.touched && !imgUrl.valid">
-                            <div class="camposRequeridos" *ngIf="imgUrl.errors['required']"> -> Imagen es requerido</div>
+                      <div class="col mi-fila">
+                        <div class="mi-elemento">
+                          <label for="nombre">Nombre:</label>
+                          <input
+                            [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
+                            type="text" name="nombre" #nombre="ngModel"
+                            [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese nombre producto"
+                            class="form-control" required />
+                          <div *ngIf="nombre.touched && !nombre.valid">
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> Nombre es requerido
+                            </div>
                           </div>
-                      </div>
-                    </div>
-                    <div class="mi-elemento">
-                      <div class="form-group">
-                        <label for="promo">Promo:</label>
-                        <input [ngClass]="{'input-error': promo.touched && !promo.valid, 'input-success': promo.valid && !promo.errors}" type="text" name="promo" class="form-control"
-                          placeholder="Ingrese porcentaje de descuento"
-                          [(ngModel)]="productoService.selectedProduct.promo" #promo="ngModel" required>
-                          <div *ngIf="promo.touched && !promo.valid">
-                            <div class="camposRequeridos" *ngIf="promo.errors['required']"> -> Promo es requerido</div>
+                        </div>
+
+                        <div class="mi-elemento">
+                          <label for="marca">Marca:</label>
+                          <input
+                            [ngClass]="{'input-error': marca.touched && !marca.valid, 'input-success': marca.valid && !marca.errors}"
+                            type="text" name="marca" #marca="ngModel" class="form-control" placeholder="Marca"
+                            [(ngModel)]="productoService.selectedProduct.marca" required>
+                          <div *ngIf="marca.touched && !marca.valid">
+                            <div class="camposRequeridos" *ngIf="marca.errors['required']"> -> Marca es requerido</div>
                           </div>
+                        </div>
+                      </div>
+                      <div class="col mi-fila">
+                        <div class="mi-elemento">
+                          <label for="peso">Peso:</label>
+                          <input
+                            [ngClass]="{'input-error': peso.touched && !peso.valid, 'input-success': peso.valid && !peso.errors}"
+                            type="number" name="peso" #peso="ngModel" class="form-control" placeholder="Peso (Kg)"
+                            [(ngModel)]="productoService.selectedProduct.peso" required>
+                          <div *ngIf="peso.touched && !peso.valid">
+                            <div class="camposRequeridos" *ngIf="peso.errors['required']"> -> Peso es requerido</div>
+                          </div>
+                        </div>
+                        <div class="mi-elemento">
+                          <label for="precio">Precio:</label>
+                          <br>
+                          <input
+                            [ngClass]="{'input-error': precio.touched && !precio.valid, 'input-success': precio.valid && !precio.errors}"
+                            type="number" name="precio" #precio="ngModel" class="form-control" placeholder="Precio ($)"
+                            [(ngModel)]="productoService.selectedProduct.precio" required>
+                          <div *ngIf="precio.touched && !precio.valid">
+                            <div class="camposRequeridos" *ngIf="precio.errors['required']"> -> Precio es requerido
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col mi-fila">
+                        <div class="mi-elemento">
+                          <label for="tipoMascota">Tipo de Mascota:</label>
+                          <br>
+                          <select id="dropdownList"
+                            [ngClass]="{'input-error': tipoMascota.touched && !tipoMascota.valid, 'input-success': tipoMascota.valid && !tipoMascota.errors}"
+                            [(ngModel)]="productoService.selectedProduct.tipoMascota._id" #tipoMascota="ngModel"
+                            name="tipoMascota" class="form-control" placeholder="Tipo de Mascota" required>
+                            <option *ngFor="let tm of tipoMascotasService.tipoMascotas" value="{{tm._id}}">{{tm.nombre}}
+                              {{tm.tamanoRaza}} {{tm.edad}}</option>
+                          </select>
+                          <i class="fas fa-chevron-down"></i> <!-- Icono de flecha hacia abajo -->
+                          <div *ngIf="tipoMascota.touched && !tipoMascota.valid">
+                            <div class="camposRequeridos" *ngIf="tipoMascota.errors['required']"> -> Tipo de Mascota es
+                              requerido</div>
+                          </div>
+                        </div>
+                        <div class="mi-elemento">
+                          <div class="form-group">
+                            <label for="imgUrl">Imagen:</label>
+                            <input
+                              [ngClass]="{'input-error': imgUrl.touched && !imgUrl.valid, 'input-success': imgUrl.valid && !imgUrl.errors}"
+                              type="text" name="imgUrl" class="form-control"
+                              placeholder="Ingrese la imagen del producto"
+                              [(ngModel)]="productoService.selectedProduct.imgUrl" #imgUrl="ngModel" required>
+                            <div *ngIf="imgUrl.touched && !imgUrl.valid">
+                              <div class="camposRequeridos" *ngIf="imgUrl.errors['required']"> -> Imagen es requerido
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mi-elemento">
+                          <div class="form-group">
+                            <label for="promo">Promo:</label>
+                            <input
+                              [ngClass]="{'input-error': promo.touched && !promo.valid, 'input-success': promo.valid && !promo.errors}"
+                              type="text" name="promo" class="form-control"
+                              placeholder="Ingrese porcentaje de descuento"
+                              [(ngModel)]="productoService.selectedProduct.promo" #promo="ngModel" required>
+                            <div *ngIf="promo.touched && !promo.valid">
+                              <div class="camposRequeridos" *ngIf="promo.errors['required']"> -> Promo es requerido
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="mi-elemento">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea
+                          [ngClass]="{'input-error': descripcion.touched && !descripcion.valid, 'input-success': descripcion.valid && !descripcion.errors}"
+                          name="descripcion" id="" class="form-control" placeholder="Descripción" cols="20" rows="4"
+                          [(ngModel)]="productoService.selectedProduct.descripcion" #descripcion="ngModel"
+                          required></textarea>
+                        <div *ngIf="descripcion.touched && !descripcion.valid">
+                          <div class="camposRequeridos" *ngIf="descripcion.errors['required']"> -> Descripcion es
+                            requerido</div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="InsertSuccess" class="overlay">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <img id="imgSuccess" src="assets/images/check.png" alt="">
+                          {{tituloModalSucces}}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            data-bs-dismiss="modal" (click)="ModalClose()"></button>
+                        </div>
+                      </div>
+
+
+
+                      <div *ngIf="errorMessage" class="custom-error-message">
+                        ¡Error!
+                        {{errorMessage}}
+                      </div>
+
+                    </div>
+                    <div class="columna">
+                      <div id="imgConteiner">
+                        <div class="imagen"
+                          [style.background-image]="'url(' + productoService.selectedProduct.imgUrl + ')'"
+                          *ngIf="productoService.selectedProduct.imgUrl"></div>
                       </div>
                     </div>
                   </div>
-
-                  <div class="mi-elemento">
-                    <label for="descripcion">Descripción:</label>
-                    <textarea [ngClass]="{'input-error': descripcion.touched && !descripcion.valid, 'input-success': descripcion.valid && !descripcion.errors}" name="descripcion" id="" class="form-control" placeholder="Descripción" cols="20" rows="4"
-                      [(ngModel)]="productoService.selectedProduct.descripcion" #descripcion="ngModel" required></textarea>
-                      <div *ngIf="descripcion.touched && !descripcion.valid">
-                        <div class="camposRequeridos" *ngIf="descripcion.errors['required']"> -> Descripcion es requerido</div>
-                      </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                      (click)="cancel()">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
                   </div>
-                  
-                  <div *ngIf="InsertSuccess" class="overlay">  
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                      {{tituloModalSucces}}
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-bs-dismiss="modal" (click)="ModalClose()"></button>
-                    </div>
-                  </div>
-
-
-
-                <div *ngIf="errorMessage" class="custom-error-message">
-                  ¡Error!
-                  {{errorMessage}}
-                </div>
-
-                </div>
-                <div class="columna">
-                <div id="imgConteiner">
-                  <div class="imagen" [style.background-image]="'url(' + productoService.selectedProduct.imgUrl + ')'" *ngIf="productoService.selectedProduct.imgUrl"></div>
-                </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancel()">Cancelar</button>
-                <button type="submit" class="btn btn-success">Guardar</button>
-              </div>
                 </form>
               </div>
             </div>

@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalidadService } from 'src/app/services/localidad/localidad.service';
-import { Localidad } from 'src/app/models/localidad';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
+import { Proveedor } from 'src/app/models/proveedor';
 import { NgForm } from "@angular/forms";
 
 
 
 
 @Component({
-  selector: 'app-crud-localidad',
-  templateUrl: './crud-localidad.component.html',
-  styleUrls: ['./crud-localidad.component.css']
+  selector: 'app-crud-proveedor',
+  templateUrl: './crud-proveedor.component.html',
+  styleUrls: ['./crud-proveedor.component.css']
 })
-export class CrudLocalidadComponent implements OnInit {
+export class CrudProveedorComponent implements OnInit {
 
-  constructor(public LocalidadService: LocalidadService) { }
+  constructor(public ProveedorService: ProveedorService) { }
   DependencyError =false;
   InsertSuccess =false;
   errorMessage: string = "";
 
   
   ngOnInit(): void {
-    this.getLocalidad(); 
+    this.getProveedor(); 
     this.InsertSuccess =false;
   }
 
@@ -28,28 +28,28 @@ export class CrudLocalidadComponent implements OnInit {
   resetForm(form: NgForm) {
   
     form.reset();
-    this.getLocalidad();
-    this.cambiarTituloModal("NUEVA LOCALIDAD");
-    this.cambiarTituloModalSuccess("Localidad Creada con Exito!")
+    this.getProveedor();
+    this.cambiarTituloModal("NUEVO PROVEEDOR");
+    this.cambiarTituloModalSuccess("Proveedor Creado con Exito!")
 
   }
 
-  getLocalidad() {
-    this.LocalidadService.getAllLocalidades().subscribe(
+  getProveedor() {
+    this.ProveedorService.getAllProveedores().subscribe(
       (res) => {
-        this.LocalidadService.Localidades = res;
+        this.ProveedorService.Proveedores = res;
       },
       err => console.log(err)
     )
   }
 
-  addLocalidad(form: NgForm) {
+  addProveedor(form: NgForm) {
     this.InsertSuccess = false;
     if (form.value._id) {
-      this.LocalidadService.updateLocalidad(form.value).subscribe(
+      this.ProveedorService.updateProveedor(form.value).subscribe(
         res => {
         console.log(res);
-        this.getLocalidad();
+        this.getProveedor();
         this.InsertSuccess = true;   
       },
         err => {
@@ -63,9 +63,9 @@ export class CrudLocalidadComponent implements OnInit {
       )
         
         } else {
-      this.LocalidadService.createLocalidad(form.value).subscribe(
+      this.ProveedorService.createProveedor(form.value).subscribe(
         res => {
-          this.getLocalidad();
+          this.getProveedor();
           form.reset();
           this.InsertSuccess = true;
         },
@@ -83,27 +83,24 @@ export class CrudLocalidadComponent implements OnInit {
   }
 
 
-  deleteLocalidad(id: string) {
-  if (!this.LocalidadService.findSucursalByLocalidad(id)){
+  deleteProveedor(id: string) {
     if (confirm('Seguro quieres eliminar esta localidad?')) {
-      this.LocalidadService.deleteLocalidad(id).subscribe(
+      this.ProveedorService.deleteProveedor(id).subscribe(
         (res) => {
-          this.getLocalidad();
+          this.getProveedor();
         },
         (err) => console.error(err)
       );
     }
-  } else {
-    this.DependencyError = true;
   }
 
-  }
+  
 
-  editLocalidad(localidad: Localidad) {
+  editProveedor(proveedor: Proveedor) {
    
-    this.cambiarTituloModal("EDITAR LOCALIDAD");
-    this.cambiarTituloModalSuccess("Localidad Actualizada con Exito!")
-    this.LocalidadService.selectedLocalidad = localidad;
+    this.cambiarTituloModal("EDITAR PROVEEDOR");
+    this.cambiarTituloModalSuccess("Proveedor Actualizado con Exito!")
+    this.ProveedorService.selectedProveedor = proveedor;
   }
 
 
@@ -121,7 +118,7 @@ export class CrudLocalidadComponent implements OnInit {
 }
 
  cancel() {
-  this.getLocalidad();
+  this.getProveedor();
 }
 
   ModalClose(){

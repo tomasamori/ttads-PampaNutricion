@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Storelocator } from "../../models/store-locator";
 import { environment } from "../../../environments/environment";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreLocatorService {
   URL_API = environment.URL_SUCURSAL;
-  selectedTipoMascota: Storelocator = {
+  selectedSucursal: Storelocator = {
     nombre: '',
     direccion: '',
     foto: '',

@@ -18,6 +18,7 @@ export class LocalidadService {
 
   constructor(private http: HttpClient) { }
   Localidades: Localidad[];
+  
 
   getAllLocalidades() {
     return this.http.get<Localidad[]>(this.URL_API);
@@ -37,5 +38,9 @@ export class LocalidadService {
 
   getRecordById(_id: String): Observable<Localidad>{
     return this.http.get<Localidad>(`${this.URL_API}/${_id}`);
+  }
+
+  findSucursalByLocalidad(id: string) {
+    return this.http.get<boolean>(`${this.URL_API}/localidad/${id}/sucursales`);
   }
 }

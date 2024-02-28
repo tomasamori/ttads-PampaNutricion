@@ -10,7 +10,9 @@ export const environment = {
   URL_AUTH: 'http://localhost:3000/api/v1/auth',
   URL_PEDIDO: 'http://localhost:3000/api/v1/pedido',
   URL_USUARIO:'http://localhost:3000/api/v1/usuario',
-  URL_LOCALIDAD:'http://localhost:3000/api/v1/localidad'
+  URL_LOCALIDAD:'http://localhost:3000/api/v1/localidad',
+  URL_ROL:'http://localhost:3000/api/v1/rol',
+  URL_PROVEEDOR:'http://localhost:3000/api/v1/proveedor'
 };
 
 /*

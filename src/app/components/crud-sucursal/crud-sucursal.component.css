@@ -77,8 +77,6 @@ h1 {
   
 }
 
-
-
 .agrupaColumnas {
   display: flex;
 }
@@ -89,15 +87,15 @@ h1 {
   /* Ajusta otros estilos según sea necesario */
 }
 .imagen {
-  width: 300px; /* Ancho de la imagen */
-  height: 300px; /* Altura de la imagen */
+  width: 150px; /* Ancho de la imagen */
+  height: 150px; /* Altura de la imagen */
   background-size: contain; /* Ajusta el tamaño de la imagen para cubrir todo el div */
   background-repeat: no-repeat;
   background-position-y: center; /* Centra la imagen verticalmente */
-  margin-bottom: 50%;
-  margin-top: 60%;
+  margin-bottom: auto;
+  margin-top: 20%;
   background-position: center; /* Centra la imagen */
-  margin-left: 25px;
+  margin-left: 30px;
   margin-right: auto;
 }
 #imgConteiner .imagen {
@@ -126,7 +124,6 @@ h1 {
   justify-content: center;
   z-index: 1050; 
 }
-
 
 .alert {
   max-width: 400px;
