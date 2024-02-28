@@ -21,8 +21,6 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
 import { CartComponent } from './components/cart/cart.component';
-import { CartCardComponent } from './components/cart-card/cart-card.component';
-import { CartCounterComponent } from './components/cart-counter/cart-counter.component';
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -31,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 import { DatePipe } from '@angular/common';
-
 
 @NgModule({
   declarations: [
@@ -52,8 +49,6 @@ import { DatePipe } from '@angular/common';
     FooterComponent,
     StoreLocatorComponent,
     StoreLocatorCardComponent,
-    CartCounterComponent,
-    CartCardComponent,
     CartComponent,
     ResetPasswordComponent,
     OrderManagerComponent
@@ -67,12 +62,14 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule, 
     ToastrModule.forRoot(
       {
-        positionClass: 'toast-top-center'
+        positionClass: 'toast-top-center',
+        maxOpened:3,
+        autoDismiss: true
       }
-    )
+    ),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

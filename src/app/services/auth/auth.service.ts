@@ -17,7 +17,7 @@ export class AuthService {
     usuario: '',
     password: '',
     email: '',
-    rol: [],
+    rol: {_id: '', name: ''},
     cuil: '',
     nombre: '',
     fechaNacimiento: new Date(),

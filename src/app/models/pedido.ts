@@ -6,7 +6,7 @@ export interface Pedido {
     usuario: string,
     password: string,
     email: string,
-    rol: string[], 
+    rol: {_id: string, name: string}, 
     cuil: string,
     nombre: string,
     fechaNacimiento: Date,

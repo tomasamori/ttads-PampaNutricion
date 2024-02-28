@@ -12,12 +12,14 @@ export class OrderManagerComponent {
 
   constructor(public pedidoService: PedidoService) { }
 
+  isCliente = false; 
+  
   selectedUser = {
     _id: '',
     usuario: '',
     password: '',
     email: '',
-    rol: [''],
+    rol: { _id: '', name: ''},
     cuil: '',
     nombre: '',
     fechaNacimiento: new Date(),
@@ -41,7 +43,7 @@ export class OrderManagerComponent {
   selectedOrder = {
     _id: '',
     nroPedido: 0,
-    usuario: {usuario: '', password: '', email: '', rol: [''], cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''},
+    usuario: { usuario: '', password: '', email: '', rol: {_id: '', name: ''}, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: '' },
     productos: [],
     cantidad: [],
     subtotal: 0,
@@ -65,25 +67,32 @@ export class OrderManagerComponent {
   estados: string[] = ['Pendiente', 'En preparación', 'Preparado', 'Entregado'];
 
   ngOnInit(): void {
-    this.pedidoService.getAllPedido();
+    if (localStorage.getItem('rol') === 'cliente') {
+      this.pedidoService.getPedidosByUser(localStorage.getItem('usuarioFoundId'));
+      this.isCliente = true;
+    }
+    else {
+      this.pedidoService.getAllPedido();
+    }
   }
 
   updateOrder(nroPedido: number) {
     const orderToUpdate = this.pedidoService.pedidos.find(order => order.nroPedido === nroPedido);
     if (orderToUpdate) {
-      this.pedidoService.updatePedido(orderToUpdate).subscribe(
-        () => {},
-        err => console.log(err)
-      );
+      this.pedidoService.updatePedido(orderToUpdate)
     }
   }
 
   deleteOrder(id: string) {
-    this.pedidoService.deletePedido(id).subscribe(
-      (res) => {
-        this.pedidoService.getAllPedido();
-      },
-      err => console.log(err)
-    )
+    const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este pedido?');
+    if (confirmDelete) {
+      this.pedidoService.deletePedido(id).subscribe(
+        (res) => {
+          this.pedidoService.getAllPedido();
+        },
+        err => console.log(err)
+      )
+    }
   }
+
 }

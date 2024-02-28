@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm } from "@angular/forms";
 import { empty } from 'rxjs';
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -12,34 +13,49 @@ import { empty } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   registrationSuccess = false;
+  loginSuccess = false;
   forgotPasswordFormSuccess = false;
   errorMessage: string = "";
+  isCliente = false;
+  isAdmin = false;
+  isEmpleado = false;
   
-  
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
     if (localStorage.getItem('usuarioFoundId')){
       if (localStorage.getItem('token')){
-      this.registrationSuccess = true;
+      this.loginSuccess = true;
+      if (localStorage.getItem('rol') === 'cliente'){
+        this.isCliente = true; 
+      } else {
+        this.isCliente = false;
+        if (localStorage.getItem('rol') === 'admin'){
+          this.isAdmin = true;
+        } else{
+          this.isEmpleado = true;
+        }
+      }
       }
     }
   }
 
-  
   logOut(){
+    this.router.navigate(['/home']);
     localStorage.clear();
-    this.registrationSuccess = false;
+    this.loginSuccess = false;
   }
   
   login(form: NgForm) {
     this.authService.login(form.value)
     .subscribe(res => {
-      console.log(res);
-      this.registrationSuccess = true;
+      this.loginSuccess = true;
       localStorage.setItem('usuarioFoundId',res['usuarioFoundId']);
       localStorage.setItem('token',res['token']);
+      localStorage.setItem('rol',res['usuarioFoundRol']);
+      localStorage.setItem('usuarioFoundNombre',res['usuarioFoundNombre']);
+      localStorage.setItem('usuarioFoundCuil',res['usuarioFoundCuil']);
       form.reset();
     },
     err => {
@@ -59,9 +75,7 @@ export class NavbarComponent implements OnInit {
     this.authService.register(form.value)
       .subscribe(res => {
         form.reset();
-        console.log(res['token']); // acá va a mostrar el token que vuelve del back. habría que guardar el token en el local storage y redirigir al usuario a la home logueado (luego usar ese token para hacer peticiones al back y que el back sepa que el usuario está logueado)
         this.registrationSuccess = true;
-        debugger;
       },
       err => {
         console.log(err);

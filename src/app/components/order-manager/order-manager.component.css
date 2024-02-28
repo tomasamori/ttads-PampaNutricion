@@ -1,0 +1,13 @@
+.listfs {
+    background: rgb(235,102,25);
+    background: linear-gradient(356deg, rgba(235,102,25,0.7035189075630253) 0%, rgba(235,102,25,0.804359243697479) 25%, rgba(235,102,25,0.896796218487395) 50%, rgba(235,102,25,0.8015581232492998) 75%, rgba(235,102,25,0.700717787114846) 100%);
+}
+
+.listfs h1 {
+    font-family: 'russooneregular';
+}
+
+.modal-header {
+    background-color: #ee6e25;
+    color: #ffffff
+  }

@@ -17,7 +17,7 @@ export class UsuarioService {
         usuario: '',
         password: '',
         email: '',
-        rol: [''],
+        rol: {_id: '', name: ''},
         cuil: '',
         nombre: '',
         fechaNacimiento: new Date(),
