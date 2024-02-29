@@ -109,7 +109,7 @@ export class CartComponent implements OnInit {
         this.pedido.cantidad.push(this.Products[i].amount);
         this.pedido.productos.push(this.Products[i]);
         this.pedido.estado = 'En preparacion'
-        this.pedido.usuario = {_id: '65d0ce0a267fbfbf43d25d7f', usuario: '', password: '', email: '', rol: {_id: '', name: ''}, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}; // --> Cambiado para evitar el error del model
+        this.pedido.usuario = {_id: localStorage.getItem('usuarioFoundId'), usuario: '', password: '', email: '', rol: {_id: '', name: ''}, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}; // --> Cambiado para evitar el error del model
         }
         this.Totales(this.Products);
         this.pedido.subtotal = this.Subtotal;
