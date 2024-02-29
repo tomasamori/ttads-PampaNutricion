@@ -29,7 +29,6 @@ export class CrudProductsComponent implements OnInit {
 
 
   resetForm(form: NgForm) {
-  
     form.reset();
     this.getProducts();
     this.getTypesOfPets();

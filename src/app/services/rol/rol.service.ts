@@ -12,7 +12,7 @@ export class RolService {
   URL_API = environment.URL_ROL;
 
   selectedRol: Rol = {
-  nombre: ''
+  name: ''
   };
 
   constructor(private http: HttpClient) { }

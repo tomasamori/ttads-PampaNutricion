@@ -45,7 +45,7 @@
                             [(ngModel)]="usuarioService.selectedUsuario.nombre" placeholder="Ingrese nombre del usuario"
                             class="form-control" required />
                           <div *ngIf="nombre.touched && !nombre.valid">
-                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> Nombre es requerido
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *
                             </div>
                           </div>
                         </div>
@@ -57,7 +57,7 @@
                             type="number" name="cuil" #cuil="ngModel" class="form-control" placeholder="CUIL"
                             [(ngModel)]="usuarioService.selectedUsuario.cuil" required>
                           <div *ngIf="cuil.touched && !cuil.valid">
-                            <div class="camposRequeridos" *ngIf="cuil.errors['required']"> -> CUIL es requerido</div>
+                            <div class="camposRequeridos" *ngIf="cuil.errors['required']"> CUIL es requerido *</div>
                           </div>
                         </div>
                       </div>
@@ -70,8 +70,8 @@
                             placeholder="fechaNacimiento"
                             [ngModel]="formatDate(usuarioService.selectedUsuario.fechaNacimiento)" required>
                           <div *ngIf="fechaNacimiento.touched && !fechaNacimiento.valid">
-                            <div class="camposRequeridos" *ngIf="fechaNacimiento.errors['required']"> -> Fecha de
-                              Nacimiento es requerido</div>
+                            <div class="camposRequeridos" *ngIf="fechaNacimiento.errors['required']"> Fecha de
+                              Nacimiento es requerido *</div>
                           </div>
                         </div>
                         <div class="mi-elemento">
@@ -82,7 +82,7 @@
                             type="email" name="email" #email="ngModel" class="form-control" placeholder="E-mail"
                             [(ngModel)]="usuarioService.selectedUsuario.email" [disabled]="isDisabled" required>
                           <div *ngIf="email.touched && !email.valid">
-                            <div class="camposRequeridos" *ngIf="email.errors['required']"> -> Email es requerido
+                            <div class="camposRequeridos" *ngIf="email.errors['required']"> Email es requerido *
                             </div>
                           </div>
                         </div>
@@ -97,7 +97,7 @@
                             type="text" name="usuario" #usuario="ngModel" class="form-control" placeholder="Usuario"
                             [(ngModel)]="usuarioService.selectedUsuario.usuario" [disabled]="isDisabled" required>
                           <div *ngIf="usuario.touched && !usuario.valid">
-                            <div class="camposRequeridos" *ngIf="usuario.errors['required']"> -> Usuario es requerido
+                            <div class="camposRequeridos" *ngIf="usuario.errors['required']"> Usuario es requerido *
                             </div>
                           </div>
                         </div>
@@ -110,8 +110,8 @@
                               [(ngModel)]="usuarioService.selectedUsuario.password" #password="ngModel"
                               [disabled]="isDisabled" required>
                             <div *ngIf="password.touched && !password.valid">
-                              <div class="camposRequeridos" *ngIf="password.errors['required']"> -> Contraseña es
-                                requerido
+                              <div class="camposRequeridos" *ngIf="password.errors['required']"> Contraseña es
+                                requerido *
                               </div>
                             </div>
                           </div>
@@ -121,11 +121,11 @@
                             <label for="direccion">Dirección:</label>
                             <input
                               [ngClass]="{'input-error': direccion.touched && !direccion.valid, 'input-success': direccion.valid && !direccion.errors}"
-                              type="text" name="dirección" class="form-control" placeholder="Ingrese su dirección"
+                              type="text" name="direccion" class="form-control" placeholder="Ingrese su Dirección"
                               [(ngModel)]="usuarioService.selectedUsuario.direccion" #direccion="ngModel" required>
                             <div *ngIf="direccion.touched && !direccion.valid">
-                              <div class="camposRequeridos" *ngIf="direccion.errors['required']"> -> Dirección es
-                                requerido
+                              <div class="camposRequeridos" *ngIf="direccion.errors['required']"> Dirección es
+                                requerido *
                               </div>
                             </div>
                           </div>
@@ -136,30 +136,40 @@
                         <label for="telefono">Teléfono:</label>
                         <input
                           [ngClass]="{'input-error': telefono.touched && !telefono.valid, 'input-success': telefono.valid && !telefono.errors}"
-                          type="tel" name="telefono" id="telefono" class="form-control" placeholder="Teléfono"
+                          type="number" name="telefono" id="telefono" class="form-control" placeholder="Teléfono"
                           [(ngModel)]="usuarioService.selectedUsuario.telefono" #telefono="ngModel" required>
                         <div *ngIf="telefono.touched && !telefono.valid">
-                          <div class="camposRequeridos" *ngIf="telefono.errors['required']"> -> Telefono es
-                            requerido</div>
+                          <div class="camposRequeridos" *ngIf="telefono.errors['required']"> Teléfono es
+                            requerido *</div>
                         </div>
                       </div>
-                     <!--<div class="mi-elemento">
+
+                      <div class="mi-elemento">
                         <label for="rol">Rol:</label>
-                        <br>  
-                        <select id="dropdownList" [ngClass]="{'input-error': rol.touched && !rol.valid, 'input-success': rol.valid && !rol.errors}" [(ngModel)]="usuarioService.selectedUsuario.rol" #rol="ngModel" name="rol"
-                          class="form-control" placeholder="rol" required>
-                          <option *ngFor="let r of RolService.Roles" value="{{l._id}}">{{l.nombre}}
-                            {{l.codPostal}} </option>    
+                        <br>
+                        <select id="dropdownList"
+                          [ngClass]="{'input-error': rol.touched && !rol.valid, 'input-success': rol.valid && !rol.errors}"
+                          [(ngModel)]="usuarioService.selectedUsuario.rol._id" #rol="ngModel" name="rol"
+                          class="form-control" placeholder="Ingrese Rol" required>
+                          <option value="" selected>Selecciona una opción...</option>
+                          <option value="63fc93ec351253e5804f3354">empleado</option>
+                          <option value="63fc93ec351253e5804f3353">cliente</option>
+                          <option value="63fc93ec351253e5804f3355">admin</option>
                         </select>
-                        <i class="fas fa-chevron-down"></i>  Icono de flecha hacia abajo 
-                        <div *ngIf="localidad.touched && !localidad.valid">
-                          <div class="camposRequeridos" *ngIf="localidad.errors['required']"> -> Localidad es requerido</div>
+
+                        <div *ngIf="rol.touched && !rol.valid">
+                          <div class="camposRequeridos" *ngIf="rol.errors['required']"> Rol es
+                            requerido *</div>
                         </div>
-                      </div>-->
+                      </div>
+
+
+
 
                       <div *ngIf="InsertSuccess" class="overlay">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                          {{tituloModalSucces}}
+                        <div class="alert alert-success alert-dismissible fade show" id="SuccesContainer" role="alert">
+                          <div class="SuccessItems"><img id="imgSuccess" src="assets/images/check.png" alt=""></div>
+                          <div class="SuccessItems">{{tituloModalSucces}}</div>
                           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                             data-bs-dismiss="modal" (click)="ModalClose()"></button>
                         </div>
@@ -195,7 +205,7 @@
             <td>{{u.usuario}}</td>
             <td>{{u.direccion}}</td>
             <td>{{u.telefono}}</td>
-            <td>{{u.rol}}</td>
+            <td>{{u.rol.name}}</td>
             <td>
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#UsuarioModal"
                 (click)="editUsuario(u)">

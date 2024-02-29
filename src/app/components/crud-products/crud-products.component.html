@@ -43,7 +43,7 @@
                           <input
                             [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
                             type="text" name="nombre" #nombre="ngModel" maxlength="50"
-                            [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese nombre producto"
+                            [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese Nombre Producto"
                             (input)="onInputChange($event)" class="form-control" required />
                           <div *ngIf="nombre.touched && !nombre.valid">
                             <div class="camposRequeridos" *ngIf="nombre.errors['required']">Nombre es requerido *
@@ -55,7 +55,7 @@
                           <label for="marca">Marca:</label>
                           <input
                             [ngClass]="{'input-error': marca.touched && !marca.valid, 'input-success': marca.valid && !marca.errors}"
-                            type="text" name="marca" #marca="ngModel" class="form-control" placeholder="Marca"
+                            type="text" name="marca" #marca="ngModel" class="form-control" placeholder="Ingrese Marca"
                             [(ngModel)]="productoService.selectedProduct.marca" required>
                           <div *ngIf="marca.touched && !marca.valid">
                             <div class="camposRequeridos" *ngIf="marca.errors['required']"> Marca es requerido *</div>
@@ -67,7 +67,7 @@
                           <label for="peso">Peso:</label>
                           <input
                             [ngClass]="{'input-error': peso.touched && !peso.valid, 'input-success': peso.valid && !peso.errors}"
-                            type="number" name="peso" #peso="ngModel" class="form-control" placeholder="Peso (Kg)"
+                            type="number" name="peso" #peso="ngModel" class="form-control" placeholder="Ingrese Peso (Kg)"
                             maxlength="5" [(ngModel)]="productoService.selectedProduct.peso" min="0" max="999" required>
                           <div *ngIf="peso.touched && !peso.valid">
                             <div class="camposRequeridos" *ngIf="peso.errors['required']"> Peso es requerido *</div>
@@ -80,7 +80,7 @@
                           <br>
                           <input
                             [ngClass]="{'input-error': precio.touched && !precio.valid, 'input-success': precio.valid && !precio.errors}"
-                            type="number" name="precio" #precio="ngModel" class="form-control" placeholder="Precio ($)"
+                            type="number" name="precio" #precio="ngModel" class="form-control" placeholder="Ingrese Precio ($)"
                             [(ngModel)]="productoService.selectedProduct.precio" min="0" max="9999999" required>
                           <div *ngIf="precio.touched && !precio.valid">
                             <div class="camposRequeridos" *ngIf="precio.errors['required']"> Precio es requerido *</div>
@@ -97,7 +97,7 @@
                           <select id="dropdownList"
                             [ngClass]="{'input-error': tipoMascota.touched && !tipoMascota.valid, 'input-success': tipoMascota.valid && !tipoMascota.errors}"
                             [(ngModel)]="productoService.selectedProduct.tipoMascota._id" #tipoMascota="ngModel"
-                            name="tipoMascota" class="form-control" placeholder="Tipo de Mascota" required>
+                            name="tipoMascota" class="form-control" placeholder="Ingrese Tipo de Mascota" required>
                             <option value="">Selecciona una opción...</option>
                             <option *ngFor="let tm of tipoMascotasService.tipoMascotas" value="{{tm._id}}">{{tm.nombre}}
                               {{tm.tamanoRaza}} {{tm.edad}}</option>
@@ -114,7 +114,7 @@
                             <input
                               [ngClass]="{'input-error': imgUrl.touched && !imgUrl.valid, 'input-success': imgUrl.valid && !imgUrl.errors}"
                               type="text" name="imgUrl" class="form-control"
-                              placeholder="Ingrese la imagen del producto"
+                              placeholder="Ingrese la Imagen del Producto"
                               [(ngModel)]="productoService.selectedProduct.imgUrl" #imgUrl="ngModel" required>
                             <div *ngIf="imgUrl.touched && !imgUrl.valid">
                               <div class="camposRequeridos" *ngIf="imgUrl.errors['required']"> Imagen es requerido *
@@ -128,7 +128,7 @@
                             <input
                               [ngClass]="{'input-error': promo.touched && !promo.valid, 'input-success': promo.valid && !promo.errors}"
                               type="number" name="promo" class="form-control"
-                              placeholder="Ingrese porcentaje de descuento"
+                              placeholder="Ingrese Porcentaje(%) de Descuento"
                               [(ngModel)]="productoService.selectedProduct.promo" #promo="ngModel" min="0" max="99"
                               required>
                             <div *ngIf="promo.touched && !promo.valid">
@@ -144,7 +144,7 @@
                         <label for="descripcion">Descripción:</label>
                         <textarea
                           [ngClass]="{'input-error': descripcion.touched && !descripcion.valid, 'input-success': descripcion.valid && !descripcion.errors}"
-                          name="descripcion" id="" class="form-control" placeholder="Descripción" cols="20" rows="4"
+                          name="descripcion" id="" class="form-control" placeholder="Ingrese Descripción" cols="20" rows="4"
                           [(ngModel)]="productoService.selectedProduct.descripcion" #descripcion="ngModel"
                           required></textarea>
                         <div *ngIf="descripcion.touched && !descripcion.valid">

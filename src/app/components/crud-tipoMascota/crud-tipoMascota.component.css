@@ -10,7 +10,9 @@ h1 {
   border: none; /* Elimina cualquier borde predefinido */
   border-bottom: 3px solid #ee7f3f; /* Añade una línea de un píxel de grosor debajo del campo */
   outline: none; /* Elimina el contorno cuando el campo está enfocado */
+  
 }
+
 
 .Presentacion{
   display: flex;
@@ -26,7 +28,7 @@ h1 {
         font-weight: bold;
         color: #ffffff;
         background-color: #ee7f3f;
-        margin-left:20%;
+        text-align: center;
 }
 
 .dropdown i {
@@ -76,6 +78,7 @@ h1 {
     display: block;
     flex-wrap:wrap-reverse; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
     gap: 10px; /* Espacio entre los elementos en la misma línea */
+    padding: 20px;
 }
 
 #ProductModal .mi-elemento {
