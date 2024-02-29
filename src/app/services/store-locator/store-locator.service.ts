@@ -28,7 +28,7 @@ export class StoreLocatorService {
     }
   
     updateStorelocator(storelocator : Storelocator){
-      return this.http.put(`${this.URL_API}/${storelocator.direccion}`, storelocator);
+      return this.http.put(`${this.URL_API}/${storelocator._id}`, storelocator);
     }
   
     deleteStorelocator(direccion:string){
