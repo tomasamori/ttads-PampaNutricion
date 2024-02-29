@@ -9,7 +9,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
   styleUrls: ['./order-manager.component.css']
 })
 export class OrderManagerComponent {
-
+  
   constructor(public pedidoService: PedidoService) { }
 
   isCliente = false; 
@@ -66,6 +66,8 @@ export class OrderManagerComponent {
 
   estados: string[] = ['Pendiente', 'En preparación', 'Preparado', 'Entregado'];
 
+  
+  
   ngOnInit(): void {
     if (localStorage.getItem('rol') === 'cliente') {
       this.pedidoService.getPedidosByUser(localStorage.getItem('usuarioFoundId'));
@@ -75,6 +77,7 @@ export class OrderManagerComponent {
       this.pedidoService.getAllPedido();
     }
   }
+
 
   updateOrder(nroPedido: number) {
     const orderToUpdate = this.pedidoService.pedidos.find(order => order.nroPedido === nroPedido);

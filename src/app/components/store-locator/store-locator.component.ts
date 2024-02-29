@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreLocatorService } from 'src/app/services/store-locator/store-locator.service';
+
 
 @Component({
   selector: 'app-store-locator',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreLocatorComponent implements OnInit {
 
-  constructor() { }
-
+  constructor( public storeLocatorService: StoreLocatorService) { }
+  
   ngOnInit(): void {
+    this.getSucursal();
+  }
+
+  getSucursal() {
+    this.storeLocatorService.getAllStorelocator().subscribe(
+      (res) => {
+        this.storeLocatorService.storeLocators = res;
+      },
+      err => console.log(err)
+    )
   }
 
 }

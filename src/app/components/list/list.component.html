@@ -74,7 +74,7 @@
         </div>
       </form>
     </div>
-    <div *ngFor="let p of productoService.productos | listFilter: filterProduct.toLowerCase()">
+    <div *ngFor="let p of productoService.productos | listFilter: filterProduct.toLowerCase()  | paginate: { itemsPerPage: 5, currentPage: p }">
       <app-product-card
         _id="{{p._id}}"
         brand="{{p.marca}}"
@@ -91,5 +91,10 @@
         >
       </app-product-card>
     </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
+    <br>
   </div>  
 </div>

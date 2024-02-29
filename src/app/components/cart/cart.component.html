@@ -1,11 +1,19 @@
 <div class="navc">
     <div class="container-fluid">
       <div *ngIf="(cartService.getAllCarrito().length)==0">
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="contenedor imagen">
           <a href="/products" class="imagen"> 
             <img class="imagen" src="https://i.pinimg.com/564x/55/26/8c/55268c6a3e4ce1823888c9825eac5c5e.jpg" alt="Imagen Centrada" > 
           </a>
         </div> 
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
       <div *ngIf="(cartService.getAllCarrito().length)>0">
         <div class="DetalleP">

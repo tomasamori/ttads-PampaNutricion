@@ -54,3 +54,13 @@ a:hover {
 .ng-invalid:not(form).ng-touched {
   border-left: 5px solid #a94442;
 }
+
+.icono-circular {
+  width: 30px; /* Ajusta el ancho deseado de la imagen */
+  height: 30px; /* Ajusta la altura deseada de la imagen */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  margin-right: 5px; /* Ajusta el margen derecho según tus necesidades */
+}
+
+
+

@@ -2,6 +2,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="fs">
+            <!--Encabezado-->
+
+            <br>
+            <div  class="contenedor">
+                <div class="texto">Somos Pampa Nutrición</div>
+            </div>
+
+            <!--Fin Encabezado-->            
+
             <!--Historia-->
             <div class="row align-items-center">
                 <div class="col-12 col-md-9 col-lg-5 text">
@@ -9,26 +18,13 @@
                         <h1 class="text-white lh-base fst-normal mt-4">
                             Nuestra Historia
                         </h1>
-                        <p class="fst-normal mt-4 fs-5 lead">
-                            Pampa Nutrición es una empresa que nació en una pequeña ciudad llamada Villa
-                            Ramallo, vendiendo y distribuyendo alimentos de forma minorista para mascotas a
-                            los pueblos cercanos a la localidad, como La Violeta, San Pedro, Ramallo, San
-                            Nicolás, entre otros.
-                            Hoy en día es de las cadenas mayoristas más importantes del país, con más de 10
-                            años en el mercado especializada en la comercialización de productos y servicios
-                            para mascotas. Brinda una experiencia diferente de compra, ofreciendo productos y
-                            servicios de alta calidad que cumplen con las necesidades de las mascotas y la
-                            satisfacción de sus dueños.
-                            En Pampa Nutrición reconocen a las mascotas como un miembro más de la familia,
-                            a las que debemos cuidar, proteger, y brindar el mejor alimento para que tengan una
-                            excelente calidad de vida. Para ello ofrecen la más amplia variedad en productos
-                            alimenticios y accesorios.
-                            Actualmente, podés visitar cualquiera de sus 5 sucursales distribuidas a lo largo del
-                            país, las cuales cuentan con modernas y cómodas instalaciones o realizar cualquier
-                            tipo de compra desde la comodidad de tu casa.
-                            Pampa Nutrición es una empresa que está en constante crecimiento y siempre
-                            atenta a nuevas oportunidades inmobiliarias para extenderse a lo largo del país e
-                            incorporar nuevos alimentos y servicios de calidad para ofrecer lo mejor a las mascota
+                        <p class="fst-normal mt-4 fs-5 bold">
+                            Pampa Nutrición, originaria de Villa Ramallo, comenzó como una empresa minorista de alimentos para mascotas en localidades cercanas. 
+                            En más de 10 años, ha evolucionado para convertirse en una destacada cadena mayorista a nivel nacional. Especializada en productos y 
+                            servicios para mascotas, la empresa busca proporcionar una experiencia de compra única, destacando la calidad y la satisfacción tanto 
+                            de las mascotas como de sus dueños. Reconociendo a las mascotas como miembros de la familia, Pampa Nutrición ofrece una amplia variedad 
+                            de productos alimenticios y accesorios. Con cinco sucursales en todo el país y planes de expansión, la empresa se mantiene en crecimiento, 
+                            comprometida con brindar lo mejor para las mascotas
                         </p>
                     </div>
                 </div>
@@ -41,6 +37,9 @@
                           <div class="carousel-item" data-bs-interval="2000">
                             <img src="./assets/images/PampaFrente2.jpg" style="width: 250px; height: 500px;" class="mx-auto d-block w-75">
                           </div>
+                          <div class="carousel-item" data-bs-interval="2000">
+                            <img src="./assets/images/pampaFrente3.jpg" style="width: 250px; height: 500px;" class="mx-auto d-block w-75">
+                          </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -51,11 +50,14 @@
                           <span class="visually-hidden">Next</span>
                         </button>
                     </div>
+                    <br><br>
                 </div>
+                <br>
+                <br>
             </div>
             <!--Fin Historia-->
 
-            <!--Surcursales
+            <!--Surcursales-->
             <section class="bg-light py-5">
                     <div class="row text-center pt-5 pb-3">
                         <div class="col-lg-6 m-auto">
@@ -68,13 +70,13 @@
                         </div>
                     </div>
                     <div id="carouselExampleCaptions" class="carousel slide">
-                        <div *ngFor="let s of sucursalService.sucrusales">
+                        <div *ngFor="let s of storeLocatorService.storeLocators">
                             <div  class="carousel-inner">
                                 <div class="carousel-item active">
                                     <img src="{{s.foto}}" class="mx-auto d-block w-25 img-fluid"> 
+                                    <br>
                                     <h5 class="text-black d-flex justify-content-center align-items-center">{{s.nombre}}</h5>
-                                    <p class="text-black d-flex justify-content-center align-items-center">{{s.direccion}}</p>
-                                    <p class="text-black d-flex justify-content-center align-items-center">{{s.localidad.nombre}}</p>
+                                    <p class="text-black d-flex justify-content-center align-items-center">{{s.direccion}} - {{s.localidad.nombre}}</p>
                                 </div>
                             </div>
                         </div>
@@ -88,46 +90,6 @@
                         </button>
                     </div>
             </section>
-            Fin sucursales-->
-
-            <!--Surcursales-->
-            <section class="bg-light py-5">
-                    <div class="row text-center pt-5 pb-3">
-                        <div class="col-lg-6 m-auto">
-                            <h1 class="text-black lh-base fst-normal mt-2">
-                                Sucursales
-                            </h1>
-                            <p class="fst-normal mt-2 fs-5 lead">
-                                Día a día buscamos expandirnos y crecer en todo el mundo 
-                                <br> 
-                            </p>
-                        </div>
-                    </div>
-                    <div id="carouselExampleCaptions" class="carousel slide">
-                            <div  class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="./assets/images/PampaFrente2.jpg" class="mx-auto d-block w-25 img-fluid"> 
-                                    <br>    
-                                    <h5 class="text-black d-flex justify-content-center align-items-center">Sucursal 1</h5>
-                                    <p class="text-black d-flex justify-content-center align-items-center">Zeballos 1232</p>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="./assets/images/PampaFrente.png" class="mx-auto d-block w-25 img-fluid"> 
-                                    <h5 class="text-black d-flex justify-content-center align-items-center">Sucursal 2</h5>
-                                    <p class="text-black d-flex justify-content-center align-items-center">España 1232</p>
-                                </div>
-                            </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-            </section>
-            <!--Fin sucursales-->
             
             <!--Servicios-->
             <div class="row text-center pt-5 pb-3">
@@ -165,7 +127,7 @@
                       <div class="text-container">
                         <h6 class="h6 mt-4 mx-4 text-white text-center">
                             Ofrecemos una amplia gama de productos para satisfacer las necesidades de tu negocio a gran escala. 
-                            Nuestro catálogo diverso y accesible garantiza que encuentres exactamente lo que buscas para mantener en marcha tu operación mayorista.
+                            Nuestro catálogo diverso y accesible garantiza que encuentres exactamente lo que buscas para mantener en marcha tu operación mayorista
                         </h6>
                       </div>
                       <div class="h1 text-white text-center">
@@ -173,7 +135,7 @@
                                 <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
                             </svg>
                             <br>
-                            <h5>Venta Mayorista</h5>
+                            <h5>Venta mayorista</h5>
                        </div>
                     </div>
                 </div>
@@ -184,7 +146,7 @@
                       <div class="text-container">
                         <h6 class="h6 mt-4 mx-4 text-white text-center">
                             Para aquellos que gestionan negocios más pequeños, Pampa Nutrición tiene productos exclusivos y atractivos para tus clientes. 
-                            Explora nuestro catálogo diseñado para adaptarse a las necesidades únicas de la venta minorista.
+                            Explora nuestro catálogo diseñado para adaptarse a las necesidades únicas de la venta minorista
                         </h6>
                       </div>
                       <div class="h1 text-white text-center">
@@ -192,7 +154,7 @@
                             <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5m2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5"/>
                         </svg>
                         <br>
-                        <h5>Ventas Minoristas</h5>
+                        <h5>Venta minorista</h5>
                       </div>
                     </div>
                 </div>
@@ -202,9 +164,9 @@
                     <div class="h-100 py-5 services-icon-wap shadow">
                         <div class="text-container">
                             <h6 class="h6 mt-4 mx-4 text-white text-center">
-                                En PampaNutrición, valoramos la satisfacción del cliente sobre todas las cosas. Nuestro equipo de atención al 
+                                En Pampa Nutrición, valoramos la satisfacción del cliente sobre todas las cosas. Nuestro equipo de atención al 
                                 cliente está aquí para ayudarte en cada paso del camino. Ya sea que tengas preguntas sobre productos, envíos o cualquier otra cosa, 
-                                estamos disponibles para brindarte la mejor atención online posible.
+                                estamos disponibles para brindarte la mejor atención online posible
                             </h6>
                         </div>
                         <div class="h1 text-white text-center">
@@ -232,6 +194,7 @@
                                Hace años que trabajamos con las mejores marcas para ofrecer la mejor calidad de nuestros productos
                             </p>
                         </div>
+
                         <div class="col-lg-9 m-auto tempaltemo-carousel">
                             <div class="row d-flex flex-row">
                                 <!--Controls-->
@@ -252,16 +215,16 @@
                                             <div class="carousel-item active">
                                                 <div class="row">
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/aca.png" style="width: 100px; height: 100px;" alt="Brand Logo">
+                                                        <img src="./assets/images/marcas/aca.png" style="width: 80px; height: 60px;" alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                       <img class="img-fluid brand-img" src="./assets/images/marcas/pedigree.png" style="width: 100px; height: 100px;" alt="Brand Logo">
+                                                       <img src="./assets/images/marcas/pedigree.png" style="width: 80px; height: 60px;" alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/sabroFood.png" style="width: 100px; height: 100px;" alt="Brand Logo">
+                                                        <img  src="./assets/images/marcas/sabroFood.png" style="width:80px; height: 60px;" alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                       <img class="img-fluid brand-img" src="./assets/images/marcas/ganave.png" style="width: 100px; height: 100px;" alt="Brand Logo">
+                                                       <img src="./assets/images/marcas/ganave.png" style="width: 80px; height: 60px;" alt="Brand Logo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,16 +233,16 @@
                                             <div class="carousel-item">
                                                 <div class="row">
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/sabrositos.png" style="width: 100px; height: 100px;"  alt="Brand Logo">
+                                                        <img src="./assets/images/marcas/sabrositos.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/vetifarma.png" style="width: 100px; height: 100px;"  alt="Brand Logo">
+                                                        <img src="./assets/images/marcas/vetifarma.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/whiskas.png" style="width: 100px; height: 100px;"  alt="Brand Logo">
+                                                        <img src="./assets/images/marcas/whiskas.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/nutribonXQ.png" style="width: 100px; height: 100px;"  alt="Brand Logo">
+                                                        <img src="./assets/images/marcas/nutribonXQ.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -288,16 +251,16 @@
                                             <div class="carousel-item">
                                                 <div class="row">
                                                     <div class="col-3 p-md-5">
-                                                       <img class="img-fluid brand-img" src="./assets/images/marcas/optimum.png" style="width: 200px; height: 100px;"  alt="Brand Logo">
+                                                       <img  src="./assets/images/marcas/optimum.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                       <img class="img-fluid brand-img" src="./assets/images/marcas/champ.png" style="width: 150px; height: 100px;"  alt="Brand Logo">
+                                                       <img  src="./assets/images/marcas/champ.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                      <img class="img-fluid brand-img" src="./assets/images/marcas/petting.png" style="width: 150px; height: 100px;"  alt="Brand Logo">
+                                                      <img src="./assets/images/marcas/petting.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/cooperacion.png" style="width: 200px; height: 100px;"  alt="Brand Logo">
+                                                        <img  src="./assets/images/marcas/cooperacion.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,16 +269,16 @@
                                             <div class="carousel-item">
                                                 <div class="row">
                                                     <div class="col-3 p-md-5">
-                                                       <img class="img-fluid brand-img" src="./assets/images/marcas/iams.png" style="width: 200px; height: 100px;"  alt="Brand Logo">
+                                                       <img src="./assets/images/marcas/iams.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                       <img class="img-fluid brand-img" src="./assets/images/marcas/matute.png" style="width: 200px; height: 100px;"  alt="Brand Logo">
+                                                       <img src="./assets/images/marcas/matute.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                      <img class="img-fluid brand-img" src="./assets/images/marcas/metrive.png" style="width: 200px; height: 100px;"  alt="Brand Logo">
+                                                      <img src="./assets/images/marcas/metrive.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                     <div class="col-3 p-md-5">
-                                                        <img class="img-fluid brand-img" src="./assets/images/marcas/nutribon.png" style="width: 200px; height: 100px;"  alt="Brand Logo">
+                                                        <img src="./assets/images/marcas/nutribon.png" style="width: 100px; height: 60px;"  alt="Brand Logo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -336,6 +299,7 @@
                                 <!--End Controls-->
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>

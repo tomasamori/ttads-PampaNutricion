@@ -51,4 +51,23 @@
     filter: invert(100%) grayscale(100%);
 }
 
+.contenedor {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Puedes ajustar la altura según tus necesidades */
+  background: url('../../../assets/images/reunion.jpeg') center/cover;
+  color: white; /* Color del texto */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilo opcional para el texto */
+.texto {
+  font-size: 50px;
+  font-family: 'russooneregular';
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra al texto */
+}
+
 

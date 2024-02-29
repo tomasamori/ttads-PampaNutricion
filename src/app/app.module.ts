@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 import { DatePipe } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
+    NgxPaginationModule, 
     ToastrModule.forRoot(
       {
         positionClass: 'toast-top-center',

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener  } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm } from "@angular/forms";
 import { empty } from 'rxjs';
 import { Router } from '@angular/router'
-
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +18,7 @@ export class NavbarComponent implements OnInit {
   isCliente = false;
   isAdmin = false;
   isEmpleado = false;
-  
+
   constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -42,9 +41,15 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['']);
     localStorage.clear();
     this.loginSuccess = false;
+    this.isAdmin = false;
+    this.isEmpleado = false;
+  }
+  
+  readName(){
+    return localStorage.getItem('usuarioFoundNombre');
   }
   
   login(form: NgForm) {
@@ -57,6 +62,8 @@ export class NavbarComponent implements OnInit {
       localStorage.setItem('usuarioFoundNombre',res['usuarioFoundNombre']);
       localStorage.setItem('usuarioFoundCuil',res['usuarioFoundCuil']);
       form.reset();
+      if (localStorage.getItem('rol') === 'admin'){
+        this.isAdmin = true;}
     },
     err => {
       console.log(err);

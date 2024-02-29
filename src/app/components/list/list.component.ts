@@ -10,6 +10,8 @@ import { Producto } from "src/app/models/producto";
 })
 export class ListComponent implements OnInit {
 
+  p: number = 1;
+  
   constructor(public productoService: ProductoService, private router: Router) { }
 
   productList: Producto[] = [];
