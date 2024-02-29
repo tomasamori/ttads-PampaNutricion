@@ -29,7 +29,18 @@ h1 {
         background-color: #ee7f3f;
         margin-left:20%;
 }
+#SuccesContainer {
+  flex-direction: column;
+}
 
+.SuccessItems{
+  margin-top: 10px;
+}
+
+#imgSuccess{
+  width: 100px; /* Ancho de la imagen */
+  height: 100px; /* Altura de la imagen */
+}
 .dropdown i {
   position: absolute;
   top: 50%;

@@ -29,8 +29,9 @@ h1 {
         font-weight: bold;
         color: #ffffff;
         background-color: #ee7f3f;
-        margin-left:20%;
+        text-align: center;
 }
+
 
 .dropdown i {
   position: absolute;

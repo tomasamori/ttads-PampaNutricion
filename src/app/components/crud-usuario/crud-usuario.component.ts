@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { RolService } from 'src/app/services/rol/rol.service';
 import { Usuario } from 'src/app/models/usuario';
 import { NgForm } from "@angular/forms";
 import { DatePipe } from '@angular/common';
+import { Rol } from 'src/app/models/rol';
 
 
 
@@ -14,7 +16,7 @@ import { DatePipe } from '@angular/common';
 })
 export class CrudUsuarioComponent implements OnInit {
 
-  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe) { }
+  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe, public rolService: RolService) { }
   InsertSuccess =false;
   isDisabled = false;
   errorMessage: string = "";
@@ -33,6 +35,7 @@ export class CrudUsuarioComponent implements OnInit {
     this.getUsuario();
     this.cambiarTituloModal("NUEVO USUARIO");
     this.cambiarTituloModalSuccess("Usuario Creado con Exito!")
+    this.usuarioService.selectedUsuario.rol._id = '';
 
   }
 
@@ -44,7 +47,6 @@ export class CrudUsuarioComponent implements OnInit {
     this.InsertSuccess = true;
     this.isDisabled = false;
     if (form.value._id) {
-      console.log(form.value, 'Fecha Nacimiento')
       this.isDisabled = true;
       this.usuarioService.updateUsuario(form.value).subscribe(
         res => {
@@ -107,6 +109,15 @@ export class CrudUsuarioComponent implements OnInit {
 
   }
 
+  getRols() {
+    this.rolService.getAllRoles().subscribe(
+      (res) => {
+        this.rolService.Roles = res;
+        console.log(res)
+      },
+      err => console.log(err)
+    )
+  }
 
  // Propiedad para almacenar el título dinámico del modal
  tituloModal: string = '';

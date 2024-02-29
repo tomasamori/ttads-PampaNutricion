@@ -49,7 +49,7 @@
                       <input
                         [ngClass]="{'input-error': tamanoRaza.touched && !tamanoRaza.valid, 'input-success': tamanoRaza.valid && !tamanoRaza.errors}"
                         type="text" name="tamanoRaza" #tamanoRaza="ngModel" class="form-control" maxlength="50"
-                        placeholder="Tamaño Raza" [(ngModel)]="tipoMascotasService.selectedTipoMascota.tamanoRaza"
+                        placeholder="Ingrese Tamaño Raza" [(ngModel)]="tipoMascotasService.selectedTipoMascota.tamanoRaza"
                         required>
                       <div *ngIf="tamanoRaza.touched && !tamanoRaza.valid">
                         <div class="camposRequeridos" *ngIf="tamanoRaza.errors['required']"> Tamaño Raza es requerido *
@@ -61,7 +61,7 @@
                       <label for="edad">Edad:</label>
                       <input
                         [ngClass]="{'input-error': edad.touched && !edad.valid, 'input-success': edad.valid && !edad.errors}"
-                        type="text" name="edad" #edad="ngModel" class="form-control" placeholder="Edad" maxlength="50"
+                        type="text" name="edad" #edad="ngModel" class="form-control" placeholder="Ingrese Edad" maxlength="50"
                         [(ngModel)]="tipoMascotasService.selectedTipoMascota.edad" required>
                       <div *ngIf="edad.touched && !edad.valid">
                         <div class="camposRequeridos" *ngIf="edad.errors['required']"> Peso es requerido *</div>

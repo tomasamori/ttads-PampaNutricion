@@ -1,4 +1,4 @@
 export interface Rol {
     _id?: any,
-    nombre: String
+    name: String
 }
