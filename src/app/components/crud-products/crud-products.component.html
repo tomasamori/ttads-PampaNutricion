@@ -154,9 +154,9 @@
                       </div>
 
                       <div *ngIf="InsertSuccess" class="overlay">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                          <img id="imgSuccess" src="assets/images/check.png" alt="">
-                          {{tituloModalSucces}}
+                        <div class="alert alert-success alert-dismissible fade show" id="SuccesContainer" role="alert">
+                          <div class="SuccessItems"><img id="imgSuccess" src="assets/images/check.png" alt=""></div>
+                          <div class="SuccessItems">{{tituloModalSucces}}</div>
                           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                             data-bs-dismiss="modal" (click)="ModalClose()"></button>
                         </div>

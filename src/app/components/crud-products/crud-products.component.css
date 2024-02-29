@@ -108,10 +108,14 @@ h1 {
   border-radius: 10px;
 
 }
-/*.mi-elemento {
-  flex: 1; /* Hace que los elementos ocupen el espacio disponible en la línea 
-  margin: 10px; /* Espacio entre los elementos en líneas diferentes 
-}*/
+#SuccesContainer {
+  flex-direction: column;
+}
+
+.SuccessItems{
+  margin-top: 10px;
+}
+
 
 .bg-warning {
     background-color: #ee7f3f !important; 

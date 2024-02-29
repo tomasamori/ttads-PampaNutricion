@@ -36,11 +36,11 @@
                       <label for="nombre">Nombre:</label>
                       <input
                         [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
-                        type="text" name="nombre" #nombre="ngModel"
+                        type="text" name="nombre" #nombre="ngModel" maxlength="50"
                         [(ngModel)]="tipoMascotasService.selectedTipoMascota.nombre"
                         placeholder="Ingrese nombre producto" class="form-control" required />
                       <div *ngIf="nombre.touched && !nombre.valid">
-                        <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> Nombre es requerido</div>
+                        <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *</div>
                       </div>
                     </div>
 
@@ -48,11 +48,11 @@
                       <label for="tamanoRaza">Tamaño Raza:</label>
                       <input
                         [ngClass]="{'input-error': tamanoRaza.touched && !tamanoRaza.valid, 'input-success': tamanoRaza.valid && !tamanoRaza.errors}"
-                        type="text" name="tamanoRaza" #tamanoRaza="ngModel" class="form-control"
+                        type="text" name="tamanoRaza" #tamanoRaza="ngModel" class="form-control" maxlength="50"
                         placeholder="Tamaño Raza" [(ngModel)]="tipoMascotasService.selectedTipoMascota.tamanoRaza"
                         required>
                       <div *ngIf="tamanoRaza.touched && !tamanoRaza.valid">
-                        <div class="camposRequeridos" *ngIf="tamanoRaza.errors['required']"> -> Tamaño Raza es requerido
+                        <div class="camposRequeridos" *ngIf="tamanoRaza.errors['required']"> Tamaño Raza es requerido *
                         </div>
                       </div>
                     </div>
@@ -61,16 +61,17 @@
                       <label for="edad">Edad:</label>
                       <input
                         [ngClass]="{'input-error': edad.touched && !edad.valid, 'input-success': edad.valid && !edad.errors}"
-                        type="text" name="edad" #edad="ngModel" class="form-control" placeholder="Edad"
+                        type="text" name="edad" #edad="ngModel" class="form-control" placeholder="Edad" maxlength="50"
                         [(ngModel)]="tipoMascotasService.selectedTipoMascota.edad" required>
                       <div *ngIf="edad.touched && !edad.valid">
-                        <div class="camposRequeridos" *ngIf="edad.errors['required']"> -> Peso es requerido</div>
+                        <div class="camposRequeridos" *ngIf="edad.errors['required']"> Peso es requerido *</div>
                       </div>
                     </div>
 
                     <div *ngIf="InsertSuccess" class="overlay">
-                      <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{tituloModalSucces}}
+                      <div class="alert alert-success alert-dismissible fade show" id="SuccesContainer" role="alert">
+                        <div class="SuccessItems"><img id="imgSuccess" src="assets/images/check.png" alt=""></div>
+                        <div class="SuccessItems">{{tituloModalSucces}}</div>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                           data-bs-dismiss="modal" (click)="ModalClose()"></button>
                       </div>

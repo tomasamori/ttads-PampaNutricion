@@ -53,7 +53,18 @@ h1 {
 #ProductModal .modal-dialog {
     max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
   }
+  #SuccesContainer {
+    flex-direction: column;
+  }
+  
+  .SuccessItems{
+    margin-top: 10px;
+  }
 
+  #imgSuccess{
+    width: 100px; /* Ancho de la imagen */
+    height: 100px; /* Altura de la imagen */
+  }
 #ProductModal .modal-content {
     width: 100%;
   }
