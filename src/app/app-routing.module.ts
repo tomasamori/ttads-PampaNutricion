@@ -10,6 +10,7 @@ import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tip
 import { CrudUsuarioComponent } from './components/crud-usuario/crud-usuario.component';
 import { CrudLocalidadComponent } from './components/crud-localidad/crud-localidad.component';
 import { CrudSucursalComponent } from './components/crud-sucursal/crud-sucursal.component';
+import { CrudProveedorComponent } from './components/crud-proveedor/crud-proveedor.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'crud-typeOfPets', component: CrudTipoMascotaComponent},
   {path: 'crud-users', component: CrudUsuarioComponent},
   {path: 'crud-Storelocator', component: CrudSucursalComponent},
+  {path: 'crud-proveedor', component: CrudProveedorComponent},
   {path: 'crud-locations', component: CrudLocalidadComponent},
   {path: 'store-locator', component: StoreLocatorComponent},
   {path:'cart', component:CartComponent},

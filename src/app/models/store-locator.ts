@@ -3,5 +3,5 @@ export interface Storelocator {
     nombre: String,
     direccion: String,
     foto: String,
-    localidad:{codPostal: String, nombre: String}
+    localidad:{_id: string, codPostal: String, nombre: String}
 }

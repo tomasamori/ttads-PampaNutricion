@@ -1,5 +1,5 @@
-<!--<div class="Presentacion">
-  <img id="imgPresentacion" src="assets/images/global.png" alt="">
+<div class="Presentacion">
+  <img id="imgPresentacion" src="assets/images/mensajero.png" alt="">
   <h1>TRABAJAR CON PROVEEDORES</h1>
 </div>
 <div class="container">
@@ -16,7 +16,7 @@
             <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ProveedorModal"
                 (click)="resetForm(proveedorForm)">Nuevo</button></th>
           </tr>
-        
+
           <div class="modal" id="ProveedorModal" #ProveedorModal tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog bg-transparent">
@@ -24,11 +24,11 @@
                 <div class="modal-header bg-warning">
                   <h1 class="modal-title fs-5" id="h1-PUProd">{{ tituloModal }}</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                 
+
                   </button>
                 </div>
 
-                
+
                 <form ngNativeValidate #proveedorForm="ngForm" (ngSubmit)="addProveedor(proveedorForm)">
 
                   <input type="hidden" name="_id" [(ngModel)]="ProveedorService.selectedProveedor._id">
@@ -38,8 +38,7 @@
                       <label for="cuil">CUIL:</label>
                       <input
                         [ngClass]="{'input-error': cuil.touched && !cuil.valid, 'input-success': cuil.valid && !cuil.errors}"
-                        type="number" name="cuil" #cuil="ngModel"
-                        [(ngModel)]="ProveedorService.selectedProveedor.cuil"
+                        type="number" name="cuil" #cuil="ngModel" [(ngModel)]="ProveedorService.selectedProveedor.cuil"
                         placeholder="Ingrese cuil" class="form-control" required />
                       <div *ngIf="cuil.touched && !cuil.valid">
                         <div class="camposRequeridos" *ngIf="cuil.errors['required']"> -> Cuil es requerido</div>
@@ -47,14 +46,52 @@
                     </div>
 
                     <div class="mi-elemento">
-                      <label for="nombre">Nombre:</label>
+                      <label for="cuit">CUIT:</label>
                       <input
-                        [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
-                        type="text" name="nombre" #nombre="ngModel" class="form-control"
-                        placeholder="Nombre" [(ngModel)]="LocalidadService.selectedLocalidad.nombre"
-                        required>
-                      <div *ngIf="nombre.touched && !nombre.valid">
-                        <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> nombre es requerido
+                        [ngClass]="{'input-error': cuit.touched && !cuit.valid, 'input-success': cuit.valid && !cuit.errors}"
+                        type="number" name="cuit" #cuit="ngModel" class="form-control" placeholder="Cuit"
+                        [(ngModel)]="ProveedorService.selectedProveedor.cuit" required>
+                      <div *ngIf="cuit.touched && !cuit.valid">
+                        <div class="camposRequeridos" *ngIf="cuit.errors['required']"> -> Cuit es requerido
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col mi-fila">
+
+                    <div class="mi-elemento">
+                      <label for="razonSocial">Razon Social:</label>
+                      <input
+                        [ngClass]="{'input-error': razonSocial.touched && !razonSocial.valid, 'input-success': razonSocial.valid && !razonSocial.errors}"
+                        type="text" name="razonSocial" #razonSocial="ngModel" class="form-control" placeholder="Nombre"
+                        [(ngModel)]="ProveedorService.selectedProveedor.razonSocial" required>
+                      <div *ngIf="razonSocial.touched && !razonSocial.valid">
+                        <div class="camposRequeridos" *ngIf="razonSocial.errors['required']"> -> Razon Social es
+                          requerido
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mi-elemento">
+                      <label for="email">E-Mail:</label>
+                      <input
+                        [ngClass]="{'input-error': email.touched && !email.valid, 'input-success': email.valid && !email.errors}"
+                        type="email" name="email" #email="ngModel" [(ngModel)]="ProveedorService.selectedProveedor.email"
+                        placeholder="Ingrese E-Mail" class="form-control" required />
+                      <div *ngIf="email.touched && !email.valid">
+                        <div class="camposRequeridos" *ngIf="email.errors['required']"> -> E-Mail es
+                          requerida</div>
+                      </div>
+                    </div>
+
+                    <div class="mi-elemento">
+                      <label for="telefono">Teléfono:</label>
+                      <input
+                        [ngClass]="{'input-error': telefono.touched && !telefono.valid, 'input-success': razonSocial.valid && !razonSocial.errors}"
+                        type="text" name="telefono" #telefono="ngModel" class="form-control" placeholder="Nombre"
+                        [(ngModel)]="ProveedorService.selectedProveedor.telefono" required>
+                      <div *ngIf="telefono.touched && !telefono.valid">
+                        <div class="camposRequeridos" *ngIf="telefono.errors['required']"> -> Teléfono es
+                          requerido
                         </div>
                       </div>
                     </div>
@@ -66,14 +103,14 @@
                           data-bs-dismiss="modal" (click)="ModalClose()"></button>
                       </div>
                     </div>
+
+
+
+                    <div *ngIf="errorMessage" class="custom-error-message">
+                      ¡Error!
+                      {{errorMessage}}
+                    </div>
                   </div>
-
-
-                  <div *ngIf="errorMessage" class="custom-error-message">
-                    ¡Error!
-                    {{errorMessage}}
-                  </div>
-
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                       (click)="cancel()">Cancelar</button>
@@ -86,27 +123,22 @@
           </div>
         </thead>
         <tbody>
-          <div *ngIf="DependencyError" class="overlay">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              No puede eliminar esta localidad porque hay sucursales asociadas
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                data-bs-dismiss="modal" (click)="ModalClose()"></button>
-            </div>
-          </div>
-        
-          <tr *ngFor="let l of LocalidadService.Localidades">
-            <td>{{l.codPostal}}</td>
-            <td>{{l.nombre}}</td>
+          <tr *ngFor="let p of ProveedorService.Proveedores">
+            <td>{{p.cuil}}</td>
+            <td>{{p.cuit}}</td>
+            <td>{{p.razonSocial}}</td>
+            <td>{{p.email}}</td>
+            <td>{{p.telefono}}</td>
             <td>
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ProveedorModal"
-                (click)="editLocalidad(l)">
+                (click)="editProveedor(p)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
                   viewBox="0 0 16 16">
                   <path
                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                 </svg>
               </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteLocalidad(l._id)">
+              <button class="btn btn-danger btn-sm" (click)="deleteProveedor(p._id)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
                   viewBox="0 0 16 16">
                   <path
@@ -121,4 +153,4 @@
       </table>
     </div>
   </div>
-</div>-->
+</div>

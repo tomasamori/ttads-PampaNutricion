@@ -16,17 +16,15 @@ export class CrudProductsComponent implements OnInit {
   InsertSuccess =false;
   errorMessage: string = "";
   constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService) { }
-  //InsertSuccess: boolean;
-
-  
+ 
   tipoMascota: TipoMascota;
   
-
- 
 
   ngOnInit(): void {
     this.getProducts(); 
     this.InsertSuccess =false;
+    this.getTypesOfPets();
+
   }
 
 
@@ -37,6 +35,7 @@ export class CrudProductsComponent implements OnInit {
     this.getTypesOfPets();
     this.cambiarTituloModal("NUEVO PRODUCTO");
     this.cambiarTituloModalSuccess("Producto Creado con Exito!")
+    this.productoService.selectedProduct.tipoMascota._id = '';
 
   }
 
@@ -56,7 +55,11 @@ export class CrudProductsComponent implements OnInit {
         res => {
         console.log(res);
         this.getProducts();
-        this.InsertSuccess = true;   
+        this.InsertSuccess = true; 
+        form.reset();  
+        setTimeout(() => {
+          this.ModalClose();
+        }, 2000);
       },
         err => {
           console.log(err);
@@ -103,11 +106,11 @@ export class CrudProductsComponent implements OnInit {
   }
 
   editProduct(product: Producto) {
-   
     this.cambiarTituloModal("EDITAR PRODUCTO");
     this.cambiarTituloModalSuccess("Producto Actualizado con Exito!")
     this.productoService.selectedProduct = product;
-    this.getTypesOfPets();
+    this.productoService.selectedProduct.tipoMascota._id = product.tipoMascota._id;
+
   }
 
   getTypesOfPets() {
@@ -134,13 +137,19 @@ export class CrudProductsComponent implements OnInit {
 
  cancel() {
   this.getProducts();
+  
 }
 
   ModalClose(){
     this.InsertSuccess = false;
   }
     
-  
+  onInputChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const newValue = inputElement.value.toUpperCase();
+    // Asigna el nuevo valor en mayúsculas al modelo
+    this.productoService.selectedProduct.nombre = newValue;
+  }
 
 }
 

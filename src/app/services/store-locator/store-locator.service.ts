@@ -10,10 +10,11 @@ import { Observable } from "rxjs";
 export class StoreLocatorService {
   URL_API = environment.URL_SUCURSAL;
   selectedSucursal: Storelocator = {
+    _id: '',
     nombre: '',
     direccion: '',
     foto: '',
-    localidad:{codPostal: '', nombre: ''}
+    localidad:{_id:'', codPostal: '', nombre: ''}
     };
     constructor(private http: HttpClient) { }
     storeLocators: Storelocator[];

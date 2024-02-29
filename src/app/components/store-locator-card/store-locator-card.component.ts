@@ -23,7 +23,7 @@ export class StoreLocatorCardComponent implements OnInit {
     nombre: '',
     direccion: '',
     foto: '',
-    localidad:{codPostal: '', nombre: ''}
+    localidad:{_id:'',codPostal: '', nombre: ''}
   }
   completar(){
     this.storelocator.foto = this.imgUrl;

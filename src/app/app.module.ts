@@ -15,6 +15,7 @@ import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tip
 import { CrudUsuarioComponent } from './components/crud-usuario/crud-usuario.component';
 import { CrudLocalidadComponent } from './components/crud-localidad/crud-localidad.component';
 import { CrudSucursalComponent } from './components/crud-sucursal/crud-sucursal.component';
+import { CrudProveedorComponent } from './components/crud-proveedor/crud-proveedor.component';
 import { CrudCardComponent } from './components/crud-card/crud-card.component';
 import { ProductCounterComponent } from './components/product-counter/product-counter.component';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
@@ -41,6 +42,7 @@ import { DatePipe } from '@angular/common';
     HomeComponent,
     CrudPageComponent,
     CrudProductsComponent,
+    CrudProveedorComponent,
     CrudSucursalComponent,
     CrudCardComponent, 
     ProductCounterComponent,
