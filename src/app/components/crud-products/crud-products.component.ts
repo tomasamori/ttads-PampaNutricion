@@ -57,9 +57,6 @@ export class CrudProductsComponent implements OnInit {
         this.getProducts();
         this.InsertSuccess = true; 
         form.reset();  
-        setTimeout(() => {
-          this.ModalClose();
-        }, 2000);
       },
         err => {
           console.log(err);
