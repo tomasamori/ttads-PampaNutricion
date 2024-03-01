@@ -1,9 +1,8 @@
 import { Component, OnInit, HostListener  } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm } from "@angular/forms";
-import { empty } from 'rxjs';
 import { Router } from '@angular/router'
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,20 +11,19 @@ import { Router } from '@angular/router'
 export class NavbarComponent implements OnInit {
 
   registrationSuccess = false;
-  loginSuccess = false;
+  loginSuccess:boolean = false;
+  open:boolean;
   forgotPasswordFormSuccess = false;
   errorMessage: string = "";
   isCliente = false;
   isAdmin = false;
   isEmpleado = false;
-
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
     if (localStorage.getItem('usuarioFoundId')){
       if (localStorage.getItem('token')){
-      this.loginSuccess = true;
+        this.loginSuccess = true;
       if (localStorage.getItem('rol') === 'cliente'){
         this.isCliente = true; 
       } else {
@@ -40,10 +38,19 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  CloseModal(id:string): void {
+   setTimeout(() => {
+      document.getElementById(id).classList.remove('show');
+      document.querySelector('.modal-backdrop').remove();
+      window.location.reload();
+   }, 1000); // esto es 1 seg si quieren mas tiempo pongan las cantidad de seg en ms o si quieren q dependa el modal se parametriza
+  }
+
+  
   logOut(){
     this.router.navigate(['']);
     localStorage.clear();
-    this.loginSuccess = false;
+    
     this.isAdmin = false;
     this.isEmpleado = false;
   }
@@ -64,6 +71,8 @@ export class NavbarComponent implements OnInit {
       form.reset();
       if (localStorage.getItem('rol') === 'admin'){
         this.isAdmin = true;}
+        this.toastr.success("Bienvenido!");
+        this.CloseModal('login');
     },
     err => {
       console.log(err);
@@ -83,6 +92,7 @@ export class NavbarComponent implements OnInit {
       .subscribe(res => {
         form.reset();
         this.registrationSuccess = true;
+        this.CloseModal('Register')
       },
       err => {
         console.log(err);
@@ -105,6 +115,7 @@ export class NavbarComponent implements OnInit {
           form.reset();
           this.forgotPasswordFormSuccess = true;
           this.isSubmitting = false;
+          this.CloseModal('ForgotPass')
         },
         err => {
           console.log(err);
