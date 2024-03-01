@@ -82,16 +82,26 @@ export class CrudTipoMascotaComponent implements OnInit {
   }
 
 
-  deleteTipoMascota(id: string) {
-    if (confirm('Seguro quieres eliminar este tipo de mascota?')) {
-      this.tipoMascotasService.deleteTipoMacota(id).subscribe(
-        (res) => {
-          this.getTipoMascota();
-        },
-        (err) => console.error(err)
-      );
-    }
-
+  deleteTipoMascota(id: string) {  
+    this.tipoMascotasService.findProductoByTipoMascota(id).subscribe(
+      (res: any[]) => {
+        if (!(res && res.length > 0)) {
+          if (confirm('Seguro quieres eliminar este tipo de mascota?')) {
+            this.tipoMascotasService.deleteTipoMacota(id).subscribe(
+              () => {
+                this.getTipoMascota();
+              },
+              (err) => console.error(err)
+            );
+          } else {
+            console.log('Cancelado');
+          }
+        } else {
+          alert('No se puede eliminar el tipo de mascota porque tiene productos asociadas');
+        }
+      },
+      (err) => console.error(err)
+    );
   }
 
   editTipoMascota(tipoMascota: TipoMascota) {

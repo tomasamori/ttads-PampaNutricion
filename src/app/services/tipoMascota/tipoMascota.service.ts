@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { TipoMascota } from "../../models/tipoMascota";
+import { Producto } from "../../models/producto";
 import { environment } from "../../../environments/environment";
 import {Observable} from "rxjs";
 
@@ -20,6 +21,8 @@ export class TipoMascotaService {
   constructor(private http: HttpClient) { }
   tipoMascotas: TipoMascota[];
 
+  productos:Producto[];
+
   getAllTiposMascotas() {
     return this.http.get<TipoMascota[]>(this.URL_API);
   }
@@ -38,5 +41,9 @@ export class TipoMascotaService {
 
   getRecordById(_id: String): Observable<TipoMascota>{
     return this.http.get<TipoMascota>(`${this.URL_API}/${_id}`);
+  }
+
+  findProductoByTipoMascota(id: string) {
+    return this.http.get<Producto[]>(`${this.URL_API}/${id}/productos`);
   }
 }
