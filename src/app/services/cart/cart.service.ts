@@ -78,15 +78,17 @@ export class CartService {
       }
     }  
   }
-  updateProd(productsDetail:Producto){
-    this.products = JSON.parse(localStorage.getItem('products')!);
-    this.products.forEach((prod,i)=>{
-      if(this.products[i]._id === productsDetail._id){
-        this.products[i] = productsDetail;
-        localStorage.setItem('products', JSON.stringify(this.products));
+  updateProd(productsDetail: Producto) {
+    if (localStorage.getItem('products') !== null) {
+      this.products = JSON.parse(localStorage.getItem('products')!);
+      for (let i = 0; i < this.products.length; i++) {
+        if (this.products[i]._id === productsDetail._id) {
+          this.products[i] = productsDetail;
+          localStorage.setItem('products', JSON.stringify(this.products));
+          break;
+        }
       }
-    })
-
+    }
   }
 
 
