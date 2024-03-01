@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Localidad } from "../../models/localidad";
+import { Storelocator } from "../../models/store-locator";
 import { environment } from "../../../environments/environment";
 import {Observable} from "rxjs";
 
@@ -19,6 +20,7 @@ export class LocalidadService {
   constructor(private http: HttpClient) { }
   Localidades: Localidad[];
   
+  Sucursales: Storelocator[];
 
   getAllLocalidades() {
     return this.http.get<Localidad[]>(this.URL_API);
@@ -41,6 +43,7 @@ export class LocalidadService {
   }
 
   findSucursalByLocalidad(id: string) {
-    return this.http.get<boolean>(`${this.URL_API}/localidad/${id}/sucursales`);
+    return this.http.get<Storelocator[]>(`${this.URL_API}/${id}/sucursales`);
   }
+
 }

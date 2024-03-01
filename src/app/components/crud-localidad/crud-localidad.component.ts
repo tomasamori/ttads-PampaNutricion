@@ -17,6 +17,7 @@ export class CrudLocalidadComponent implements OnInit {
   DependencyError =false;
   InsertSuccess =false;
   errorMessage: string = "";
+  StorelocatorsExist = false;
 
   
   ngOnInit(): void {
@@ -81,23 +82,29 @@ export class CrudLocalidadComponent implements OnInit {
     }
     this.InsertSuccess = false;
   }
-
-
-  deleteLocalidad(id: string) {
-  if (!this.LocalidadService.findSucursalByLocalidad(id)){
-    if (confirm('Seguro quieres eliminar esta localidad?')) {
-      this.LocalidadService.deleteLocalidad(id).subscribe(
-        (res) => {
-          this.getLocalidad();
-        },
-        (err) => console.error(err)
-      );
-    }
-  } else {
-    this.DependencyError = true;
+ 
+  deleteLocalidad(id: string) {  
+    this.LocalidadService.findSucursalByLocalidad(id).subscribe(
+      (res: any[]) => {
+        if (!(res && res.length > 0)) {
+          if (confirm('Seguro quieres eliminar esta localidad?')) {
+            this.LocalidadService.deleteLocalidad(id).subscribe(
+              () => {
+                this.getLocalidad();
+              },
+              (err) => console.error(err)
+            );
+          } else {
+            console.log('Cancelado');
+          }
+        } else {
+          alert('No se puede eliminar la localidad porque tiene sucursales asociadas');
+        }
+      },
+      (err) => console.error(err)
+    );
   }
-
-  }
+  
 
   editLocalidad(localidad: Localidad) {
    

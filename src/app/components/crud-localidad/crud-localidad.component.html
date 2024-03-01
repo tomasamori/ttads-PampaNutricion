@@ -39,7 +39,7 @@
                         [(ngModel)]="LocalidadService.selectedLocalidad.codPostal"
                         placeholder="Ingrese codigo postal" class="form-control" required />
                       <div *ngIf="codPostal.touched && !codPostal.valid">
-                        <div class="camposRequeridos" *ngIf="codPostal.errors['required']"> -> Codigo Postal es requerido</div>
+                        <div class="camposRequeridos" *ngIf="codPostal.errors['required']"> Codigo Postal es requerido *</div>
                       </div>
                     </div>
 
@@ -51,7 +51,7 @@
                         placeholder="Nombre" [(ngModel)]="LocalidadService.selectedLocalidad.nombre"
                         required>
                       <div *ngIf="nombre.touched && !nombre.valid">
-                        <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> nombre es requerido
+                        <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *
                         </div>
                       </div>
                     </div>
@@ -83,13 +83,7 @@
           </div>
         </thead>
         <tbody>
-          <div *ngIf="DependencyError" class="overlay">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              No puede eliminar esta localidad porque hay sucursales asociadas
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                data-bs-dismiss="modal" (click)="ModalClose()"></button>
-            </div>
-          </div>
+         
           <!-- Fin Modal -->
           <tr *ngFor="let l of LocalidadService.Localidades">
             <td>{{l.codPostal}}</td>

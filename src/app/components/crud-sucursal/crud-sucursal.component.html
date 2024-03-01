@@ -42,7 +42,7 @@
                             type="text" name="nombre" #nombre="ngModel" class="form-control" placeholder="Nombre"
                             [(ngModel)]="StoreLocatorService.selectedSucursal.nombre" required>
                           <div *ngIf="nombre.touched && !nombre.valid">
-                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -> nombre es requerido
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -Nombre es requerido *
                             </div>
                           </div>
                         </div>
@@ -51,11 +51,11 @@
                           <input
                             [ngClass]="{'input-error': direccion.touched && !direccion.valid, 'input-success': direccion.valid && !direccion.errors}"
                             type="text" name="direccion" #direccion="ngModel"
-                            [(ngModel)]="StoreLocatorService.selectedSucursal.direccion" placeholder="Ingrese dirección"
+                            [(ngModel)]="StoreLocatorService.selectedSucursal.direccion" placeholder="Ingrese Dirección"
                             class="form-control" required />
                           <div *ngIf="direccion.touched && !direccion.valid">
-                            <div class="camposRequeridos" *ngIf="direccion.errors['required']"> -> Dirección es
-                              requerida</div>
+                            <div class="camposRequeridos" *ngIf="direccion.errors['required']"> Dirección es
+                              requerida *</div>
                           </div>
                         </div>
                       </div>
@@ -65,10 +65,10 @@
                           <label for="foto">Foto:</label>
                           <input
                             [ngClass]="{'input-error': foto.touched && !foto.valid, 'input-success': foto.valid && !foto.errors}"
-                            type="text" name="foto" #foto="ngModel" class="form-control" placeholder="Foto"
+                            type="text" name="foto" #foto="ngModel" class="form-control" placeholder="Ingrese Foto"
                             [(ngModel)]="StoreLocatorService.selectedSucursal.foto" required>
                           <div *ngIf="foto.touched && !foto.valid">
-                            <div class="camposRequeridos" *ngIf="foto.errors['required']"> -> foto es requerido
+                            <div class="camposRequeridos" *ngIf="foto.errors['required']"> Foto es requerido *
                             </div>
                           </div>
                         </div>
@@ -77,15 +77,15 @@
                           <br>
                           <select id="dropdownList"
                             [ngClass]="{'input-error': localidad.touched && !localidad.valid, 'input-success': localidad.valid && !localidad.errors}"
-                            [(ngModel)]="StoreLocatorService.selectedSucursal.localidad._id" #localidad="ngModel" name="localidad"
-                            class="form-control" placeholder="Localidad" required>
+                            [(ngModel)]="StoreLocatorService.selectedSucursal.localidad._id" #localidad="ngModel"
+                            name="localidad" class="form-control" placeholder="Localidad" required>
                             <option *ngFor="let l of LocalidadService.Localidades" value="{{l._id}}">{{l.nombre}}
                               {{l.codPostal}} </option>
                           </select>
                           <i class="fas fa-chevron-down"></i> <!-- Icono de flecha hacia abajo -->
                           <div *ngIf="localidad.touched && !localidad.valid">
-                            <div class="camposRequeridos" *ngIf="localidad.errors['required']"> -> Localidad es
-                              requerido
+                            <div class="camposRequeridos" *ngIf="localidad.errors['required']"> Localidad es
+                              requerido *
                             </div>
                           </div>
                         </div>
@@ -93,8 +93,11 @@
 
                       <div>
                         <div *ngIf="InsertSuccess" class="overlay">
-                          <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{tituloModalSucces}}
+
+                          <div class="alert alert-success alert-dismissible fade show" id="SuccesContainer"
+                            role="alert">
+                            <div class="SuccessItems"><img id="imgSuccess" src="assets/images/check.png" alt=""></div>
+                            <div class="SuccessItems">{{tituloModalSucces}}</div>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                               data-bs-dismiss="modal" (click)="ModalClose()"></button>
                           </div>

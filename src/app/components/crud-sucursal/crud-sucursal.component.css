@@ -36,7 +36,18 @@ h1 {
   transform: translateY(-50%);
 
 }
+#SuccesContainer {
+  flex-direction: column;
+}
 
+.SuccessItems{
+  margin-top: 10px;
+}
+
+#imgSuccess{
+  width: 100px; /* Ancho de la imagen */
+  height: 100px; /* Altura de la imagen */
+}
 #dropdownList {
   appearance: none;
   -webkit-appearance: none;

@@ -13,8 +13,8 @@ export class StoreLocatorService {
     _id: '',
     nombre: '',
     direccion: '',
-    foto: '',
-    localidad:{_id:'', codPostal: '', nombre: ''}
+    localidad:{_id:'', codPostal: '', nombre: ''},
+    foto: ''
     };
     constructor(private http: HttpClient) { }
     storeLocators: Storelocator[];
