@@ -1,7 +1,7 @@
 
 
 export interface Usuario {
-    _id?: string,
+    _id?: any,
     usuario: string,
     password: string,
     email: string,

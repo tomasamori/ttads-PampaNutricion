@@ -21,11 +21,13 @@ export class CrudUsuarioComponent implements OnInit {
   isDisabled = false;
   errorMessage: string = "";
   
+  rol:Rol;
 
 
   ngOnInit(): void {
     this.getUsuario(); 
     this.InsertSuccess =false;
+    this.getRols();
   }
 
 
@@ -33,9 +35,10 @@ export class CrudUsuarioComponent implements OnInit {
     this.isDisabled = false;
     form.reset();
     this.getUsuario();
+    this.getRols();
     this.cambiarTituloModal("NUEVO USUARIO");
     this.cambiarTituloModalSuccess("Usuario Creado con Exito!")
-    this.usuarioService.selectedUsuario.rol._id = '';
+    
 
   }
 
@@ -44,6 +47,7 @@ export class CrudUsuarioComponent implements OnInit {
   }
 
   addUsuario(form: NgForm) {
+    console.log(this.usuarioService.selectedUsuario)
     this.InsertSuccess = true;
     this.isDisabled = false;
     if (form.value._id) {
@@ -105,6 +109,7 @@ export class CrudUsuarioComponent implements OnInit {
     this.cambiarTituloModalSuccess("Usuario Actualizado con Exito!")
     this.usuarioService.selectedUsuario = usuario;
     this.usuarioService.selectedUsuario.fechaNacimiento = fechaNacimiento;
+    this.usuarioService.selectedUsuario.rol._id = usuario.rol._id;
     
 
   }

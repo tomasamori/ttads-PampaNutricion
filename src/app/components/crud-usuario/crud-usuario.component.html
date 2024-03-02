@@ -143,25 +143,24 @@
                             requerido *</div>
                         </div>
                       </div>
-
-                      <div class="mi-elemento">
-                        <label for="rol">Rol:</label>
-                        <br>
-                        <select id="dropdownList"
-                          [ngClass]="{'input-error': rol.touched && !rol.valid, 'input-success': rol.valid && !rol.errors}"
-                          [(ngModel)]="usuarioService.selectedUsuario.rol._id" #rol="ngModel" name="rol"
-                          class="form-control" placeholder="Ingrese Rol" required>
-                          <option value="" selected>Selecciona una opción...</option>
-                          <option value="63fc93ec351253e5804f3354">empleado</option>
-                          <option value="63fc93ec351253e5804f3353">cliente</option>
-                          <option value="63fc93ec351253e5804f3355">admin</option>
-                        </select>
-
-                        <div *ngIf="rol.touched && !rol.valid">
-                          <div class="camposRequeridos" *ngIf="rol.errors['required']"> Rol es
-                            requerido *</div>
+                      
+                        <div class="mi-elemento">
+                          <label for="rol">Rol:</label>
+                          <br>
+                          <select id="dropdownList"
+                            [ngClass]="{'input-error': rol.touched && !rol.valid, 'input-success': rol.valid && !rol.errors}"
+                            [(ngModel)]="usuarioService.selectedUsuario.rol._id" #rol="ngModel"
+                            name="rol" class="form-control" placeholder="Ingrese Rol" required>
+                            <option value="">Selecciona una opción...</option>
+                            <option *ngFor="let r of rolService.Roles" value="{{r._id}}">{{r.name}}
+                            </option>
+                          </select>
+                
+                          <div *ngIf="rol.touched && !rol.valid">
+                            <div class="camposRequeridos" *ngIf="rol.errors['required']"> Rol es
+                              requerido *</div>
+                          </div>
                         </div>
-                      </div>
 
 
 

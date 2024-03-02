@@ -13,7 +13,6 @@ export class UsuarioService {
     URL_API = environment.URL_USUARIO;
 
     selectedUsuario: Usuario = {
-        _id: '',
         usuario: '',
         password: '',
         email: '',
