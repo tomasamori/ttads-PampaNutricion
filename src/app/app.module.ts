@@ -31,7 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 import { DatePipe } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import {CloudinaryModule} from '@cloudinary/ng';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CommonModule,
     BrowserAnimationsModule,
     NgxPaginationModule, 
+    CloudinaryModule,
+    NgxDropzoneModule,
     ToastrModule.forRoot(
       {
         positionClass: 'toast-top-center',

@@ -4,29 +4,45 @@ import { NgForm } from "@angular/forms";
 import { Storelocator } from 'src/app/models/store-locator';
 import { Localidad } from 'src/app/models/localidad';
 import { LocalidadService } from 'src/app/services/localidad/localidad.service';
-
-
-
+import {Cloudinary} from '@cloudinary/url-gen'
+import {UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crud-sucursal',
   templateUrl: './crud-sucursal.component.html',
-  styleUrls: ['./crud-sucursal.component.css']
+  styleUrls: ['./crud-sucursal.component.css'],
+  providers:[UploadFotoService]
 })
 export class CrudSucursalComponent implements OnInit {
 
   localidad: Localidad;
 
-  constructor(public StoreLocatorService: StoreLocatorService, public LocalidadService: LocalidadService) { }
+  constructor(public StoreLocatorService: StoreLocatorService, public LocalidadService: LocalidadService, private _UploadFotoService:UploadFotoService) { }
   InsertSuccess =false;
   errorMessage: string = "";
-
-  
+  files: File[] = [];
+  btn:boolean=true;
+  ins:boolean=true;
+  emp:boolean=false;
+  BackgroundTitlePick:string;
+  hide:boolean=true
   ngOnInit(): void {
     this.getSucursal(); 
     this.InsertSuccess =false;
+    //const cld = new Cloudinary({cloud: {cloudName: 'drwkty7lb'}});
+    
   }
 
+  onSelect(event) {
+    console.log(event);
+    this.files = event.addedFiles;
+  }
+  
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
 
   resetForm(form: NgForm) {
   
@@ -34,6 +50,9 @@ export class CrudSucursalComponent implements OnInit {
     this.getSucursal();
     this.getLocators();
     this.cambiarTituloModal("NUEVA SUCURSAL");
+    this.BackgroundTitlePick = 'Subir imagen.'
+    this.hide = false;
+    this.ins= true;
     this.cambiarTituloModalSuccess("Sucursal Creada con Exito!")
 
   }
@@ -48,6 +67,41 @@ export class CrudSucursalComponent implements OnInit {
   }
 
   addSucursal(form: NgForm) {
+    
+    if (!form.value._id) {
+      this.emp = !this.files[0]
+      if (!this.emp){
+      this.btn= false;
+      let dataURl = this._UploadFotoService.Foto(this.files[0])
+      this._UploadFotoService.uploadImg(dataURl).subscribe(
+        res => {
+          form.value.foto = res['secure_url'];
+          this.sigue_addSuc(form);
+        }, err => {
+          console.log(err)
+        }
+      )
+      }
+    } else {
+      if (!this.files[0]) {
+        this.btn= false;
+        this.sigue_addSuc(form);
+      } else {
+        this.btn= false;
+       // let imgOld = form.value.foto;
+        let dataURl = this._UploadFotoService.Foto(this.files[0]);
+        this._UploadFotoService.uploadImg(dataURl).subscribe(
+          res => {
+            form.value.foto = res['secure_url'];
+            this.sigue_addSuc(form);
+          }, err => {
+            console.log(err)
+          })
+      }
+    }
+  }
+
+  sigue_addSuc(form: NgForm){
     this.InsertSuccess = false;
     if (form.value._id) {
       this.StoreLocatorService.updateStorelocator(form.value).subscribe(
@@ -65,7 +119,6 @@ export class CrudSucursalComponent implements OnInit {
            }
         }
       )
-        
         } else {
       this.StoreLocatorService.createStorelocator(form.value).subscribe(
         res => {
@@ -84,8 +137,11 @@ export class CrudSucursalComponent implements OnInit {
       )
     }
     this.InsertSuccess = false;
+    this.files = [];
+    this.btn=true;
+    this.CloseModal('SucursalModal');
+    this.hide = true;
   }
-
 
   deleteSucursal(id: string) {
     if (confirm('Seguro quieres eliminar esta sucursal?')) {
@@ -100,7 +156,9 @@ export class CrudSucursalComponent implements OnInit {
   }
 
   editSucursal(sucursal: Storelocator) {
-  
+    this.BackgroundTitlePick = 'Subir imagen si desea cambiarla.'
+    this.ins= false;
+    this.hide = false;
     this.cambiarTituloModal("EDITAR SUCURSAL");
     this.cambiarTituloModalSuccess("Sucursal Actualizada con Exito!")
     this.StoreLocatorService.selectedSucursal = sucursal;
@@ -129,13 +187,22 @@ export class CrudSucursalComponent implements OnInit {
 }
 
  cancel() {
+  this.files = [];
   this.getSucursal();
+  this.hide = true;
 }
 
   ModalClose(){
     this.InsertSuccess = false;
   }
-    
+
+  CloseModal(id: string): void {
+    setTimeout(() => {
+      document.getElementById(id).classList.remove('show');
+      document.querySelector('.modal-backdrop').remove();
+      window.location.reload();
+    }, 1000);
+  }
   
 
 }

@@ -11,7 +11,10 @@ h1 {
   border-bottom: 3px solid #ee7f3f; /* Añade una línea de un píxel de grosor debajo del campo */
   outline: none; /* Elimina el contorno cuando el campo está enfocado */
 }
-
+.maxwh{
+  max-width: 200px;
+  max-height: 200px;
+}
 .Presentacion{
   display: flex;
 }

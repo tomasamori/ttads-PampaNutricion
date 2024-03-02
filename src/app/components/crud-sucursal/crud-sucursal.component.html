@@ -61,7 +61,7 @@
                       </div>
                       <div class="col mi-fila">
 
-                        <div class="mi-elemento">
+                        <div class="mi-elemento"*ngIf="hide">
                           <label for="foto">Foto:</label>
                           <input
                             [ngClass]="{'input-error': foto.touched && !foto.valid, 'input-success': foto.valid && !foto.errors}"
@@ -72,6 +72,23 @@
                             </div>
                           </div>
                         </div>
+
+                        <div class="mi-elemento">
+                          <label for="foto">Foto:</label>
+                          <ngx-dropzone (change)="onSelect($event)" accept=".jpg, .png" [ngClass]="{'input-error': !this.files[0] && foto.touched && !foto.valid, 'input-success': this.files.length===1}"
+                          type="text" name="foto" #foto="ngModel" class="form-control" placeholder="Ingrese Foto"
+                          [(ngModel)]="StoreLocatorService.selectedSucursal.foto" required>
+                            <ngx-dropzone-label >{{BackgroundTitlePick}}</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngIf="files.length > 0" [file]="files[0]" [removable]="true" (removed)="onRemove($event)">
+                              <ngx-dropzone-label></ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                          </ngx-dropzone>
+                          <div *ngIf="!this.files[0] && ins && emp && !foto.valid">
+                            <div class="camposRequeridos" *ngIf="foto.errors['required']"> Foto es requerido *
+                            </div>
+                          </div>
+                        </div>
+
                         <div class="mi-elemento">
                           <label for="localidad">Localidad:</label>
                           <br>
@@ -121,7 +138,11 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                       (click)="cancel()">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button *ngIf="btn" type="submit" class="btn btn-success">Guardar</button>
+                    <div *ngIf="!btn" class="d-flex align-items-center">
+                      <strong>Loading...</strong>
+                      <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
                   </div>
 
                 </form>
@@ -134,7 +155,7 @@
           <tr *ngFor="let sc of StoreLocatorService.storeLocators">
             <td>{{sc.nombre}}</td>
             <td>{{sc.direccion}}</td>
-            <td><img src={{sc.foto}} class="img-thumbnail" /></td>
+            <td><img src={{sc.foto}} class="img-thumbnail maxwh" /></td>
             <td>{{sc.localidad.nombre}} {{sc.localidad.codPostal}}</td>
             <td>
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#SucursalModal"

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Storelocator } from "../../models/store-locator";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
-
+import {UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,15 +16,16 @@ export class StoreLocatorService {
     localidad:{_id:'', codPostal: '', nombre: ''},
     foto: ''
     };
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,private _UploadFotoService:UploadFotoService) { }
     storeLocators: Storelocator[];
     
     getAllStorelocator() {
       return this.http.get<Storelocator[]>(this.URL_API);
     }
-  
-    createStorelocator(storelocator : Storelocator){
-      return this.http.post(this.URL_API, storelocator);
+
+    createStorelocator(storelocator : Storelocator)
+    { 
+    return this.http.post(this.URL_API, storelocator);
     }
   
     updateStorelocator(storelocator : Storelocator){
