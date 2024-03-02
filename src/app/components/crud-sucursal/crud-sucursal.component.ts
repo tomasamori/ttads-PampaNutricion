@@ -42,6 +42,7 @@ export class CrudSucursalComponent implements OnInit {
   onRemove(event) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
+    this.emp = true;
   }
 
   resetForm(form: NgForm) {

@@ -108,7 +108,7 @@
                               requerido *</div>
                           </div>
                         </div>
-                        <div class="mi-elemento">
+                        <div class="mi-elemento" *ngIf="hide">
                           <div class="form-group">
                             <label for="imgUrl">Imagen:</label>
                             <input
@@ -119,6 +119,22 @@
                             <div *ngIf="imgUrl.touched && !imgUrl.valid">
                               <div class="camposRequeridos" *ngIf="imgUrl.errors['required']"> Imagen es requerido *
                               </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mi-elemento">
+                          <label for="imgUrl">Imagen:</label>
+                          <ngx-dropzone (change)="onSelect($event)" accept=".jpg, .png" [ngClass]="{'input-error': !this.files[0] && foto.touched && !foto.valid, 'input-success': this.files.length===1}"
+                          type="text" name="foto" #foto="ngModel" class="form-control" placeholder="Ingrese Foto"
+                          [(ngModel)]="productoService.selectedProduct.imgUrl" required>
+                            <ngx-dropzone-label >{{BackgroundTitlePick}}</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngIf="files.length > 0" [file]="files[0]" [removable]="true" (removed)="onRemove($event)">
+                              <ngx-dropzone-label></ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                          </ngx-dropzone>
+                          <div *ngIf="!this.files[0] && ins && emp && !foto.valid">
+                            <div class="camposRequeridos" *ngIf="foto.errors['required']"> Foto es requerido *
                             </div>
                           </div>
                         </div>
@@ -179,9 +195,13 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    <button *ngIf="btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                       (click)="cancel()">Cancelar</button>
                     <button type="submit" class="btn btn-success">Guardar</button>
+                    <div *ngIf="!btn" class="d-flex align-items-center">
+                      <strong>Loading...</strong>
+                      <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
                   </div>
                 </form>
               </div>

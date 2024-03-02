@@ -4,7 +4,7 @@ import { TipoMascotaService } from 'src/app/services/tipoMascota/tipoMascota.ser
 import { NgForm } from "@angular/forms";
 import { Producto } from 'src/app/models/producto';
 import { TipoMascota } from 'src/app/models/tipoMascota';
-
+import { UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
 
 
 @Component({
@@ -15,7 +15,13 @@ import { TipoMascota } from 'src/app/models/tipoMascota';
 export class CrudProductsComponent implements OnInit {
   InsertSuccess =false;
   errorMessage: string = "";
-  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService) { }
+  files: File[] = [];
+  btn:boolean=true;
+  ins:boolean=true;
+  emp:boolean=false;
+  BackgroundTitlePick:string;
+  hide:boolean=true
+  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService) { }
  
   tipoMascota: TipoMascota;
   
@@ -35,9 +41,21 @@ export class CrudProductsComponent implements OnInit {
     this.cambiarTituloModal("NUEVO PRODUCTO");
     this.cambiarTituloModalSuccess("Producto Creado con Exito!")
     this.productoService.selectedProduct.tipoMascota._id = '';
+    this.BackgroundTitlePick = 'Subir imagen.'
+    this.hide = false;
+    this.ins= true;
 
   }
-
+  onSelect(event) {
+    console.log(event);
+    this.files = event.addedFiles;
+  }
+  
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+    this.emp = true;
+  }
   getProducts() {
     this.productoService.getAllProducto().subscribe(
       (res) => {
@@ -48,6 +66,43 @@ export class CrudProductsComponent implements OnInit {
   }
 
   addproduct(form: NgForm) {
+    if (!form.value._id) {
+      this.emp = !this.files[0]
+      if (!this.emp){
+        debugger;
+      this.btn= false;
+      let dataURl = this._UploadFotoService.Foto(this.files[0])
+      this._UploadFotoService.uploadImg(dataURl).subscribe(
+        res => {
+          form.value.imgUrl = res['secure_url'];
+          debugger;
+          this.sigue_AddProd(form);
+        }, err => {
+          console.log(err)
+        }
+      )
+      }
+    } else {
+      if (!this.files[0]) {
+        this.btn= false;
+        this.sigue_AddProd(form);
+      } else {
+        this.btn= false;
+        
+        let dataURl = this._UploadFotoService.Foto(this.files[0]);
+        this._UploadFotoService.uploadImg(dataURl).subscribe(
+          res => {
+            form.value.imgUrl = res['secure_url'];
+            debugger;
+            this.sigue_AddProd(form);
+          }, err => {
+            console.log(err)
+          })
+      }
+    }
+  }
+
+  sigue_AddProd(form:NgForm){
     this.InsertSuccess = false;
     if (form.value._id) {
       this.productoService.updateProducto(form.value).subscribe(
@@ -86,6 +141,10 @@ export class CrudProductsComponent implements OnInit {
       )
     }
     this.InsertSuccess = false;
+    this.files = [];
+    this.btn=true;
+    this.CloseModal('ProductModal');
+    this.hide = true;
   }
 
 
@@ -106,6 +165,9 @@ export class CrudProductsComponent implements OnInit {
     this.cambiarTituloModalSuccess("Producto Actualizado con Exito!")
     this.productoService.selectedProduct = product;
     this.productoService.selectedProduct.tipoMascota._id = product.tipoMascota._id;
+    this.BackgroundTitlePick = 'Subir imagen si desea cambiarla.'
+    this.ins= false;
+    this.hide = false;
 
   }
 
@@ -133,6 +195,8 @@ export class CrudProductsComponent implements OnInit {
 
  cancel() {
   this.getProducts();
+  this.files = [];
+  this.hide = true;
   
 }
 
@@ -145,6 +209,14 @@ export class CrudProductsComponent implements OnInit {
     const newValue = inputElement.value.toUpperCase();
     // Asigna el nuevo valor en mayúsculas al modelo
     this.productoService.selectedProduct.nombre = newValue;
+  }
+
+  CloseModal(id: string): void {
+    setTimeout(() => {
+      document.getElementById(id).classList.remove('show');
+      document.querySelector('.modal-backdrop').remove();
+      window.location.reload();
+    }, 1000);
   }
 
 }
