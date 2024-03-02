@@ -1,94 +1,144 @@
-<div class="container-fluid p-0">
-  <div class="listfs align-items-center">
-    <br />
-    <div class="container-fluid p-3">
-      <h1 class="text-center text-white display-2 tbg">Carrito de Compras</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="listfs align-items-center">
+      <br />
+      <div class="container-fluid p-3">
+        <h1 class="text-center text-white display-2 tbg">Carrito de Compras</h1>
+      </div>
     </div>
-  </div>
-</div>
 
-<div *ngIf="(cartService.getAllCarrito().length)==0">
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="contenedor imagen">
-    <a href="/products" class="imagen">
-      <img class="imagen" src="https://i.pinimg.com/564x/55/26/8c/55268c6a3e4ce1823888c9825eac5c5e.jpg"
-        alt="Imagen Centrada">
-    </a>
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-</div>
-
-<br>
-<br>
-
-<div class="row">
-  <!-- Columna de 8 -->
-  <div class="col-md-1"></div>
-  <div class="col-md-8">
-    <div class="list-cart" *ngFor="let p of cartService.getAllCarrito()">
-      <app-product-card _id="{{p._id}}" brand="{{p.marca}}" name="{{p.nombre}}" discount="{{p.promo}}"
-        description="{{p.descripcion}}" weight="{{p.peso}}" petName="{{p.tipoMascota.nombre}}"
-        petAge="{{p.tipoMascota.edad}}" petSize="{{p.tipoMascota.tamanoRaza}}" price="{{p.precio.toFixed(2)}}"
-        imgUrl="{{p.imgUrl}}" amount1="{{p.amount}}" TpoObj="1" (counterChanged)="onCounterChange()">
-      </app-product-card>
+    <!--Imagen en caso de carro vacio-->
+    <div *ngIf="(cartService.getAllCarrito().length)==0">
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="contenedor imagen">
+        <a href="/products" class="imagen">
+          <img class="imagen" src="https://i.pinimg.com/564x/55/26/8c/55268c6a3e4ce1823888c9825eac5c5e.jpg"
+            alt="Imagen Centrada">
+        </a>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
-  </div>
 
-  <!-- Columna de 4 -->
-  <div *ngIf="(cartService.getAllCarrito().length)>0" class="col-md-2">
+    <br>
+    <br>
 
-    <div class="container-fluid bg-gray p-2">
-      <p class="text-center mb-2 lead small">Detalle de Pedido</p>
-      <br>
-      <p class="text-left mb-0 small">
-        <strong>&nbsp;&nbsp;&nbsp; Cantidad de productos</strong> 
-        <span style="float: right;">{{CantidadAritulos()}}&nbsp;&nbsp;&nbsp; </span>
-      </p>
-      
-      <p class="text-left mb-0 small">
-        <strong>&nbsp;&nbsp;&nbsp; Subtotal</strong> 
-        <span style="float: right;">$ {{SubTotal}}&nbsp;&nbsp;&nbsp;</span>
-      </p>
+    <!--En caso de que no este vacio-->
 
-      <p class="text-left mb-2 small">
-        <strong>&nbsp;&nbsp;&nbsp; Envio</strong> 
-        <span style="float: right;">Gratis&nbsp;&nbsp;&nbsp;</span>
-      </p>
-      
-      
-      <br>
-
-      
-      <p class="text-left mb-2 small">
-        <strong>&nbsp;&nbsp;&nbsp;&nbsp;Total</strong>
-        <span style="float: right;">$ {{Total}}&nbsp;&nbsp;&nbsp;</span>
-      </p>
-      
-      <div class="row justify-content-center mt-1 mb-0">
-        <div class="d-flex justify-content-center">
-          
-          <button type="button" class="btn btn-success" style="width: 80%;" (click)="Pay()">
-            Finalizar compra
-          </button>
+    <div class="row p-3">
+      <div class="col-md-10">
+        <div>
+          <div class="list-cart w-100" *ngFor="let p of cartService.getAllCarrito()">
+            <app-product-card 
+              _id="{{p._id}}" 
+              brand="{{p.marca}}" 
+              name="{{p.nombre}}" 
+              discount="{{p.promo}}"
+              description="{{p.descripcion}}" 
+              weight="{{p.peso}}" 
+              petName="{{p.tipoMascota.nombre}}"
+              petAge="{{p.tipoMascota.edad}}" 
+              petSize="{{p.tipoMascota.tamanoRaza}}" 
+              price="{{p.precio.toFixed(2)}}"
+              imgUrl="{{p.imgUrl}}" 
+              amount1="{{p.amount}}" 
+              TpoObj="1" 
+              (counterChanged)="onCounterChange()">
+            </app-product-card>
+          </div>
         </div>
       </div>
-      
-      <div class="d-flex justify-content-center mt-0 mb-0">
-        <button class="btn btn-link btn-sm text-secondary lead text-decoration-none" type="button" (click)="List()">
-          Seguir comprando
-        </button>
+
+
+      <!-- Columna de 4 -->
+     
+      <div *ngIf="(cartService.getAllCarrito().length)>0" class="col-md-2">
+
+        <div class="container-fluid bg-gray p-2">
+          <p class="text-center mb-2 lead small">Detalle de Pedido</p>
+          <br>
+          <p class="text-left mb-0 small">
+            <strong>&nbsp;&nbsp;&nbsp; Cantidad de productos</strong>
+            <span style="float: right;">{{CantidadAritulos()}}&nbsp;&nbsp;&nbsp; </span>
+          </p>
+          <p class="text-left mb-0 small">
+            <strong>&nbsp;&nbsp;&nbsp; Subtotal</strong>
+            <span style="float: right;">$ {{SubTotal}}&nbsp;&nbsp;&nbsp;</span>
+          </p>
+          <p class="text-left mb-2 small">
+            <strong>&nbsp;&nbsp;&nbsp; Envio</strong>
+            <span style="float: right;">Gratis&nbsp;&nbsp;&nbsp;</span>
+          </p>
+
+          <br>
+
+          <p class="text-left mb-2 small">
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;Total</strong>
+            <span style="float: right;">$ {{Total}}&nbsp;&nbsp;&nbsp;</span>
+          </p>
+
+          <div class="row justify-content-center mt-1 mb-0">
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-success" style="width: 80%;" data-bs-toggle="modal"
+                data-bs-target="#confirm">
+                Finalizar compra
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center mt-0 mb-0">
+            <button class="btn btn-link btn-sm text-secondary lead text-decoration-none" type="button" (click)="List()">
+              Seguir comprando
+            </button>
+          </div>
+
+
       </div>
+    </div>
       
     </div>
   </div>
-  <div class="col-md-1"></div>
 </div>
+<br>
 
-<br>
-<br>
+
+<!--Modal Confirm-->
+<div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle de compra</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">¿Está seguro que desea finalizar la compra?</p>
+        <p class="text-left mb-0 small">
+          <strong>&nbsp;&nbsp;&nbsp; Cantidad de productos</strong>
+          <span style="float: right;">{{CantidadAritulos()}}&nbsp;&nbsp;&nbsp; </span>
+        </p>
+        <p class="text-left mb-0 small">
+          <strong>&nbsp;&nbsp;&nbsp; Subtotal</strong>
+          <span style="float: right;">$ {{SubTotal}}&nbsp;&nbsp;&nbsp;</span>
+        </p>
+        <p class="text-left mb-2 small">
+          <strong>&nbsp;&nbsp;&nbsp; Envio</strong>
+          <span style="float: right;">Gratis&nbsp;&nbsp;&nbsp;</span>
+        </p>
+        <br>
+        <p class="text-left mb-2 small">
+          <strong>&nbsp;&nbsp;&nbsp;&nbsp;Total</strong>
+          <span style="float: right;">$ {{Total}}&nbsp;&nbsp;&nbsp;</span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="Pay()">Comprar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm } from "@angular/forms";
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -58,7 +59,7 @@ export class NavbarComponent implements OnInit {
   readName() {
     return localStorage.getItem('usuarioFoundNombre');
   }
-
+  
   login(form: NgForm) {
     this.authService.login(form.value)
       .subscribe(res => {
