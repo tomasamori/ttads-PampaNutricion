@@ -65,14 +65,12 @@
                       <div class="col mi-fila">
                         <div class="mi-elemento">
                           <label for="peso">Peso:</label>
-                          <input
-                            [ngClass]="{'input-error': peso.touched && !peso.valid, 'input-success': peso.valid && !peso.errors}"
-                            type="number" name="peso" #peso="ngModel" class="form-control" placeholder="Ingrese Peso (Kg)"
-                            maxlength="5" [(ngModel)]="productoService.selectedProduct.peso" min="0" max="999" required>
+                          <input [ngClass]="{'input-error': peso.touched && !peso.valid, 'input-success': peso.valid && !peso.errors}"
+                            type="text" name="peso" #peso="ngModel" class="form-control" placeholder="Ingrese Peso (Kg)" maxlength="5"
+                            [(ngModel)]="productoService.selectedProduct.peso" pattern="[0-9]+([.][0-9]+)?" required>
                           <div *ngIf="peso.touched && !peso.valid">
                             <div class="camposRequeridos" *ngIf="peso.errors['required']"> Peso es requerido *</div>
-                            <div class="camposRequeridos" *ngIf="peso.errors['min']">El valor mínimo permitido es {{peso.errors['min'].min}} *</div>
-                            <div class="camposRequeridos" *ngIf="peso.errors['max']">El valor máximo permitido es {{peso.errors['max'].max}} *</div> 
+                            <div class="camposRequeridos" *ngIf="peso.errors['pattern']">Ingrese un valor numérico válido *</div>
                           </div>
                         </div>
                         <div class="mi-elemento">
