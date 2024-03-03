@@ -26,7 +26,7 @@ export class CrudUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+    if (localStorage.getItem('rol') === 'admin') {
       this.getUsuario(); 
       this.InsertSuccess =false;
       this.getRols();

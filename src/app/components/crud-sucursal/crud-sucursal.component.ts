@@ -30,7 +30,7 @@ export class CrudSucursalComponent implements OnInit {
 
     //const cld = new Cloudinary({cloud: {cloudName: 'drwkty7lb'}});
     
-    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+    if (localStorage.getItem('rol') === 'admin') {
       this.getSucursal(); 
       this.InsertSuccess =false;
     }

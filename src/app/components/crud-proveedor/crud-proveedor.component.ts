@@ -20,7 +20,7 @@ export class CrudProveedorComponent implements OnInit {
 
   
   ngOnInit(): void {
-    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+    if (localStorage.getItem('rol') === 'admin') {
       this.getProveedor(); 
       this.InsertSuccess =false;
     }

@@ -20,7 +20,7 @@ export class CrudTipoMascotaComponent implements OnInit {
   
   ngOnInit(): void {
     
-    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+    if (localStorage.getItem('rol') === 'admin') {
       this.getTipoMascota(); 
       this.InsertSuccess =false;
     }

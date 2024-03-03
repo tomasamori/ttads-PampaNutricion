@@ -28,7 +28,7 @@ export class CrudProductsComponent implements OnInit {
   
 
   ngOnInit(): void {
-    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+    if (localStorage.getItem('rol') === 'admin') {
       this.getProducts(); 
       this.InsertSuccess =false;
       this.getTypesOfPets();
