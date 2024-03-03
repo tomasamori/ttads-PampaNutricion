@@ -121,12 +121,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of selectedOrder.productos; let i = index" class="bg-light">
-                            <td class="text-center">{{ product.marca }}</td>
-                            <td class>{{ product.nombre }}</td>
-                            <td class="text-center">{{ selectedOrder.cantidad[i] }}</td>
-                            <td class="text-center">{{ product.peso }}</td>
-                            <td class="text-center">$ {{ product.precio }}</td>
+                        <tr *ngFor="let product of selectedOrder.items; let i = index" class="bg-light">
+                            <td class="text-center">{{ product.producto.marca }}</td>
+                            <td class>{{ product.producto.nombre }}</td>
+                            <td class="text-center">{{ selectedOrder.items[i].cantidad }}</td>
+                            <td class="text-center">{{ product.producto.peso }}</td>
+                            <td class="text-center">$ {{ product.producto.precio }}</td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-end">Subtotal:</td>

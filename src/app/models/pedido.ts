@@ -13,19 +13,21 @@ export interface Pedido {
     direccion: string, 
     telefono: string
   };
-  productos: {
-    _id?: any,
-    marca: string,
-    nombre: string,
-    descripcion: string,
-    peso: number,
-    imgUrl: string,
-    tipoMascota: {_id: string, nombre: string, tamanoRaza: string, edad: string},
-    precio: number,
-    promo: number,
-    amount:number
+  items: {
+    producto: {
+      _id?: string,
+      marca: string,
+      nombre: string,
+      descripcion: string,
+      peso: number,
+      imgUrl: string,
+      tipoMascota: { _id: string, nombre: string, tamanoRaza: string, edad: string },
+      precio: number,
+      promo: number,
+      amount: number
+    },
+    cantidad: number,
   }[];
-  cantidad: number[];
   subtotal: number;
   total: number;
   estado: string;

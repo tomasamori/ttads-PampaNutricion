@@ -31,9 +31,8 @@ export class CartComponent implements OnInit {
 
 
   pedido: Pedido = {
-    cantidad: [],
-    productos: [],
-    estado: 'En preparacion',
+    items: [],
+    estado: 'Pendiente',
     usuario: { _id: '', usuario: '', password: '', email: '', rol: { _id: '', name: '' }, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: '' }, // --> Cambiado para evitar el error del model
     subtotal: 0,
     total: 0,
@@ -106,9 +105,8 @@ export class CartComponent implements OnInit {
     this.Products = this.cartService.getAllCarrito();
     if (nro = 1) {
       for (var i = 0; i < this.Products.length; i++) {
-        this.pedido.cantidad.push(this.Products[i].amount);
-        this.pedido.productos.push(this.Products[i]);
-        this.pedido.estado = 'En preparacion'
+        this.pedido.items.push({ producto: this.Products[i], cantidad: this.Products[i].amount });
+        this.pedido.estado = 'Pendiente';
         this.pedido.usuario = { _id: localStorage.getItem('usuarioFoundId'), usuario: '', password: '', email: '', rol: { _id: '', name: '' }, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: '' }; // --> Cambiado para evitar el error del model
       }
       this.Totales(this.Products);

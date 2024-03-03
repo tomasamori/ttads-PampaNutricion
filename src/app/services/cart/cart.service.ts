@@ -33,9 +33,8 @@ export class CartService {
 
     selectedPedido: Pedido = {
       _id: '',
-      usuario: {_id: '', usuario: '', password: '', email: '', rol: {_id: '', name: ''}, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''}, // --> Cambiado para evitar el error del model
-      productos: [],
-      cantidad : [],
+      usuario: {_id: '', usuario: '', password: '', email: '', rol: {_id: '', name: ''}, cuil: '', nombre: '', fechaNacimiento: new Date(), direccion: '', telefono: ''},
+      items: [{producto: {_id: '', marca: '', nombre: '', descripcion: '', peso: 0, imgUrl: '', tipoMascota: {_id: '', nombre: '', tamanoRaza: '', edad: ''}, precio: 0, promo: 0, amount: 0}, cantidad: 0}],
       subtotal: 0,
       total:0,
       estado:'',
