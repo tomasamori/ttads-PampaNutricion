@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { NgForm } from "@angular/forms";
 import { DatePipe } from '@angular/common';
 import { Rol } from 'src/app/models/rol';
-
+import { Router } from '@angular/router';
 
 
 
@@ -16,7 +16,7 @@ import { Rol } from 'src/app/models/rol';
 })
 export class CrudUsuarioComponent implements OnInit {
 
-  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe, public rolService: RolService) { }
+  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe, public rolService: RolService,private router: Router) { }
   InsertSuccess =false;
   isDisabled = false;
   errorMessage: string = "";
@@ -25,11 +25,16 @@ export class CrudUsuarioComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUsuario(); 
-    this.InsertSuccess =false;
-    this.getRols();
-  }
-
+    
+    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+      this.getUsuario(); 
+      this.InsertSuccess =false;
+      this.getRols();
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
+  } 
 
   resetForm(form: NgForm) {
     this.isDisabled = false;
@@ -38,8 +43,6 @@ export class CrudUsuarioComponent implements OnInit {
     this.getRols();
     this.cambiarTituloModal("NUEVO USUARIO");
     this.cambiarTituloModalSuccess("Usuario Creado con Exito!")
-    
-
   }
 
   getUsuario() {
@@ -120,7 +123,8 @@ export class CrudUsuarioComponent implements OnInit {
         this.rolService.Roles = res;
         console.log(res)
       },
-      err => console.log(err)
+      err => {console.log(err)
+      }
     )
   }
 

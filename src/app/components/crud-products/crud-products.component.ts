@@ -5,6 +5,7 @@ import { NgForm } from "@angular/forms";
 import { Producto } from 'src/app/models/producto';
 import { TipoMascota } from 'src/app/models/tipoMascota';
 import { UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,18 +22,22 @@ export class CrudProductsComponent implements OnInit {
   emp:boolean=false;
   BackgroundTitlePick:string;
   hide:boolean=true
-  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService) { }
+  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService,private router: Router) { }
  
   tipoMascota: TipoMascota;
   
 
   ngOnInit(): void {
-    this.getProducts(); 
-    this.InsertSuccess =false;
-    this.getTypesOfPets();
+    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+      this.getProducts(); 
+      this.InsertSuccess =false;
+      this.getTypesOfPets();
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
 
   }
-
 
   resetForm(form: NgForm) {
     form.reset();

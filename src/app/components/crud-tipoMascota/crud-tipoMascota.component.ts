@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TipoMascotaService } from 'src/app/services/tipoMascota/tipoMascota.service';
 import { TipoMascota } from 'src/app/models/tipoMascota';
 import { NgForm } from "@angular/forms";
-
+import { Router } from '@angular/router';
 
 
 
@@ -13,14 +13,20 @@ import { NgForm } from "@angular/forms";
 })
 export class CrudTipoMascotaComponent implements OnInit {
 
-  constructor(public tipoMascotasService: TipoMascotaService) { }
+  constructor(public tipoMascotasService: TipoMascotaService,private router: Router) { }
   InsertSuccess =false;
   errorMessage: string = "";
 
   
   ngOnInit(): void {
-    this.getTipoMascota(); 
-    this.InsertSuccess =false;
+    
+    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+      this.getTipoMascota(); 
+      this.InsertSuccess =false;
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
   }
 
 

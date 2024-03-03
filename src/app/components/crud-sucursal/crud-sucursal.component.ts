@@ -4,9 +4,8 @@ import { NgForm } from "@angular/forms";
 import { Storelocator } from 'src/app/models/store-locator';
 import { Localidad } from 'src/app/models/localidad';
 import { LocalidadService } from 'src/app/services/localidad/localidad.service';
-import {Cloudinary} from '@cloudinary/url-gen'
 import {UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crud-sucursal',
@@ -18,7 +17,7 @@ export class CrudSucursalComponent implements OnInit {
 
   localidad: Localidad;
 
-  constructor(public StoreLocatorService: StoreLocatorService, public LocalidadService: LocalidadService, private _UploadFotoService:UploadFotoService) { }
+  constructor(public StoreLocatorService: StoreLocatorService, public LocalidadService: LocalidadService, private _UploadFotoService:UploadFotoService,private router: Router) { }
   InsertSuccess =false;
   errorMessage: string = "";
   files: File[] = [];
@@ -28,10 +27,16 @@ export class CrudSucursalComponent implements OnInit {
   BackgroundTitlePick:string;
   hide:boolean=true
   ngOnInit(): void {
-    this.getSucursal(); 
-    this.InsertSuccess =false;
+
     //const cld = new Cloudinary({cloud: {cloudName: 'drwkty7lb'}});
     
+    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+      this.getSucursal(); 
+      this.InsertSuccess =false;
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
   }
 
   onSelect(event) {

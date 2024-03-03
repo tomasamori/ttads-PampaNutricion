@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { Proveedor } from 'src/app/models/proveedor';
 import { NgForm } from "@angular/forms";
-
+import { Router } from '@angular/router';
 
 
 
@@ -13,15 +13,22 @@ import { NgForm } from "@angular/forms";
 })
 export class CrudProveedorComponent implements OnInit {
 
-  constructor(public ProveedorService: ProveedorService) { }
+  constructor(public ProveedorService: ProveedorService,private router: Router) { }
   DependencyError =false;
   InsertSuccess =false;
   errorMessage: string = "";
 
   
   ngOnInit(): void {
-    this.getProveedor(); 
-    this.InsertSuccess =false;
+    if (localStorage.getItem('rol') === 'admin' || localStorage.getItem('rol') === 'empleado') {
+      this.getProveedor(); 
+      this.InsertSuccess =false;
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
+
+
   }
 
 
