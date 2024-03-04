@@ -4,5 +4,10 @@
 }
 
 #card{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    transition: transform 0.3s; /* Transición suave para el efecto */
 }
+
+.card:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al 110% al pasar el ratón por encima */
+  }

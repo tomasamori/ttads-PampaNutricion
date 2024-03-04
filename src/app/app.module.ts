@@ -33,6 +33,10 @@ import { DatePipe } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { OrderFilterByNumberPipe } from './pipes/order-filter-by-number.pipe';
+import { OrderFilterByClientPipe } from './pipes/order-filter-by-client.pipe';
+import { OrderFilterByDatePipe } from './pipes/order-filter-by-date.pipe';
+import { OrderFilterByStatesPipe } from './pipes/order-filter-by-states.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +59,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     StoreLocatorCardComponent,
     CartComponent,
     ResetPasswordComponent,
-    OrderManagerComponent
+    OrderManagerComponent,
+    OrderFilterByNumberPipe,
+    OrderFilterByClientPipe,
+    OrderFilterByDatePipe,
+    OrderFilterByStatesPipe
   ],
   imports: [
     BrowserModule,

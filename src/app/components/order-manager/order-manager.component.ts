@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Pedido } from 'src/app/models/pedido';
 import { Usuario } from 'src/app/models/usuario';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
@@ -12,7 +13,13 @@ export class OrderManagerComponent {
   
   constructor(public pedidoService: PedidoService) { }
 
-  isCliente = false; 
+  isCliente = false;
+  orderList: Pedido[] = [];
+  data: Pedido[];
+  filterOrderByNumber = '';
+  filterOrderByClient = ''; 
+  filterOrderByDate = '';
+  filterOrderByStates = '';
   
   selectedUser = {
     _id: '',
@@ -70,7 +77,9 @@ export class OrderManagerComponent {
 
   estados: string[] = ['Pendiente', 'En preparación', 'Preparado', 'Entregado'];
 
-  
+  clearFilters() {
+    this.pedidoService.pedidos = this.orderList.sort();
+  }
   
   ngOnInit(): void {
     if (localStorage.getItem('rol') === 'cliente') {
@@ -78,7 +87,7 @@ export class OrderManagerComponent {
       this.isCliente = true;
     }
     else {
-      this.pedidoService.getAllPedido();
+      this.pedidoService.getAllPedido()
     }
   }
 
