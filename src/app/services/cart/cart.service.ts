@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, observable } from 'rxjs';
 import {Producto} from "../../models/producto";
 import { Pedido } from 'src/app/models/pedido';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from "../../../environments/environment";
-import {Observable} from "rxjs";
-
 
 
 @Injectable({
@@ -107,44 +104,5 @@ export class CartService {
   }
 
 
-    getAllPedido() {
-      return this.http.get<Pedido>(this.URL_API);
-    }
-  
-    createPedido(pedido: Pedido){
-     const httpOptions = {
-        headers: new HttpHeaders({
-          "x-access-token": localStorage.getItem('token')
-        })
-      };
-      return this.http.post<Pedido>(this.URL_API, pedido,httpOptions);
-    }
-  
-    updatePedido(pedido : Pedido){
-      return this.http.put(`${this.URL_API}/${pedido._id}`, pedido);
-    }
-  
-    deletePedido(_id:string){
-      return this.http.delete(`${this.URL_API}/${_id}`)
-    }
-  
-    getRecordById(_id: String): Observable<Pedido>{
-      return this.http.get<Pedido>(`${this.URL_API}/${_id}`);
-    }
-
-    loadImageAsBase64(imageUrl: string): Promise<string> {
-      return this.http.get(imageUrl, { responseType: 'blob' })
-        .toPromise()
-        .then(blob => this.blobToBase64(blob));
-    }
-  
-    private blobToBase64(blob: Blob): Promise<string> {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    }
 
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient,HttpHeaders } from "@angular/common/http";
 import { Storelocator } from "../../models/store-locator";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
@@ -19,25 +19,49 @@ export class StoreLocatorService {
     constructor(private http: HttpClient,private _UploadFotoService:UploadFotoService) { }
     storeLocators: Storelocator[];
     
+    private token = localStorage.getItem('token');
+    private id = localStorage.getItem('usuarioFoundId');
+
+
     getAllStorelocator() {
-      return this.http.get<Storelocator[]>(this.URL_API);
+      const headers = new HttpHeaders({
+        'x-access-token': this.token,
+        'id': this.id
+        }); 
+      return this.http.get<Storelocator[]>(this.URL_API,{headers:headers});
     }
 
     createStorelocator(storelocator : Storelocator)
     { 
-    return this.http.post(this.URL_API, storelocator);
+      const headers = new HttpHeaders({
+        'x-access-token': this.token,
+        'id': this.id
+        }); 
+    return this.http.post(this.URL_API, storelocator,{headers:headers});
     }
   
     updateStorelocator(storelocator : Storelocator){
-      return this.http.put(`${this.URL_API}/${storelocator._id}`, storelocator);
+      const headers = new HttpHeaders({
+        'x-access-token': this.token,
+        'id': this.id
+        }); 
+      return this.http.put(`${this.URL_API}/${storelocator._id}`, storelocator,{headers:headers});
     }
   
     deleteStorelocator(direccion:string){
-      return this.http.delete(`${this.URL_API}/${direccion}`)
+      const headers = new HttpHeaders({
+        'x-access-token': this.token,
+        'id': this.id
+        }); 
+      return this.http.delete(`${this.URL_API}/${direccion}`,{headers:headers})
     }
   
     getRecordById(direccion: String): Observable<Storelocator>{
-      return this.http.get<Storelocator>(`${this.URL_API}/${direccion}`);
+      const headers = new HttpHeaders({
+        'x-access-token': this.token,
+        'id': this.id
+        }); 
+      return this.http.get<Storelocator>(`${this.URL_API}/${direccion}`,{headers:headers});
     }
 
 }

@@ -8,6 +8,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { Pedido } from 'src/app/models/pedido';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service'
+import { PedidoService } from 'src/app/services/pedido/pedido.service'
 
 @Component({
   selector: 'app-cart',
@@ -25,7 +26,7 @@ export class CartComponent implements OnInit {
   SubTotal: Number = 0;
 
 
-  constructor(protected cartService: CartService, private router: Router, private toastr: ToastrService, private UsuService: UsuarioService) {
+  constructor(protected cartService: CartService, private router: Router, private toastr: ToastrService, private UsuService: UsuarioService,private pedidoService:PedidoService) {
     this.loadImage();
   }
 
@@ -79,7 +80,7 @@ export class CartComponent implements OnInit {
     if (localStorage.getItem('usuarioFoundId')) {
       if (localStorage.getItem('token')) {
         this.MapProdToPed(1);
-        this.cartService.createPedido(this.pedido).subscribe(
+        this.pedidoService.createPedido(this.pedido).subscribe(
           (res: Pedido) => {
             let pro = this.cartService.getAllCarrito();
             this.createPDF(res, pro);
@@ -307,7 +308,7 @@ export class CartComponent implements OnInit {
   }
   loadImage() {
     const imageUrl = 'assets/images/Pampa-LogoV.png';
-    this.cartService.loadImageAsBase64(imageUrl)
+    this.pedidoService.loadImageAsBase64(imageUrl)
       .then(base64 => this.base64Image = base64)
       .catch(error => console.error('Error loading image:', error));
   }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient,HttpHeaders } from "@angular/common/http";
 import { TipoMascota } from "../../models/tipoMascota";
 import { Producto } from "../../models/producto";
 import { environment } from "../../../environments/environment";
@@ -23,27 +23,54 @@ export class TipoMascotaService {
 
   productos:Producto[];
 
+  private token = localStorage.getItem('token');
+  private id = localStorage.getItem('usuarioFoundId');
+
   getAllTiposMascotas() {
-    return this.http.get<TipoMascota[]>(this.URL_API);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<TipoMascota[]>(this.URL_API,{headers:headers});
   }
 
   createTipoMascota(tipoMascota : TipoMascota){
-    return this.http.post(this.URL_API, tipoMascota);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.post(this.URL_API, tipoMascota,{headers:headers});
   }
 
   updateTipoMascota(tipoMascota : TipoMascota){
-    return this.http.put(`${this.URL_API}/${tipoMascota._id}`, tipoMascota);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.put(`${this.URL_API}/${tipoMascota._id}`, tipoMascota,{headers:headers});
   }
 
   deleteTipoMacota(_id:string){
-    return this.http.delete(`${this.URL_API}/${_id}`)
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.delete(`${this.URL_API}/${_id}`,{headers:headers})
   }
 
   getRecordById(_id: String): Observable<TipoMascota>{
-    return this.http.get<TipoMascota>(`${this.URL_API}/${_id}`);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<TipoMascota>(`${this.URL_API}/${_id}`,{headers:headers});
   }
 
   findProductoByTipoMascota(id: string) {
-    return this.http.get<Producto[]>(`${this.URL_API}/${id}/productos`);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<Producto[]>(`${this.URL_API}/${id}/productos`,{headers:headers});
   }
 }

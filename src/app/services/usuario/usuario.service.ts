@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient , HttpHeaders } from "@angular/common/http";
 import { Usuario } from "../../models/usuario";
 import { environment } from "../../../environments/environment";
-import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -28,8 +27,17 @@ export class UsuarioService {
 
     usuarios: Usuario[];
 
+    private token = localStorage.getItem('token');
+    private id = localStorage.getItem('usuarioFoundId');
+
+
     getAllUsuario() {
-        return this.http.get<Usuario[]>(this.URL_API).subscribe(
+        const headers = new HttpHeaders({
+            'x-access-token': this.token,
+            'id': this.id
+            }); 
+        
+        return this.http.get<Usuario[]>(this.URL_API,{headers:headers}).subscribe(
             (res) => {
                 this.usuarios = res;
             },
@@ -38,18 +46,34 @@ export class UsuarioService {
     }
 
     createUsuario(usuario : Usuario){
-        return this.http.post(this.URL_API, usuario);
+        const headers = new HttpHeaders({
+            'x-access-token': this.token,
+            'id': this.id
+            }); 
+        return this.http.post(this.URL_API, usuario,{headers:headers});
     }
 
     updateUsuario(usuario : Usuario){
-        return this.http.put(`${this.URL_API}/${usuario._id}`, usuario);
+        const headers = new HttpHeaders({
+            'x-access-token': this.token,
+            'id': this.id
+            }); 
+        return this.http.put(`${this.URL_API}/${usuario._id}`, usuario,{headers:headers});
     }
 
     deleteUsuario(_id:string){
-        return this.http.delete(`${this.URL_API}/${_id}`)
+        const headers = new HttpHeaders({
+            'x-access-token': this.token,
+            'id': this.id
+            }); 
+        return this.http.delete(`${this.URL_API}/${_id}`,{headers:headers})
     }
 
     getRecordById(_id: String){
-        return this.http.get<Usuario>(`${this.URL_API}/${_id}`);
+        const headers = new HttpHeaders({
+            'x-access-token': this.token,
+            'id': this.id
+            }); 
+        return this.http.get<Usuario>(`${this.URL_API}/${_id}`,{headers:headers});
     }
 }

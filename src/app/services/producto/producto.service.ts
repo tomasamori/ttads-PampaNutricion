@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Producto } from "../../models/producto";
 import { environment } from "../../../environments/environment";
 import {Observable} from "rxjs";
@@ -25,24 +25,47 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
   productos: Producto[];
+  
+  private token = localStorage.getItem('token');
+  private id = localStorage.getItem('usuarioFoundId');
 
   getAllProducto() {
-    return this.http.get<Producto[]>(this.URL_API);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<Producto[]>(this.URL_API,{headers:headers});
   }
 
   createProducto(producto : Producto){
-    return this.http.post(this.URL_API, producto);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.post(this.URL_API, producto,{headers:headers});
   }
 
   updateProducto(producto : Producto){
-    return this.http.put(`${this.URL_API}/${producto._id}`, producto);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.put(`${this.URL_API}/${producto._id}`, producto,{headers:headers});
   }
 
   deleteProduct(_id:string){
-    return this.http.delete(`${this.URL_API}/${_id}`)
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.delete(`${this.URL_API}/${_id}`,{headers:headers})
   }
 
   getRecordById(_id: String): Observable<Producto>{
-    return this.http.get<Producto>(`${this.URL_API}/${_id}`);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<Producto>(`${this.URL_API}/${_id}`,{headers:headers});
   }
 }
