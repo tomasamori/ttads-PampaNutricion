@@ -66,7 +66,11 @@ export class PedidoService {
   }
 
   deletePedido(_id: string){
-    return this.http.delete(`${this.URL_API}/${_id}`)
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+    });
+    return this.http.delete(`${this.URL_API}/${_id}`,{headers:headers})
   }
 
   getPedidosByUser(userId: string) {
