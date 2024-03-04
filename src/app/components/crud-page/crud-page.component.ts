@@ -7,11 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./crud-page.component.css']
 })
 export class CrudPageComponent implements OnInit {
-
+isAdmin:Boolean=true;
+isEmpleado:boolean=true;
   constructor(private router: Router) { }
 
   ngOnInit(): void {    
-    if (localStorage.getItem('rol') === 'admin') {
+    if (localStorage.getItem('rol') === 'admin'|| localStorage.getItem('rol') === 'empleado') {
+      if(localStorage.getItem('rol') === 'admin'){
+          this.isAdmin = true;
+          this.isEmpleado=false;
+      }else{
+        this.isAdmin = false;
+        this.isEmpleado=true;
+      }
 
   }
   else {

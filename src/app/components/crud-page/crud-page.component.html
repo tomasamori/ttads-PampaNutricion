@@ -9,21 +9,21 @@
 <div class="container align-items-center">
     <div class="row">
       
-        <div class="col-lg-4">  
+        <div class="col-lg-4" *ngIf="isAdmin||isEmpleado">  
           <app-crud-card
             name="Producto"
             link="products"
             imagen="assets/images/Producto.png">
           </app-crud-card>   
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="isAdmin">
           <app-crud-card
            name="Tipo de Mascota"
            link="typeOfPets"
            imagen="assets/images/Mascota.png">
           </app-crud-card>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="isAdmin">
           <app-crud-card
            name="Usuario"
            link="users"
@@ -34,17 +34,17 @@
           <app-crud-card
            name="Localidad"
            link="locations"
-           imagen="assets/images/global.png">
+           imagen="assets/images/global.png" *ngIf="isAdmin">
           </app-crud-card>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="isAdmin">
           <app-crud-card
            name="Sucusales"
            link="Storelocator"
            imagen="assets/images/sucursales.png">
           </app-crud-card>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="isAdmin">
           <app-crud-card
            name="Proveedores"
            link="proveedor"
