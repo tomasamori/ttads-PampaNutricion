@@ -24,11 +24,7 @@ export class StoreLocatorService {
 
 
     getAllStorelocator() {
-      const headers = new HttpHeaders({
-        'x-access-token': this.token,
-        'id': this.id
-        }); 
-      return this.http.get<Storelocator[]>(this.URL_API,{headers:headers});
+      return this.http.get<Storelocator[]>(this.URL_API);
     }
 
     createStorelocator(storelocator : Storelocator)
