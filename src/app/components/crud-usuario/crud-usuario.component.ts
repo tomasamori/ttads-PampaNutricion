@@ -50,7 +50,6 @@ export class CrudUsuarioComponent implements OnInit {
   }
 
   addUsuario(form: NgForm) {
-    console.log(this.usuarioService.selectedUsuario)
     this.InsertSuccess = true;
     this.isDisabled = false;
     if (form.value._id) {
@@ -158,6 +157,8 @@ export class CrudUsuarioComponent implements OnInit {
     const dd = String(date.getDate() + 1).padStart(2, '0'); // Añade ceros a la izquierda si es necesario
     return `${yyyy}-${mm}-${dd}`;
   }
+
+  //Pruebas
 
   transformDate(date): string{
     return this.datePipe.transform(date, 'short');

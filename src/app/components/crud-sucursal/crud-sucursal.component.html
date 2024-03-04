@@ -23,7 +23,6 @@
                 <div class="modal-header bg-warning">
                   <h1 class="modal-title fs-5" id="h1-PUProd">{{ tituloModal }}</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <!--<span aria-hidden="true">&times;</span>-->
                   </button>
                 </div>
 
@@ -39,7 +38,7 @@
                           <label for="nombre">Nombre:</label>
                           <input
                             [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
-                            type="text" name="nombre" #nombre="ngModel" class="form-control" placeholder="Nombre"
+                            type="text" name="nombre" #nombre="ngModel" class="form-control" placeholder="Ingrese Nombre"
                             [(ngModel)]="StoreLocatorService.selectedSucursal.nombre" required>
                           <div *ngIf="nombre.touched && !nombre.valid">
                             <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -Nombre es requerido *
@@ -58,10 +57,9 @@
                               requerida *</div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col mi-fila">
 
-                        <div class="mi-elemento"*ngIf="hide">
+
+                        <div class="mi-elemento" *ngIf="hide">
                           <label for="foto">Foto:</label>
                           <input
                             [ngClass]="{'input-error': foto.touched && !foto.valid, 'input-success': foto.valid && !foto.errors}"
@@ -75,11 +73,13 @@
 
                         <div class="mi-elemento">
                           <label for="foto">Foto:</label>
-                          <ngx-dropzone (change)="onSelect($event)" accept=".jpg, .png" [ngClass]="{'input-error': !this.files[0] && foto.touched && !foto.valid, 'input-success': this.files.length===1}"
-                          type="text" name="foto" #foto="ngModel" class="form-control" placeholder="Ingrese Foto"
-                          [(ngModel)]="StoreLocatorService.selectedSucursal.foto" required>
-                            <ngx-dropzone-label >{{BackgroundTitlePick}}</ngx-dropzone-label>
-                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngIf="files.length > 0" [file]="files[0]" [removable]="true" (removed)="onRemove($event)">
+                          <ngx-dropzone (change)="onSelect($event)" accept=".jpg, .png"
+                            [ngClass]="{'input-error': !this.files[0] && foto.touched && !foto.valid, 'input-success': this.files.length===1}"
+                            type="text" name="foto" #foto="ngModel" class="form-control" placeholder="Ingrese Foto"
+                            [(ngModel)]="StoreLocatorService.selectedSucursal.foto" required>
+                            <ngx-dropzone-label>{{BackgroundTitlePick}}</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngIf="files.length > 0"
+                              [file]="files[0]" [removable]="true" (removed)="onRemove($event)">
                               <ngx-dropzone-label></ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                           </ngx-dropzone>
@@ -92,14 +92,14 @@
                         <div class="mi-elemento">
                           <label for="localidad">Localidad:</label>
                           <br>
-                          <select id="dropdownList"
+                          <select id="dropdownList" 
                             [ngClass]="{'input-error': localidad.touched && !localidad.valid, 'input-success': localidad.valid && !localidad.errors}"
                             [(ngModel)]="StoreLocatorService.selectedSucursal.localidad._id" #localidad="ngModel"
                             name="localidad" class="form-control" placeholder="Localidad" required>
+                            <option value="">Selecciona una opción...</option>
                             <option *ngFor="let l of LocalidadService.Localidades" value="{{l._id}}">{{l.nombre}}
                               {{l.codPostal}} </option>
                           </select>
-                          <i class="fas fa-chevron-down"></i> <!-- Icono de flecha hacia abajo -->
                           <div *ngIf="localidad.touched && !localidad.valid">
                             <div class="camposRequeridos" *ngIf="localidad.errors['required']"> Localidad es
                               requerido *
@@ -182,3 +182,21 @@
     </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

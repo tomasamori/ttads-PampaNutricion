@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Proveedor } from "../../models/proveedor";
 import { environment } from "../../../environments/environment";
 import {Observable} from "rxjs";
@@ -18,29 +18,52 @@ export class ProveedorService {
     email: '',
     telefono: ''
   };
-
+  
+  private token = localStorage.getItem('token');
+  private id = localStorage.getItem('usuarioFoundId');
+  
   constructor(private http: HttpClient) { }
   Proveedores: Proveedor[];
   
 
   getAllProveedores() {
-    return this.http.get<Proveedor[]>(this.URL_API);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<Proveedor[]>(this.URL_API,{headers:headers});
   }
 
   createProveedor(proveedor : Proveedor){
-    return this.http.post(this.URL_API, proveedor);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.post(this.URL_API, proveedor,{headers:headers});
   }
 
   updateProveedor(proveedor : Proveedor){
-    return this.http.put(`${this.URL_API}/${proveedor._id}`, proveedor);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.put(`${this.URL_API}/${proveedor._id}`, proveedor,{headers:headers});
   }
 
   deleteProveedor(_id:string){
-    return this.http.delete(`${this.URL_API}/${_id}`)
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.delete(`${this.URL_API}/${_id}`,{headers:headers})
   }
 
   getRecordById(_id: String): Observable<Proveedor>{
-    return this.http.get<Proveedor>(`${this.URL_API}/${_id}`);
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+      }); 
+    return this.http.get<Proveedor>(`${this.URL_API}/${_id}`,{headers:headers});
   }
 
 }

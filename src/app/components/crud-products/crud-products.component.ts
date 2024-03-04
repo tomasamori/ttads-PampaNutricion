@@ -22,16 +22,23 @@ export class CrudProductsComponent implements OnInit {
   emp:boolean=false;
   BackgroundTitlePick:string;
   hide:boolean=true
+  delete:boolean;
   constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService,private router: Router) { }
  
   tipoMascota: TipoMascota;
   
 
   ngOnInit(): void {
-    if (localStorage.getItem('rol') === 'admin') {
+    if (localStorage.getItem('rol') === 'admin'||localStorage.getItem('rol') === 'empleado') {
       this.getProducts(); 
       this.InsertSuccess =false;
       this.getTypesOfPets();
+      if (localStorage.getItem('rol') === 'admin')
+      { 
+        this.delete = true;
+      }else{
+        this.delete = false;
+      }
     }
     else {
       this.router.navigate(['/home']);
@@ -74,13 +81,11 @@ export class CrudProductsComponent implements OnInit {
     if (!form.value._id) {
       this.emp = !this.files[0]
       if (!this.emp){
-        debugger;
       this.btn= false;
       let dataURl = this._UploadFotoService.Foto(this.files[0])
       this._UploadFotoService.uploadImg(dataURl).subscribe(
         res => {
           form.value.imgUrl = res['secure_url'];
-          debugger;
           this.sigue_AddProd(form);
         }, err => {
           console.log(err)
@@ -98,7 +103,6 @@ export class CrudProductsComponent implements OnInit {
         this._UploadFotoService.uploadImg(dataURl).subscribe(
           res => {
             form.value.imgUrl = res['secure_url'];
-            debugger;
             this.sigue_AddProd(form);
           }, err => {
             console.log(err)

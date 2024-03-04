@@ -28,11 +28,20 @@ export class PedidoService {
   private token = localStorage.getItem('token');
   private id = localStorage.getItem('usuarioFoundId');
 
+
+  createPedido(pedido: Pedido){
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+    });
+     return this.http.post<Pedido>(this.URL_API, pedido,{headers:headers});
+   }
+
   getAllPedido() {
     // Configuración del encabezado con el token de seguridad
     const headers = new HttpHeaders({
       'x-access-token': this.token,
-      'id': localStorage.getItem('usuarioFoundId')
+      'id': this.id
     });
     
     return this.http.get<Pedido[]>(this.URL_API, { headers: headers }).subscribe(
@@ -57,7 +66,11 @@ export class PedidoService {
   }
 
   deletePedido(_id: string){
-    return this.http.delete(`${this.URL_API}/${_id}`)
+    const headers = new HttpHeaders({
+      'x-access-token': this.token,
+      'id': this.id
+    });
+    return this.http.delete(`${this.URL_API}/${_id}`,{headers:headers})
   }
 
   getPedidosByUser(userId: string) {
@@ -71,5 +84,20 @@ export class PedidoService {
       },
       err => console.log(err)
     );
+  }
+
+  loadImageAsBase64(imageUrl: string): Promise<string> {
+    return this.http.get(imageUrl, { responseType: 'blob' })
+      .toPromise()
+      .then(blob => this.blobToBase64(blob));
+  }
+
+  private blobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
   }
 }
