@@ -19,7 +19,7 @@
 <br />
 
 <div class="container">
-    <div class="row">
+    <div class="row">    
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -30,11 +30,25 @@
                                 <th class="text-center">Cliente</th>
                                 <th class="text-center">Fecha</th>
                                 <th class="text-center">Estado</th>
-                                <th class="text-center">Acciones</th>
-                            </tr>
+                                <th class="text-center">Acciones</th> </tr>
+                                <tr>
+                                    <th><input class="form-control" type="search" placeholder="" aria-label="Search" [(ngModel)]="filterOrderByNumber" name="filterOrderByNumber"></th>
+                                    <th><input class="form-control" type="search" placeholder="" aria-label="Search" [(ngModel)]="filterOrderByClient" name="filterOrderByClient"></th>
+                                    <th><input class="form-control" type="date" placeholder="" aria-label="Search" [(ngModel)]="filterOrderByDate" name="filterOrderByDate"></th>
+                                    <th>
+                                        <select class="form-select" [(ngModel)]="filterOrderByStates" name="filterOrderByStates">
+                                            <option value="">Selecciona un estado</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="En preparación">En preparación</option>
+                                            <option value="Preparado">Preparado</option>
+                                            <option value="Entregado">Entregado</option>
+                                          </select>
+                                    </th>
+                                    <th></th>
+                                </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let order of this.pedidoService.pedidos">
+                            <tr *ngFor="let order of this.pedidoService.pedidos | orderFilterByNumber: filterOrderByNumber.toString().toLowerCase() | orderFilterByClient: filterOrderByClient.toLowerCase() | orderFilterByDate: filterOrderByDate | orderFilterByStates: filterOrderByStates.toLowerCase() ">
                                 <td class="text-center">{{ order.nroPedido }}</td>
                                 <td class="text-center"><button data-bs-toggle="modal"
                                         [attr.data-bs-target]="'#userModal'" (click)="setSelectedUser(order.usuario)"
