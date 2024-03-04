@@ -30,11 +30,7 @@ export class ProductoService {
   private id = localStorage.getItem('usuarioFoundId');
 
   getAllProducto() {
-    const headers = new HttpHeaders({
-      'x-access-token': this.token,
-      'id': this.id
-      }); 
-    return this.http.get<Producto[]>(this.URL_API,{headers:headers});
+    return this.http.get<Producto[]>(this.URL_API);
   }
 
   createProducto(producto : Producto){
