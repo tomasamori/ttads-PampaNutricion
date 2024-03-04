@@ -81,13 +81,11 @@ export class CrudProductsComponent implements OnInit {
     if (!form.value._id) {
       this.emp = !this.files[0]
       if (!this.emp){
-        debugger;
       this.btn= false;
       let dataURl = this._UploadFotoService.Foto(this.files[0])
       this._UploadFotoService.uploadImg(dataURl).subscribe(
         res => {
           form.value.imgUrl = res['secure_url'];
-          debugger;
           this.sigue_AddProd(form);
         }, err => {
           console.log(err)
@@ -105,7 +103,6 @@ export class CrudProductsComponent implements OnInit {
         this._UploadFotoService.uploadImg(dataURl).subscribe(
           res => {
             form.value.imgUrl = res['secure_url'];
-            debugger;
             this.sigue_AddProd(form);
           }, err => {
             console.log(err)

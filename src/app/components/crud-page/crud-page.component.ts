@@ -13,7 +13,6 @@ isEmpleado:boolean=true;
 
   ngOnInit(): void {    
     if (localStorage.getItem('rol') === 'admin'|| localStorage.getItem('rol') === 'empleado') {
-      debugger;
       if(localStorage.getItem('rol') === 'admin'){
           this.isAdmin = true;
           this.isEmpleado=false;
