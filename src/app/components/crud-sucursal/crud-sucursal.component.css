@@ -44,6 +44,19 @@ h1 {
   transform: translateY(-50%);
 
 }
+
+#ComeBack{
+  transition: transform 0.3s; 
+}
+#ComeBack :hover{
+  transform: scale(1.1);
+}
+#imgBack{
+  width: 60px; /* Establece el ancho deseado */
+  height: 60px; /* Mantiene la proporción original */
+  margin-right: 20px;
+  margin-top: 20px;
+}
 .form-control{
   width: 200px;
 }

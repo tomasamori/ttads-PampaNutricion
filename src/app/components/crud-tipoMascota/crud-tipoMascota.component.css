@@ -12,7 +12,18 @@ h1 {
   outline: none; /* Elimina el contorno cuando el campo está enfocado */
   
 }
-
+#ComeBack{
+  transition: transform 0.3s; 
+}
+#ComeBack :hover{
+  transform: scale(1.1);
+}
+#imgBack{
+  width: 60px; /* Establece el ancho deseado */
+  height: 60px; /* Mantiene la proporción original */
+  margin-right: 20px;
+  margin-top: 20px;
+}
 
 .Presentacion{
   display: flex;

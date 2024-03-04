@@ -1,6 +1,7 @@
 <div class="Presentacion">
   <img id="imgPresentacion" src="assets/images/Producto.png" alt="">
   <h1>TRABAJAR CON PRODUCTO</h1>
+  <a id="ComeBack" href="/crud-page"><img id="imgBack" src="assets/images/herramienta-de-llave.png" alt="Volver a Menú ABM"></a>
 </div>
 <div class="container">
   <div class="col">
@@ -195,7 +196,7 @@
                   <div class="modal-footer">
                     <button *ngIf="btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                       (click)="cancel()">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="submit" class="btn btn-success" *ngIf="btn">Guardar</button>
                     <div *ngIf="!btn" class="d-flex align-items-center">
                       <strong>Loading...</strong>
                       <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
@@ -242,3 +243,11 @@
     </div>
   </div>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

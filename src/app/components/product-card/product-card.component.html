@@ -71,7 +71,7 @@
                     price="{{calculatePrice(+price, +discount)}}"
                     (updatePriceEvent)="updatePrice($event)"
                     (updateAmountEvent)="updateAmount($event)"
-                    amount1 = amount1
+                    amount1 = {{amount1}}
                     TpoObj = {{TipOBJ()}}
                     (counterChanged)="onCounterChange()"
                     >
