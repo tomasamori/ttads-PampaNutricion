@@ -12,7 +12,12 @@ h1 {
   outline: none; /* Elimina el contorno cuando el campo está enfocado */
 }
 
-
+.mi-fila {
+  display: block;
+  flex-wrap:wrap-reverse; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
+  gap: 10px; /* Espacio entre los elementos en la misma línea */
+  padding: 20px;
+}
 .Presentacion{
   display: flex;
 }
