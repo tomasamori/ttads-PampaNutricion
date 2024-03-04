@@ -12,7 +12,6 @@ export class ProveedorService {
   URL_API = environment.URL_PROVEEDOR;
 
   selectedProveedor: Proveedor = {
-    cuil: '',
     cuit: '',
     razonSocial: '' ,
     email: '',
