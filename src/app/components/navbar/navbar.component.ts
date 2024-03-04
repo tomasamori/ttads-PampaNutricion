@@ -88,6 +88,10 @@ export class NavbarComponent implements OnInit {
       )
   }
 
+  modalClear(form: NgForm){
+    form.reset();
+    this.errorMessage='';
+  }
 
   register(form: NgForm) {
     this.authService.register(form.value)

@@ -86,6 +86,8 @@ export class CartComponent implements OnInit {
             this.createPDF(res, pro);
             this.cartService.vaciarCarrito();
             this.CloseModal('confirm');
+            setTimeout(() => {
+            this.router.navigate(['/home']);},1000)
           },
           err => {
             console.log(err)
@@ -130,7 +132,7 @@ export class CartComponent implements OnInit {
     setTimeout(() => {
       document.getElementById(id).classList.remove('show');
       document.querySelector('.modal-backdrop').remove();
-      window.location.reload();
+      //window.location.reload();
     }, 500);
   }
 

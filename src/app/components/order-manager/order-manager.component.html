@@ -130,8 +130,7 @@
                             <th class="text-center">Marca</th>
                             <th class="text-center">Nombre Producto</th>
                             <th class="text-center">Cantidad</th>
-                            <th class="text-center">Peso</th>
-                            <th class="text-center">Precio</th>
+                            <th class="text-end">Precio</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,15 +138,14 @@
                             <td class="text-center">{{ product.producto.marca }}</td>
                             <td class>{{ product.producto.nombre }}</td>
                             <td class="text-center">{{ selectedOrder.items[i].cantidad }}</td>
-                            <td class="text-center">{{ product.producto.peso }}</td>
-                            <td class="text-center">$ {{ product.producto.precio }}</td>
+                            <td class="text-end">$ {{ product.producto.precio }}</td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-end">Subtotal:</td>
+                            <td colspan="3" class="text-end">Subtotal:</td>
                             <td class="text-end">$ {{ selectedOrder.subtotal }}</td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-end">IVA:</td>
+                            <td colspan="3" class="text-end">IVA:</td>
                             <td class="text-end">21%</td>
                         </tr>
                     </tbody>
