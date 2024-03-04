@@ -195,7 +195,7 @@
                   <div class="modal-footer">
                     <button *ngIf="btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                       (click)="cancel()">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="submit" class="btn btn-success" *ngIf="btn">Guardar</button>
                     <div *ngIf="!btn" class="d-flex align-items-center">
                       <strong>Loading...</strong>
                       <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
