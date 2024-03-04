@@ -26,6 +26,7 @@ export class CrudSucursalComponent implements OnInit {
   emp:boolean=false;
   BackgroundTitlePick:string;
   hide:boolean=true
+
   ngOnInit(): void {
 
     //const cld = new Cloudinary({cloud: {cloudName: 'drwkty7lb'}});
@@ -33,6 +34,7 @@ export class CrudSucursalComponent implements OnInit {
     if (localStorage.getItem('rol') === 'admin') {
       this.getSucursal(); 
       this.InsertSuccess =false;
+      this.getLocators();
     }
     else {
       this.router.navigate(['/home']);
@@ -51,16 +53,15 @@ export class CrudSucursalComponent implements OnInit {
   }
 
   resetForm(form: NgForm) {
-  
     form.reset();
     this.getSucursal();
     this.getLocators();
     this.cambiarTituloModal("NUEVA SUCURSAL");
+    this.cambiarTituloModalSuccess("Sucursal Creada con Exito!")
+    this.StoreLocatorService.selectedSucursal.localidad._id = '';
     this.BackgroundTitlePick = 'Subir imagen.'
     this.hide = false;
     this.ins= true;
-    this.cambiarTituloModalSuccess("Sucursal Creada con Exito!")
-
   }
 
   getSucursal() {
@@ -114,7 +115,8 @@ export class CrudSucursalComponent implements OnInit {
         res => {
         console.log(res);
         this.getSucursal();
-        this.InsertSuccess = true;   
+        this.InsertSuccess = true;  
+        form.reset(); 
       },
         err => {
           console.log(err);
@@ -162,13 +164,14 @@ export class CrudSucursalComponent implements OnInit {
   }
 
   editSucursal(sucursal: Storelocator) {
-    this.BackgroundTitlePick = 'Subir imagen si desea cambiarla.'
-    this.ins= false;
-    this.hide = false;
     this.cambiarTituloModal("EDITAR SUCURSAL");
     this.cambiarTituloModalSuccess("Sucursal Actualizada con Exito!")
     this.StoreLocatorService.selectedSucursal = sucursal;
-    this.getLocators();
+    this.StoreLocatorService.selectedSucursal.localidad._id = sucursal.localidad._id; 
+    this.BackgroundTitlePick = 'Subir imagen si desea cambiarla.'
+    this.ins= false;
+    this.hide = false;
+   
   }
 
   getLocators() {

@@ -38,7 +38,7 @@
                         [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
                         type="text" name="nombre" #nombre="ngModel" maxlength="50"
                         [(ngModel)]="tipoMascotasService.selectedTipoMascota.nombre"
-                        placeholder="Ingrese nombre producto" class="form-control" required />
+                        placeholder="Ingrese Nombre Mascota" class="form-control" required />
                       <div *ngIf="nombre.touched && !nombre.valid">
                         <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *</div>
                       </div>

@@ -37,7 +37,7 @@
                         [ngClass]="{'input-error': codPostal.touched && !codPostal.valid, 'input-success': codPostal.valid && !codPostal.errors}"
                         type="number" name="codPostal" #codPostal="ngModel"
                         [(ngModel)]="LocalidadService.selectedLocalidad.codPostal"
-                        placeholder="Ingrese codigo postal" class="form-control" required />
+                        placeholder="Ingrese Código Postal" class="form-control" required />
                       <div *ngIf="codPostal.touched && !codPostal.valid">
                         <div class="camposRequeridos" *ngIf="codPostal.errors['required']"> Codigo Postal es requerido *</div>
                       </div>
@@ -48,7 +48,7 @@
                       <input
                         [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
                         type="text" name="nombre" #nombre="ngModel" class="form-control"
-                        placeholder="Nombre" [(ngModel)]="LocalidadService.selectedLocalidad.nombre"
+                        placeholder="Ingrese Nombre" [(ngModel)]="LocalidadService.selectedLocalidad.nombre"
                         required>
                       <div *ngIf="nombre.touched && !nombre.valid">
                         <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *

@@ -31,13 +31,21 @@ h1 {
         background-color: #ee7f3f;
         margin-left:20%;
 }
-
+.mi-fila {
+  display: block;
+  flex-wrap:wrap-reverse; /* Permite que los elementos se envuelvan en líneas adicionales según sea necesario */
+  gap: 10px; /* Espacio entre los elementos en la misma línea */
+  padding: 20px;
+}
 .dropdown i {
   position: absolute;
   top: 50%;
   right: 5px; /* Ajusta la posición de la flecha */
   transform: translateY(-50%);
 
+}
+.form-control{
+  width: 200px;
 }
 #SuccesContainer {
   flex-direction: column;
@@ -98,7 +106,7 @@ h1 {
 .columna {
   flex: 1; /* Las columnas se expanden para ocupar todo el espacio disponible */
   padding: 0 10px; /* Agrega un poco de espacio entre las columnas */
-  /* Ajusta otros estilos según sea necesario */
+
 }
 .imagen {
   width: 150px; /* Ancho de la imagen */
