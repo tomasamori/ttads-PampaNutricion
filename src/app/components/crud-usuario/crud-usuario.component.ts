@@ -92,16 +92,25 @@ export class CrudUsuarioComponent implements OnInit {
   }
 
 
-  deleteUsuario(id: string) {
-    if (confirm('¿Seguro quieres eliminar este usuario?')) {
-      this.usuarioService.deleteUsuario(id).subscribe(
-        (res) => {
-          this.getUsuario();
-        },
-        (err) => console.error(err)
-      );
-    }
-
+  deleteUsuario(id: string) {  
+    this.usuarioService.findOrdersByUser(id).subscribe(
+      (res: any[]) => {
+        if (!(res && res.length > 0)) {
+          if (confirm('¿Seguro quiere eliminar este usuario?')) {
+            this.usuarioService.deleteUsuario(id).subscribe(
+              () => {
+                this.getUsuario();
+              },
+              (err) => console.error(err)
+            );
+          } else {
+          }
+        } else {
+          alert('No se puede eliminar el usuario porque tiene pedidos asociados');
+        }
+      },
+      (err) => console.error(err)
+    );
   }
 
   editUsuario(usuario: Usuario) {

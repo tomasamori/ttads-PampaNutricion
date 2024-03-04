@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders } from "@angular/common/http";
 import { Usuario } from "../../models/usuario";
 import { environment } from "../../../environments/environment";
+import { Pedido } from "src/app/models/pedido";
 
 
 @Injectable({
@@ -76,4 +77,12 @@ export class UsuarioService {
             }); 
         return this.http.get<Usuario>(`${this.URL_API}/${_id}`,{headers:headers});
     }
+
+    findOrdersByUser(id: string) {
+        const headers = new HttpHeaders({
+          'x-access-token': this.token,
+          'id': this.id
+          }); 
+        return this.http.get<Pedido[]>(`${this.URL_API}/${id}/pedidos`,{headers:headers});
+      }
 }

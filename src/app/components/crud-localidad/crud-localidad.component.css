@@ -11,6 +11,18 @@ h1 {
   border-bottom: 3px solid #ee7f3f; /* Añade una línea de un píxel de grosor debajo del campo */
   outline: none; /* Elimina el contorno cuando el campo está enfocado */
 }
+#SuccesContainer {
+  flex-direction: column;
+}
+
+.SuccessItems{
+  margin-top: 10px;
+}
+
+#imgSuccess{
+  width: 100px; /* Ancho de la imagen */
+  height: 100px; /* Altura de la imagen */
+}
 #ComeBack{
   transition: transform 0.3s; 
 }
