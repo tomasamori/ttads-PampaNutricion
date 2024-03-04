@@ -22,16 +22,23 @@ export class CrudProductsComponent implements OnInit {
   emp:boolean=false;
   BackgroundTitlePick:string;
   hide:boolean=true
+  delete:boolean;
   constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService,private router: Router) { }
  
   tipoMascota: TipoMascota;
   
 
   ngOnInit(): void {
-    if (localStorage.getItem('rol') === 'admin') {
+    if (localStorage.getItem('rol') === 'admin'||localStorage.getItem('rol') === 'empleado') {
       this.getProducts(); 
       this.InsertSuccess =false;
       this.getTypesOfPets();
+      if (localStorage.getItem('rol') === 'admin')
+      { 
+        this.delete = true;
+      }else{
+        this.delete = false;
+      }
     }
     else {
       this.router.navigate(['/home']);
