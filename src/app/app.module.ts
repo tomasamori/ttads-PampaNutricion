@@ -20,7 +20,6 @@ import { CrudCardComponent } from './components/crud-card/crud-card.component';
 import { ProductCounterComponent } from './components/product-counter/product-counter.component';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
-import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
 import { CartComponent } from './components/cart/cart.component';
 import { StoreLocatorCardComponent } from './components/store-locator-card/store-locator-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +36,7 @@ import { OrderFilterByNumberPipe } from './pipes/order-filter-by-number.pipe';
 import { OrderFilterByClientPipe } from './pipes/order-filter-by-client.pipe';
 import { OrderFilterByDatePipe } from './pipes/order-filter-by-date.pipe';
 import { OrderFilterByStatesPipe } from './pipes/order-filter-by-states.pipe';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +55,7 @@ import { OrderFilterByStatesPipe } from './pipes/order-filter-by-states.pipe';
     CrudLocalidadComponent,
     ListFilterPipe,
     FooterComponent,
-    StoreLocatorComponent,
+    AboutUsComponent,
     StoreLocatorCardComponent,
     CartComponent,
     ResetPasswordComponent,

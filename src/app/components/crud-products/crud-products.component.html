@@ -39,29 +39,30 @@
                       <input type="hidden" name="_id" [(ngModel)]="productoService.selectedProduct._id">
 
                       <div class="col mi-fila">
-                        <div class="mi-elemento">
-                          <label for="nombre">Nombre:</label>
-                          <input
-                            [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
-                            type="text" name="nombre" #nombre="ngModel" maxlength="50"
-                            [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese Nombre"
-                            (input)="onInputChange($event)" class="form-control" required />
-                          <div *ngIf="nombre.touched && !nombre.valid">
-                            <div class="camposRequeridos" *ngIf="nombre.errors['required']">Nombre es requerido *
-                            </div>
-                          </div>
-                        </div>
 
                         <div class="mi-elemento">
                           <label for="marca">Marca:</label>
                           <input
                             [ngClass]="{'input-error': marca.touched && !marca.valid, 'input-success': marca.valid && !marca.errors}"
                             type="text" name="marca" #marca="ngModel" class="form-control" placeholder="Ingrese Marca"
-                            [(ngModel)]="productoService.selectedProduct.marca" required>
+                            (input)="onInputChange($event)" [(ngModel)]="productoService.selectedProduct.marca" required>
                           <div *ngIf="marca.touched && !marca.valid">
                             <div class="camposRequeridos" *ngIf="marca.errors['required']"> Marca es requerido *</div>
                           </div>
                         </div>
+
+                        <div class="mi-elemento">
+                          <label for="nombre">Nombre:</label>
+                          <input
+                            [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
+                            type="text" name="nombre" #nombre="ngModel" maxlength="50"
+                            [(ngModel)]="productoService.selectedProduct.nombre" placeholder="Ingrese Nombre" class="form-control" required />
+                          <div *ngIf="nombre.touched && !nombre.valid">
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']">Nombre es requerido *
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                       <div class="col mi-fila">
                         <div class="mi-elemento">
@@ -144,7 +145,7 @@
                               [ngClass]="{'input-error': promo.touched && !promo.valid, 'input-success': promo.valid && !promo.errors}"
                               type="number" name="promo" class="form-control"
                               placeholder="Ingrese Porcentaje (%) de Descuento"
-                              [(ngModel)]="productoService.selectedProduct.promo" #promo="ngModel" min="0" max="99"
+                              [(ngModel)]="productoService.selectedProduct.promo" #promo="ngModel" min="0" max="100"
                               required>
                             <div *ngIf="promo.touched && !promo.valid">
                               <div class="camposRequeridos" *ngIf="promo.errors['required']"> Promo es requerido *</div>
@@ -163,8 +164,7 @@
                           [(ngModel)]="productoService.selectedProduct.descripcion" #descripcion="ngModel"
                           required></textarea>
                         <div *ngIf="descripcion.touched && !descripcion.valid">
-                          <div class="camposRequeridos" *ngIf="descripcion.errors['required']"> -> Descripcion es
-                            requerido</div>
+                          <div class="camposRequeridos" *ngIf="descripcion.errors['required']"> Descripción es requerido *</div>
                         </div>
                       </div>
 

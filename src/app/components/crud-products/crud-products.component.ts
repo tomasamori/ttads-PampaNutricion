@@ -51,9 +51,9 @@ export class CrudProductsComponent implements OnInit {
     this.getProducts();
     this.getTypesOfPets();
     this.cambiarTituloModal("NUEVO PRODUCTO");
-    this.cambiarTituloModalSuccess("Producto Creado con Exito!")
+    this.cambiarTituloModalSuccess("Producto creado con éxito")
     this.productoService.selectedProduct.tipoMascota._id = '';
-    this.BackgroundTitlePick = 'Subir imagen.'
+    this.BackgroundTitlePick = 'Subir imagen'
     this.hide = false;
     this.ins= true;
 
@@ -158,7 +158,7 @@ export class CrudProductsComponent implements OnInit {
 
 
   deleteProduct(id: string) {
-    if (confirm('Seguro quieres eliminar este producto?')) {
+    if (confirm('¿Seguro quiere eliminar este producto?')) {
       this.productoService.deleteProduct(id).subscribe(
         (res) => {
           this.getProducts();
@@ -171,10 +171,10 @@ export class CrudProductsComponent implements OnInit {
 
   editProduct(product: Producto) {
     this.cambiarTituloModal("EDITAR PRODUCTO");
-    this.cambiarTituloModalSuccess("Producto Actualizado con Exito!")
+    this.cambiarTituloModalSuccess("Producto actualizado con éxito")
     this.productoService.selectedProduct = product;
     this.productoService.selectedProduct.tipoMascota._id = product.tipoMascota._id;
-    this.BackgroundTitlePick = 'Subir imagen si desea cambiarla.'
+    this.BackgroundTitlePick = 'Subir imagen si desea actualizarla'
     this.ins= false;
     this.hide = false;
 
@@ -213,11 +213,11 @@ export class CrudProductsComponent implements OnInit {
     this.InsertSuccess = false;
   }
     
-  onInputChange(event: Event) {
+  onInputChange(marca: Event) {
     const inputElement = event.target as HTMLInputElement;
     const newValue = inputElement.value.toUpperCase();
     // Asigna el nuevo valor en mayúsculas al modelo
-    this.productoService.selectedProduct.nombre = newValue;
+    this.productoService.selectedProduct.marca = newValue;
   }
 
   CloseModal(id: string): void {

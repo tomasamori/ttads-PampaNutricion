@@ -4,7 +4,7 @@ import { ListComponent } from "./components/list/list.component";
 import { HomeComponent } from "./components/home/home.component";
 import { CrudPageComponent } from "./components/crud-page/crud-page.component";
 import { CrudProductsComponent } from './components/crud-products/crud-products.component';
-import { StoreLocatorComponent } from './components/store-locator/store-locator.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CrudTipoMascotaComponent } from './components/crud-tipoMascota/crud-tipoMascota.component';
 import { CrudUsuarioComponent } from './components/crud-usuario/crud-usuario.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'crud-Storelocator', component: CrudSucursalComponent},
   {path: 'crud-proveedor', component: CrudProveedorComponent},
   {path: 'crud-locations', component: CrudLocalidadComponent},
-  {path: 'store-locator', component: StoreLocatorComponent},
+  {path: 'about-us', component: AboutUsComponent},
   {path:'cart', component:CartComponent},
   {path: 'crud-page', component: CrudPageComponent},
   {path: 'reset-password/:token', component: ResetPasswordComponent },

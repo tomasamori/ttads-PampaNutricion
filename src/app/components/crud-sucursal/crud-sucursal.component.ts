@@ -57,9 +57,9 @@ export class CrudSucursalComponent implements OnInit {
     this.getSucursal();
     this.getLocators();
     this.cambiarTituloModal("NUEVA SUCURSAL");
-    this.cambiarTituloModalSuccess("Sucursal Creada con Exito!")
+    this.cambiarTituloModalSuccess("Sucursal creada con éxito")
     this.StoreLocatorService.selectedSucursal.localidad._id = '';
-    this.BackgroundTitlePick = 'Subir imagen.'
+    this.BackgroundTitlePick = 'Subir imagen'
     this.hide = false;
     this.ins= true;
   }
@@ -152,7 +152,7 @@ export class CrudSucursalComponent implements OnInit {
   }
 
   deleteSucursal(id: string) {
-    if (confirm('Seguro quieres eliminar esta sucursal?')) {
+    if (confirm('¿Seguro quiere eliminar esta sucursal?')) {
       this.StoreLocatorService.deleteStorelocator(id).subscribe(
         (res) => {
           this.getSucursal();
@@ -165,10 +165,10 @@ export class CrudSucursalComponent implements OnInit {
 
   editSucursal(sucursal: Storelocator) {
     this.cambiarTituloModal("EDITAR SUCURSAL");
-    this.cambiarTituloModalSuccess("Sucursal Actualizada con Exito!")
+    this.cambiarTituloModalSuccess("Sucursal actualizada con éxito")
     this.StoreLocatorService.selectedSucursal = sucursal;
     this.StoreLocatorService.selectedSucursal.localidad._id = sucursal.localidad._id; 
-    this.BackgroundTitlePick = 'Subir imagen si desea cambiarla.'
+    this.BackgroundTitlePick = 'Subir imagen si desea actualizarla'
     this.ins= false;
     this.hide = false;
    

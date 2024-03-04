@@ -39,14 +39,14 @@
 
                       <div class="col mi-fila">
                         <div class="mi-elemento">
-                          <label for="nombre">Nombre:</label>
+                          <label for="nombre">Nombres y Apellido:</label>
                           <input
                             [ngClass]="{'input-error': nombre.touched && !nombre.valid, 'input-success': nombre.valid && !nombre.errors}"
                             type="text" name="nombre" #nombre="ngModel"
-                            [(ngModel)]="usuarioService.selectedUsuario.nombre" placeholder="Ingrese Nombre del Usuario"
+                            [(ngModel)]="usuarioService.selectedUsuario.nombre" placeholder="Ingrese Nombres y Apellido del Usuario"
                             class="form-control" required />
                           <div *ngIf="nombre.touched && !nombre.valid">
-                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombres y Apellido son requeridos *
                             </div>
                           </div>
                         </div>
@@ -55,7 +55,7 @@
                           <label for="cuil">CUIL:</label>
                           <input
                             [ngClass]="{'input-error': cuil.touched && !cuil.valid, 'input-success': cuil.valid && !cuil.errors}"
-                            type="number" name="cuil" #cuil="ngModel" class="form-control" placeholder="Ingrese Cuil"
+                            type="number" name="cuil" #cuil="ngModel" class="form-control" placeholder="Ingrese CUIL"
                             [(ngModel)]="usuarioService.selectedUsuario.cuil" required>
                           <div *ngIf="cuil.touched && !cuil.valid">
                             <div class="camposRequeridos" *ngIf="cuil.errors['required']"> CUIL es requerido *</div>
@@ -75,11 +75,11 @@
                           </div>
                         </div>
                         <div class="mi-elemento">
-                          <label for="email">E-mail:</label>
+                          <label for="email">Email:</label>
                           <br>
                           <input
                             [ngClass]="{'input-error': email.touched && !email.valid, 'input-success': email.valid && !email.errors}"
-                            type="email" name="email" #email="ngModel" class="form-control" placeholder="Ingrese E-mail"
+                            type="email" name="email" #email="ngModel" class="form-control" placeholder="Ingrese Email"
                             [(ngModel)]="usuarioService.selectedUsuario.email" [disabled]="isDisabled" required>
                           <div *ngIf="email.touched && !email.valid">
                             <div class="camposRequeridos" *ngIf="email.errors['required']"> Email es requerido *

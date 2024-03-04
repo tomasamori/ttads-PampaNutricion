@@ -42,7 +42,7 @@ export class CrudUsuarioComponent implements OnInit {
     this.getUsuario();
     this.getRols();
     this.cambiarTituloModal("NUEVO USUARIO");
-    this.cambiarTituloModalSuccess("Usuario Creado con Exito!")
+    this.cambiarTituloModalSuccess("Usuario creado con éxito")
   }
 
   getUsuario() {
@@ -93,7 +93,7 @@ export class CrudUsuarioComponent implements OnInit {
 
 
   deleteUsuario(id: string) {
-    if (confirm('Seguro quieres eliminar este usuario?')) {
+    if (confirm('¿Seguro quieres eliminar este usuario?')) {
       this.usuarioService.deleteUsuario(id).subscribe(
         (res) => {
           this.getUsuario();
@@ -108,7 +108,7 @@ export class CrudUsuarioComponent implements OnInit {
     let fechaNacimiento = new Date(usuario.fechaNacimiento);
     this.isDisabled = true;
     this.cambiarTituloModal("EDITAR USUARIO");
-    this.cambiarTituloModalSuccess("Usuario Actualizado con Exito!")
+    this.cambiarTituloModalSuccess("Usuario actualizado con éxito")
     this.usuarioService.selectedUsuario = usuario;
     this.usuarioService.selectedUsuario.fechaNacimiento = fechaNacimiento;
     this.usuarioService.selectedUsuario.rol._id = usuario.rol._id;
@@ -120,7 +120,6 @@ export class CrudUsuarioComponent implements OnInit {
     this.rolService.getAllRoles().subscribe(
       (res) => {
         this.rolService.Roles = res;
-        console.log(res)
       },
       err => {console.log(err)
       }

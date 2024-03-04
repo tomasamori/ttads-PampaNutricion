@@ -31,7 +31,7 @@ export class CrudLocalidadComponent implements OnInit {
     form.reset();
     this.getLocalidad();
     this.cambiarTituloModal("NUEVA LOCALIDAD");
-    this.cambiarTituloModalSuccess("Localidad Creada con Exito!")
+    this.cambiarTituloModalSuccess("Localidad creada con éxito")
 
   }
 
@@ -49,7 +49,6 @@ export class CrudLocalidadComponent implements OnInit {
     if (form.value._id) {
       this.LocalidadService.updateLocalidad(form.value).subscribe(
         res => {
-        console.log(res);
         this.getLocalidad();
         this.InsertSuccess = true;   
       },
@@ -87,7 +86,7 @@ export class CrudLocalidadComponent implements OnInit {
     this.LocalidadService.findSucursalByLocalidad(id).subscribe(
       (res: any[]) => {
         if (!(res && res.length > 0)) {
-          if (confirm('Seguro quieres eliminar esta localidad?')) {
+          if (confirm('¿Seguro quiere eliminar esta localidad?')) {
             this.LocalidadService.deleteLocalidad(id).subscribe(
               () => {
                 this.getLocalidad();
@@ -95,7 +94,6 @@ export class CrudLocalidadComponent implements OnInit {
               (err) => console.error(err)
             );
           } else {
-            console.log('Cancelado');
           }
         } else {
           alert('No se puede eliminar la localidad porque tiene sucursales asociadas');
@@ -109,7 +107,7 @@ export class CrudLocalidadComponent implements OnInit {
   editLocalidad(localidad: Localidad) {
    
     this.cambiarTituloModal("EDITAR LOCALIDAD");
-    this.cambiarTituloModalSuccess("Localidad Actualizada con Exito!")
+    this.cambiarTituloModalSuccess("Localidad actualizada con éxito")
     this.LocalidadService.selectedLocalidad = localidad;
   }
 

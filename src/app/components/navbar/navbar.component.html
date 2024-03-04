@@ -9,7 +9,7 @@
           <a class="nav-link" href="/home" routerLinkActive="active-link">Home</a>
         </li>
         <li class="nav-item ms-4">
-          <a class="nav-link" href="/store-locator">Sobre nosotros</a>
+          <a class="nav-link" href="/about-us">Sobre nosotros</a>
         </li>
         <li class="nav-item ms-4">
           <a class="nav-link" href="/products" routerLinkActive="active-link">Nuestros productos</a>
@@ -109,7 +109,7 @@
               <div class="d-flex gap-1 justify-content-center mt-4">
                 <div>¿Aún no estas registrado?</div>
                 <a href="#" class="text-decoration-none text-primary fw-semibold fst-italic" data-bs-toggle="modal"
-                  [attr.data-bs-target]="'#Register'">Registrarse</a>
+                  [attr.data-bs-target]="'#Register'" (click)="modalClear(loginForm)">Registrarse</a>
               </div>
             </form>
           </div>
@@ -212,14 +212,6 @@
                 </div>
               </div>
 
-              <div *ngIf="registrationSuccess" class="overlay">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  ¡Usuario registrado con éxito!
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                    data-bs-dismiss="modal"></button>
-                </div>
-              </div>
-
               <div *ngIf="errorMessage" class="custom-error-message">
                 ¡Error!
                 {{errorMessage}}
@@ -267,14 +259,6 @@
                 </div>
                 <input class="form-control" type="email" placeholder="Email" [(ngModel)]="authService.user.email"
                   name="email" required>
-              </div>
-
-              <div *ngIf="forgotPasswordFormSuccess" class="overlay">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  Mail enviado con éxito
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                    data-bs-dismiss="modal"></button>
-                </div>
               </div>
 
               <div *ngIf="errorMessage" class="custom-error-message">

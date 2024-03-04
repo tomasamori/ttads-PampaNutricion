@@ -87,7 +87,7 @@ export class ProductCardComponent implements OnInit {
   addProdCart() {
     this.completeProd();
     this.cart.addCart(this.product);
-    this.toastr.success('Se agregó correctamente al carrito.')
+    this.toastr.success('Se agregó correctamente al carrito')
   }
 
   subtract(){
@@ -106,7 +106,7 @@ export class ProductCardComponent implements OnInit {
   delete(){
     this.completeProd();
     this.cart.deleteProd(this.product)
-    this.toastr.error('Se ha eliminado el producto.')
+    this.toastr.error('Se ha eliminado el producto')
   }
   calculateFinalPrice(){
     return (this.finalPrice = this.calculatePrice(this.product.precio,this.product.promo)* this.product.amount).toFixed(2);

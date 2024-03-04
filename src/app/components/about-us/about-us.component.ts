@@ -3,11 +3,11 @@ import { StoreLocatorService } from 'src/app/services/store-locator/store-locato
 
 
 @Component({
-  selector: 'app-store-locator',
-  templateUrl: './store-locator.component.html',
-  styleUrls: ['./store-locator.component.css']
+  selector: 'app-about-us',
+  templateUrl: './about-us.component.html',
+  styleUrls: ['./about-us.component.css']
 })
-export class StoreLocatorComponent implements OnInit {
+export class AboutUsComponent implements OnInit {
 
   constructor( public storeLocatorService: StoreLocatorService) { }
   

@@ -37,7 +37,7 @@ export class CrudProveedorComponent implements OnInit {
     form.reset();
     this.getProveedor();
     this.cambiarTituloModal("NUEVO PROVEEDOR");
-    this.cambiarTituloModalSuccess("Proveedor Creado con Exito!")
+    this.cambiarTituloModalSuccess("Proveedor creado con éxito")
 
   }
 
@@ -91,7 +91,7 @@ export class CrudProveedorComponent implements OnInit {
 
 
   deleteProveedor(id: string) {
-    if (confirm('Seguro quieres eliminar esta localidad?')) {
+    if (confirm('¿Seguro quiere eliminar este proveedor?')) {
       this.ProveedorService.deleteProveedor(id).subscribe(
         (res) => {
           this.getProveedor();
@@ -106,7 +106,7 @@ export class CrudProveedorComponent implements OnInit {
   editProveedor(proveedor: Proveedor) {
    
     this.cambiarTituloModal("EDITAR PROVEEDOR");
-    this.cambiarTituloModalSuccess("Proveedor Actualizado con Exito!")
+    this.cambiarTituloModalSuccess("Proveedor actualizado con éxito")
     this.ProveedorService.selectedProveedor = proveedor;
   }
 

@@ -29,7 +29,7 @@ h1 {
   display: flex;
 }
 #imgPresentacion{
-  width: 100px; /* Establece el ancho deseado */
+  width: 140px; /* Establece el ancho deseado */
   height: auto; /* Mantiene la proporción original */
   margin: 20px;
 }

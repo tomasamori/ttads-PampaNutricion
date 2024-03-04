@@ -40,11 +40,19 @@ export class NavbarComponent implements OnInit {
   }
 
   CloseModal(id: string): void {
-    setTimeout(() => {
-      document.getElementById(id).classList.remove('show');
-      document.querySelector('.modal-backdrop').remove();
-      window.location.reload();
-    }, 500);
+    if (id === 'ForgotPass' || id === 'Register') {
+      setTimeout(() => {
+        document.getElementById(id).classList.remove('show');
+        document.querySelector('.modal-backdrop').remove();
+        window.location.reload();
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        document.getElementById(id).classList.remove('show');
+        document.querySelector('.modal-backdrop').remove();
+        window.location.reload();
+      }, 1200);
+    }    
   }
 
 
@@ -54,6 +62,7 @@ export class NavbarComponent implements OnInit {
     this.isAdmin = false;
     this.isEmpleado = false;
     this.loginSuccess = false;
+    this.toastr.success('Sesión cerrada con éxito')
   }
 
   readName() {
@@ -73,7 +82,7 @@ export class NavbarComponent implements OnInit {
         if (localStorage.getItem('rol') === 'admin') {
           this.isAdmin = true;
         }
-        this.toastr.success("Bienvenido!");
+        this.toastr.success("¡Bienvenido a Pampa Nutrición!");
         this.CloseModal('login');
       },
         err => {
@@ -98,6 +107,7 @@ export class NavbarComponent implements OnInit {
       .subscribe(res => {
         form.reset();
         this.registrationSuccess = true;
+        this.toastr.success('Usuario registrado con éxito');
         this.CloseModal('Register')
       },
         err => {
@@ -122,6 +132,7 @@ export class NavbarComponent implements OnInit {
           form.reset();
           this.forgotPasswordFormSuccess = true;
           this.isSubmitting = false;
+          this.toastr.success('Se ha enviado un correo con las instrucciones para restablecer su contraseña');
           this.CloseModal('ForgotPass')
         },
         err => {

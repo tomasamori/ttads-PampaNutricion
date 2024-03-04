@@ -35,7 +35,7 @@ export class CrudTipoMascotaComponent implements OnInit {
     form.reset();
     this.getTipoMascota();
     this.cambiarTituloModal("NUEVO TIPO DE MASCOTA");
-    this.cambiarTituloModalSuccess("Tipo de Mascota Creado con Exito!")
+    this.cambiarTituloModalSuccess("Tipo de Mascota creado con éxito")
 
   }
 
@@ -92,7 +92,7 @@ export class CrudTipoMascotaComponent implements OnInit {
     this.tipoMascotasService.findProductoByTipoMascota(id).subscribe(
       (res: any[]) => {
         if (!(res && res.length > 0)) {
-          if (confirm('Seguro quieres eliminar este tipo de mascota?')) {
+          if (confirm('¿Seguro quiere eliminar este tipo de mascota?')) {
             this.tipoMascotasService.deleteTipoMacota(id).subscribe(
               () => {
                 this.getTipoMascota();
@@ -100,10 +100,9 @@ export class CrudTipoMascotaComponent implements OnInit {
               (err) => console.error(err)
             );
           } else {
-            console.log('Cancelado');
           }
         } else {
-          alert('No se puede eliminar el tipo de mascota porque tiene productos asociadas');
+          alert('No se puede eliminar el tipo de mascota porque tiene productos asociados');
         }
       },
       (err) => console.error(err)
@@ -113,7 +112,7 @@ export class CrudTipoMascotaComponent implements OnInit {
   editTipoMascota(tipoMascota: TipoMascota) {
    
     this.cambiarTituloModal("EDITAR TIPO DE MASCOTA");
-    this.cambiarTituloModalSuccess("Tipo de Mascota Actualizado con Exito!")
+    this.cambiarTituloModalSuccess("Tipo de Mascota actualizado con éxito")
     this.tipoMascotasService.selectedTipoMascota = tipoMascota;
   }
 

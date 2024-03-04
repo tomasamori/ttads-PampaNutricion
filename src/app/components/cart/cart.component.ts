@@ -96,7 +96,7 @@ export class CartComponent implements OnInit {
       }
     }
     else {
-      this.toastr.info('Inicie sesión para poder continuar la compra.')
+      this.toastr.info('Inicie sesión para continuar con la compra')
     }
   }
 
@@ -265,7 +265,7 @@ export class CartComponent implements OnInit {
 
     let name = 'Pedido-' + pedido.nroPedido.toString().trim();
     pdfMake.createPdf(documentDefinition).download(name);
-    this.toastr.success('Su compra ha finalizado con éxito.');
+    this.toastr.success('Su compra ha finalizado con éxito');
     //lo del tiempo se puede sacar
     setTimeout(() => {
       this.cartService.vaciarCarrito();
