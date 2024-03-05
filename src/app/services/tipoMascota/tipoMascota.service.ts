@@ -71,6 +71,6 @@ export class TipoMascotaService {
       'x-access-token': this.token,
       'id': this.id
       }); 
-    return this.http.get<Producto[]>(`${this.URL_API}/${id}/productos`,{headers:headers});
+    return this.http.get<Producto[]>(`${this.URL_API}/productos/${id}`,{headers:headers});
   }
 }
