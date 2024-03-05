@@ -125,14 +125,14 @@
 
                         <div class="mi-elemento">
                           <label for="imgUrl">Imagen:</label>
-                          <ngx-dropzone (change)="onSelect($event)" accept=".jpg, .png" >
+                          <ngx-dropzone (change)="onSelect($event)" accept=".jpg, .png , .jpeg" >
                             <ngx-dropzone-label >{{BackgroundTitlePick}}</ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngIf="files.length > 0" [file]="files[0]" [removable]="true" (removed)="onRemove($event)">
                               <ngx-dropzone-label></ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                           </ngx-dropzone>
                         </div>
-                        
+
                         <div class="mi-elemento">
                           <div class="form-group">
                             <label for="promo">Promo:</label>
