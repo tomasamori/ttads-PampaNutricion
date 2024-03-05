@@ -23,7 +23,7 @@ export class CrudSucursalComponent implements OnInit {
   files: File[] = [];
   btn:boolean=true;
   ins:boolean=true;
-  emp:boolean=false;
+  //emp:boolean=false;
   BackgroundTitlePick:string;
   hide:boolean=true
 
@@ -49,7 +49,7 @@ export class CrudSucursalComponent implements OnInit {
   onRemove(event) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
-    this.emp = true;
+    //this.emp = true;
   }
 
   resetForm(form: NgForm) {
@@ -76,18 +76,22 @@ export class CrudSucursalComponent implements OnInit {
   addSucursal(form: NgForm) {
     
     if (!form.value._id) {
-      this.emp = !this.files[0]
-      if (!this.emp){
-      this.btn= false;
-      let dataURl = this._UploadFotoService.Foto(this.files[0])
-      this._UploadFotoService.uploadImg(dataURl).subscribe(
-        res => {
-          form.value.foto = res['secure_url'];
-          this.sigue_addSuc(form);
-        }, err => {
-          console.log(err)
-        }
-      )
+      //this.emp = !this.files[0]
+      //if (!this.emp){
+      if(!this.files[0]){
+        this.btn= false;
+        this.sigue_addSuc(form);
+      }else{
+        this.btn= false;
+        let dataURl = this._UploadFotoService.Foto(this.files[0])
+        this._UploadFotoService.uploadImg(dataURl).subscribe(
+          res => {
+            form.value.foto = res['secure_url'];
+            this.sigue_addSuc(form);
+          }, err => {
+            console.log(err)
+          }
+        )
       }
     } else {
       if (!this.files[0]) {

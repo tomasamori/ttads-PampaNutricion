@@ -19,7 +19,7 @@ export class CrudProductsComponent implements OnInit {
   files: File[] = [];
   btn:boolean=true;
   ins:boolean=true;
-  emp:boolean=false;
+  //emp:boolean=false;
   BackgroundTitlePick:string;
   hide:boolean=true
   delete:boolean;
@@ -66,7 +66,7 @@ export class CrudProductsComponent implements OnInit {
   onRemove(event) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
-    this.emp = true;
+    //this.emp = true;
   }
   getProducts() {
     this.productoService.getAllProducto().subscribe(
@@ -79,8 +79,13 @@ export class CrudProductsComponent implements OnInit {
 
   addproduct(form: NgForm) {
     if (!form.value._id) {
-      this.emp = !this.files[0]
-      if (!this.emp){
+      //this.emp = !this.files[0]
+      //if (!this.emp){
+    if (!this.files[0]) {
+    this.btn= false;
+    this.sigue_AddProd(form);}
+    else{
+
       this.btn= false;
       let dataURl = this._UploadFotoService.Foto(this.files[0])
       this._UploadFotoService.uploadImg(dataURl).subscribe(
@@ -90,8 +95,8 @@ export class CrudProductsComponent implements OnInit {
         }, err => {
           console.log(err)
         }
-      )
-      }
+      )}
+      //}
     } else {
       if (!this.files[0]) {
         this.btn= false;
