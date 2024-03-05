@@ -3,6 +3,7 @@ import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { Proveedor } from 'src/app/models/proveedor';
 import { NgForm } from "@angular/forms";
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CrudProveedorComponent implements OnInit {
 
-  constructor(public ProveedorService: ProveedorService,private router: Router) { }
+  constructor(public ProveedorService: ProveedorService,private router: Router, private toastr: ToastrService) { }
   DependencyError =false;
   InsertSuccess =false;
   errorMessage: string = "";
@@ -95,6 +96,7 @@ export class CrudProveedorComponent implements OnInit {
       this.ProveedorService.deleteProveedor(id).subscribe(
         (res) => {
           this.getProveedor();
+          this.toastr.success('Proveedor eliminado con éxito');
         },
         (err) => console.error(err)
       );

@@ -6,6 +6,7 @@ import { Localidad } from 'src/app/models/localidad';
 import { LocalidadService } from 'src/app/services/localidad/localidad.service';
 import {UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-crud-sucursal',
@@ -17,7 +18,7 @@ export class CrudSucursalComponent implements OnInit {
 
   localidad: Localidad;
 
-  constructor(public StoreLocatorService: StoreLocatorService, public LocalidadService: LocalidadService, private _UploadFotoService:UploadFotoService,private router: Router) { }
+  constructor(public StoreLocatorService: StoreLocatorService, public LocalidadService: LocalidadService, private _UploadFotoService:UploadFotoService,private router: Router, private toastr: ToastrService) { }
   InsertSuccess =false;
   errorMessage: string = "";
   files: File[] = [];
@@ -160,6 +161,7 @@ export class CrudSucursalComponent implements OnInit {
       this.StoreLocatorService.deleteStorelocator(id).subscribe(
         (res) => {
           this.getSucursal();
+          this.toastr.success('Sucursal eliminada con éxito');
         },
         (err) => console.error(err)
       );

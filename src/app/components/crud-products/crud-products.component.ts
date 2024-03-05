@@ -6,6 +6,7 @@ import { Producto } from 'src/app/models/producto';
 import { TipoMascota } from 'src/app/models/tipoMascota';
 import { UploadFotoService} from 'src/app/services/Cloudinary/upload-foto.service'
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CrudProductsComponent implements OnInit {
   BackgroundTitlePick:string;
   hide:boolean=true
   delete:boolean;
-  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService,private router: Router) { }
+  constructor(public productoService: ProductoService, public tipoMascotasService: TipoMascotaService,private _UploadFotoService:UploadFotoService,private router: Router, private toastr: ToastrService) { }
  
   tipoMascota: TipoMascota;
   
@@ -167,6 +168,7 @@ export class CrudProductsComponent implements OnInit {
       this.productoService.deleteProduct(id).subscribe(
         (res) => {
           this.getProducts();
+          this.toastr.success('Producto eliminado con éxito');
         },
         (err) => console.error(err)
       );

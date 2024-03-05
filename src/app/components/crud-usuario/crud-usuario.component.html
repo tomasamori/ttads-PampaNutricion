@@ -112,7 +112,7 @@
                               [disabled]="isDisabled" required>
                             <div *ngIf="password.touched && !password.valid">
                               <div class="camposRequeridos" *ngIf="password.errors['required']"> Contraseña es
-                                requerido *
+                                requerida *
                               </div>
                             </div>
                           </div>
@@ -126,7 +126,7 @@
                               [(ngModel)]="usuarioService.selectedUsuario.direccion" #direccion="ngModel" required>
                             <div *ngIf="direccion.touched && !direccion.valid">
                               <div class="camposRequeridos" *ngIf="direccion.errors['required']"> Dirección es
-                                requerido *
+                                requerida *
                               </div>
                             </div>
                           </div>

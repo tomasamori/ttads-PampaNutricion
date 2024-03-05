@@ -11,7 +11,7 @@
           <tr>
             <th scope="col">Código Postal</th>
             <th scope="col">Nombre</th>
-            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#LocalidadModal"
+            <th scope="col" class="text-center"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#LocalidadModal"
                 (click)="resetForm(localidadForm)">Nuevo</button></th>
           </tr>
           <!-- Modal -->
@@ -40,7 +40,7 @@
                         [(ngModel)]="LocalidadService.selectedLocalidad.codPostal"
                         placeholder="Ingrese Código Postal" class="form-control" required />
                       <div *ngIf="codPostal.touched && !codPostal.valid">
-                        <div class="camposRequeridos" *ngIf="codPostal.errors['required']"> Codigo Postal es requerido *</div>
+                        <div class="camposRequeridos" *ngIf="codPostal.errors['required']"> Código Postal es requerido *</div>
                       </div>
                     </div>
 
@@ -90,7 +90,7 @@
           <tr *ngFor="let l of LocalidadService.Localidades">
             <td>{{l.codPostal}}</td>
             <td>{{l.nombre}}</td>
-            <td>
+            <td class="text-center">
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#LocalidadModal"
                 (click)="editLocalidad(l)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"

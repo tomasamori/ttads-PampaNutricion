@@ -3,6 +3,7 @@ import { TipoMascotaService } from 'src/app/services/tipoMascota/tipoMascota.ser
 import { TipoMascota } from 'src/app/models/tipoMascota';
 import { NgForm } from "@angular/forms";
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CrudTipoMascotaComponent implements OnInit {
 
-  constructor(public tipoMascotasService: TipoMascotaService,private router: Router) { }
+  constructor(public tipoMascotasService: TipoMascotaService,private router: Router, private toastr: ToastrService) { }
   InsertSuccess =false;
   errorMessage: string = "";
 
@@ -96,6 +97,7 @@ export class CrudTipoMascotaComponent implements OnInit {
             this.tipoMascotasService.deleteTipoMacota(id).subscribe(
               () => {
                 this.getTipoMascota();
+                this.toastr.success('Tipo de mascota eliminado con éxito');
               },
               (err) => console.error(err)
             );

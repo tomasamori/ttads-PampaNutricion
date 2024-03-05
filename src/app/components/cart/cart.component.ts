@@ -87,7 +87,7 @@ export class CartComponent implements OnInit {
             this.cartService.vaciarCarrito();
             this.CloseModal('confirm');
             setTimeout(() => {
-            this.router.navigate(['/home']);},1000)
+            this.router.navigate(['/order-manager']);},1000)
           },
           err => {
             console.log(err)

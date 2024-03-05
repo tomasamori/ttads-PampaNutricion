@@ -11,9 +11,9 @@
           <tr>
             <th scope="col">CUIT</th>
             <th scope="col">Razón Social</th>
-            <th scope="col">E-Mail</th>
+            <th scope="col">Email</th>
             <th scope="col">Teléfono</th>
-            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ProveedorModal"
+            <th scope="col" class="text-center"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ProveedorModal"
                 (click)="resetForm(proveedorForm)">Nuevo</button></th>
           </tr>
 
@@ -39,10 +39,10 @@
                       <label for="cuit">CUIT:</label>
                       <input
                         [ngClass]="{'input-error': cuit.touched && !cuit.valid, 'input-success': cuit.valid && !cuit.errors}"
-                        type="number" name="cuit" #cuit="ngModel" class="form-control" placeholder="Ingrese Cuit"
+                        type="number" name="cuit" #cuit="ngModel" class="form-control" placeholder="Ingrese CUIT"
                         [(ngModel)]="ProveedorService.selectedProveedor.cuit" required>
                       <div *ngIf="cuit.touched && !cuit.valid">
-                        <div class="camposRequeridos" *ngIf="cuit.errors['required']"> Cuit es requerido *
+                        <div class="camposRequeridos" *ngIf="cuit.errors['required']"> CUIT es requerido *
                         </div>
                       </div>
                     </div>
@@ -55,19 +55,19 @@
                         [(ngModel)]="ProveedorService.selectedProveedor.razonSocial" required>
                       <div *ngIf="razonSocial.touched && !razonSocial.valid">
                         <div class="camposRequeridos" *ngIf="razonSocial.errors['required']"> Razón Social es
-                          requerido *
+                          requerida *
                         </div>
                       </div>
                     </div>
                     <div class="mi-elemento">
-                      <label for="email">E-Mail:</label>
+                      <label for="email">Email:</label>
                       <input
                         [ngClass]="{'input-error': email.touched && !email.valid, 'input-success': email.valid && !email.errors}"
                         type="email" name="email" #email="ngModel" [(ngModel)]="ProveedorService.selectedProveedor.email"
-                        placeholder="Ingrese E-Mail" class="form-control" required />
+                        placeholder="Ingrese Email" class="form-control" required />
                       <div *ngIf="email.touched && !email.valid">
-                        <div class="camposRequeridos" *ngIf="email.errors['required']"> E-Mail es
-                          requerida *</div>
+                        <div class="camposRequeridos" *ngIf="email.errors['required']"> Email es
+                          requerido *</div>
                       </div>
                     </div>
 
@@ -118,7 +118,7 @@
             <td>{{p.razonSocial}}</td>
             <td>{{p.email}}</td>
             <td>{{p.telefono}}</td>
-            <td>
+            <td class="text-center">
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ProveedorModal"
                 (click)="editProveedor(p)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"

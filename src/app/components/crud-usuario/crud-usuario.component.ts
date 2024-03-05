@@ -6,6 +6,7 @@ import { NgForm } from "@angular/forms";
 import { DatePipe } from '@angular/common';
 import { Rol } from 'src/app/models/rol';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class CrudUsuarioComponent implements OnInit {
 
-  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe, public rolService: RolService,private router: Router) { }
+  constructor(public usuarioService: UsuarioService, private datePipe: DatePipe, public rolService: RolService,private router: Router, private toastr: ToastrService) { }
   InsertSuccess =false;
   isDisabled = false;
   errorMessage: string = "";
@@ -100,6 +101,7 @@ export class CrudUsuarioComponent implements OnInit {
             this.usuarioService.deleteUsuario(id).subscribe(
               () => {
                 this.getUsuario();
+                this.toastr.success('Usuario eliminado con éxito');
               },
               (err) => console.error(err)
             );

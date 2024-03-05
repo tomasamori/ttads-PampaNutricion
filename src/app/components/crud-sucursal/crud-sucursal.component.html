@@ -13,7 +13,7 @@
             <th scope="col">Dirección</th>
             <th scope="col">Foto</th>
             <th scope="col">Localidad</th>
-            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#SucursalModal"
+            <th scope="col" class="text-center"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#SucursalModal"
                 (click)="resetForm(sucursalForm)">Nuevo</button></th>
           </tr>
           <!-- Modal -->
@@ -42,7 +42,7 @@
                             type="text" name="nombre" #nombre="ngModel" class="form-control" placeholder="Ingrese Nombre"
                             [(ngModel)]="StoreLocatorService.selectedSucursal.nombre" required>
                           <div *ngIf="nombre.touched && !nombre.valid">
-                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> -Nombre es requerido *
+                            <div class="camposRequeridos" *ngIf="nombre.errors['required']"> Nombre es requerido *
                             </div>
                           </div>
                         </div>
@@ -91,12 +91,11 @@
                             [(ngModel)]="StoreLocatorService.selectedSucursal.localidad._id" #localidad="ngModel"
                             name="localidad" class="form-control" placeholder="Localidad" required>
                             <option value="">Selecciona una opción...</option>
-                            <option *ngFor="let l of LocalidadService.Localidades" value="{{l._id}}">{{l.nombre}}
-                              {{l.codPostal}} </option>
+                            <option *ngFor="let l of LocalidadService.Localidades" value="{{l._id}}">{{l.nombre}}, CP {{l.codPostal}} </option>
                           </select>
                           <div *ngIf="localidad.touched && !localidad.valid">
                             <div class="camposRequeridos" *ngIf="localidad.errors['required']"> Localidad es
-                              requerido *
+                              requerida *
                             </div>
                           </div>
                         </div>
@@ -150,8 +149,8 @@
             <td>{{sc.nombre}}</td>
             <td>{{sc.direccion}}</td>
             <td><img src={{sc.foto}} class="img-thumbnail maxwh" /></td>
-            <td>{{sc.localidad.nombre}} {{sc.localidad.codPostal}}</td>
-            <td>
+            <td>{{sc.localidad.nombre}}, CP {{sc.localidad.codPostal}}</td>
+            <td class="text-center">
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#SucursalModal"
                 (click)="editSucursal(sc)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"

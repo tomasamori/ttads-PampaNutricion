@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalidadService } from 'src/app/services/localidad/localidad.service';
 import { Localidad } from 'src/app/models/localidad';
 import { NgForm } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -13,7 +14,7 @@ import { NgForm } from "@angular/forms";
 })
 export class CrudLocalidadComponent implements OnInit {
 
-  constructor(public LocalidadService: LocalidadService) { }
+  constructor(public LocalidadService: LocalidadService, private toastr: ToastrService) { }
   DependencyError =false;
   InsertSuccess =false;
   errorMessage: string = "";
@@ -90,6 +91,7 @@ export class CrudLocalidadComponent implements OnInit {
             this.LocalidadService.deleteLocalidad(id).subscribe(
               () => {
                 this.getLocalidad();
+                this.toastr.success('Localidad eliminada con éxito');
               },
               (err) => console.error(err)
             );

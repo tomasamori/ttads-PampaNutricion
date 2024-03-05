@@ -12,7 +12,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Tamaño Raza</th>
             <th scope="col">Edad</th>
-            <th scope="col"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#TipoMascotaModal"
+            <th scope="col" class="text-center"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#TipoMascotaModal"
                 (click)="resetForm(tipoMascotaForm)">Nuevo</button></th>
           </tr>
           <!-- Modal -->
@@ -102,7 +102,7 @@
             <td>{{tm.nombre}}</td>
             <td>{{tm.tamanoRaza}}</td>
             <td>{{tm.edad}}</td>
-            <td>
+            <td class="text-center">
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#TipoMascotaModal"
                 (click)="editTipoMascota(tm)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
