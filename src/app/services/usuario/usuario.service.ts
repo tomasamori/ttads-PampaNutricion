@@ -83,6 +83,6 @@ export class UsuarioService {
           'x-access-token': this.token,
           'id': this.id
           }); 
-        return this.http.get<Pedido[]>(`${this.URL_API}/${id}/pedidos`,{headers:headers});
+        return this.http.get<Pedido[]>(`${this.URL_API}/pedidos/${id}`,{headers:headers});
       }
 }

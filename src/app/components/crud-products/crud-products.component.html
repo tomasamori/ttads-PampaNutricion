@@ -68,7 +68,7 @@
                         <div class="mi-elemento">
                           <label for="peso">Peso:</label>
                           <input [ngClass]="{'input-error': peso.touched && !peso.valid, 'input-success': peso.valid && !peso.errors}"
-                            type="text" name="peso" #peso="ngModel" class="form-control" placeholder="Ingrese Peso (Kg)" maxlength="5"
+                            type="number" name="peso" #peso="ngModel" class="form-control" placeholder="Ingrese Peso (Kg)" maxlength="5"
                             [(ngModel)]="productoService.selectedProduct.peso" pattern="[0-9]+([.][0-9]+)?" required>
                           <div *ngIf="peso.touched && !peso.valid">
                             <div class="camposRequeridos" *ngIf="peso.errors['required']"> Peso es requerido *</div>

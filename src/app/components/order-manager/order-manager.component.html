@@ -53,7 +53,7 @@
                                 <td class="text-center"><button data-bs-toggle="modal"
                                         [attr.data-bs-target]="'#userModal'" (click)="setSelectedUser(order.usuario)"
                                         class="btn btn-secondary">{{ order.usuario.nombre }}</button></td>
-                                <td class="text-center">{{ order.createdAt | date: 'dd/MM/yyyy' }}</td>
+                                <td class="text-center">{{ formatDate(order.createdAt) }}</td>
                                 <td *ngIf="!isCliente" class="text-center">
                                     <select [(ngModel)]="order.estado" (change)="updateOrder(order.nroPedido)"
                                         class="form-select form-select-sm">
