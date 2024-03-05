@@ -70,7 +70,7 @@ export class LocalidadService {
       'x-access-token': this.token,
       'id': this.id
       }); 
-    return this.http.get<Storelocator[]>(`${this.URL_API}/${id}/sucursales`,{headers:headers});
+    return this.http.get<Storelocator[]>(`${this.URL_API}/sucursales/${id}`,{headers:headers});
   }
 
 }
