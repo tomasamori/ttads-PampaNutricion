@@ -110,5 +110,9 @@ export class OrderManagerComponent {
       )
     }
   }
+  
+  formatDate(date){
+    return new Date(date).toLocaleDateString('es-ES', {timeZone: 'UTC'});
+  }
 
 }
