@@ -102,6 +102,10 @@ export class NavbarComponent implements OnInit {
     this.errorMessage='';
   }
 
+  forgotPasswordModalClear(form: NgForm){
+    this.errorMessage='';
+  }
+
   register(form: NgForm) {
     this.authService.register(form.value)
       .subscribe(res => {
