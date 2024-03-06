@@ -64,7 +64,7 @@
                                 <td class="text-center">
                                     <button data-bs-toggle="modal" [attr.data-bs-target]="'#orderDetailsModal'"
                                         class="btn btn-primary me-3" (click)="setSelectedOrder(order)">Ver</button>
-                                    <button *ngIf="!isCliente" class="btn btn-danger"
+                                    <button *ngIf="!isCliente && !isEmpleado" class="btn btn-danger"
                                         (click)="deleteOrder(order._id)">Eliminar</button>
                                 </td>
                             </tr>

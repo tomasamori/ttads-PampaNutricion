@@ -14,6 +14,7 @@ export class OrderManagerComponent {
   constructor(public pedidoService: PedidoService) { }
 
   isCliente = false;
+  isEmpleado = false;
   orderList: Pedido[] = [];
   data: Pedido[];
   filterOrderByNumber = '';
@@ -85,6 +86,10 @@ export class OrderManagerComponent {
     if (localStorage.getItem('rol') === 'cliente') {
       this.pedidoService.getPedidosByUser(localStorage.getItem('usuarioFoundId'));
       this.isCliente = true;
+    }
+    else if (localStorage.getItem('rol') === 'empleado') {
+      this.pedidoService.getAllPedido();
+      this.isEmpleado = true;
     }
     else {
       this.pedidoService.getAllPedido()
